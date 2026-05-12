@@ -19,10 +19,11 @@ export default function CTA({ brand }) {
           <div className="relative">
             <div className="pill mb-4"><span>TestFlight beta</span></div>
             <h2 className="section-title max-w-2xl">
-              Try it before <span className="text-flame-400">race day.</span>
+              Show up to a <span className="text-flame-400">solid surface.</span>
             </h2>
             <p className="muted text-lg mt-4 max-w-xl">
               Drop your email and you’ll get a TestFlight link when the next build ships. No spam — only build notes.
+              Cancel anytime.
             </p>
 
             {!submitted ? (

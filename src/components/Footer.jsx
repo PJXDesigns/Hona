@@ -10,7 +10,7 @@ export default function Footer({ brand }) {
           </span>
           <div>
             <div className="font-display font-bold">{brand.name}</div>
-            <div className="text-xs muted">Built by an athlete for Ironman Texas 2027.</div>
+            <div className="text-xs muted">Heavy. Stable. Where the work gets shaped.</div>
           </div>
         </div>
         <div className="flex items-center gap-4 text-sm muted">

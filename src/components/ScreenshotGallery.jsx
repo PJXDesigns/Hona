@@ -14,10 +14,10 @@ const screens = [
     render: () => (
       <div className="h-full w-full bg-gradient-to-b from-ink-900 to-ink-950 p-3 flex flex-col gap-2 text-[10px]">
         <div className="rounded-lg bg-gradient-to-br from-flame-600 to-flame-800 p-3">
-          <div className="text-[8px] uppercase opacity-80">Race in</div>
-          <div className="font-display font-bold text-xl">347d 04h</div>
+          <div className="text-[8px] uppercase opacity-80">Today · Tuesday</div>
+          <div className="font-display font-bold text-xl">Build · Wk 4</div>
           <div className="mt-1 h-1 rounded-full bg-white/20 overflow-hidden">
-            <div className="h-full w-[5%] bg-white/80" />
+            <div className="h-full w-[33%] bg-white/80" />
           </div>
         </div>
         {['Training','InBody','Nutrition','Body Metrics','Recovery'].map(t => (

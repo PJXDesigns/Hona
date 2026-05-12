@@ -1,23 +1,6 @@
-import { useEffect, useState } from 'react'
 import { ArrowRight, Play, Smartphone } from 'lucide-react'
 
-function useCountdown(targetISO) {
-  const [now, setNow] = useState(() => new Date())
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000)
-    return () => clearInterval(t)
-  }, [])
-  const target = new Date(targetISO + 'T07:00:00')
-  const diff = Math.max(0, target - now)
-  const d = Math.floor(diff / 86400000)
-  const h = Math.floor((diff % 86400000) / 3600000)
-  const m = Math.floor((diff % 3600000) / 60000)
-  const s = Math.floor((diff % 60000) / 1000)
-  return { d, h, m, s }
-}
-
 export default function Hero({ brand }) {
-  const c = useCountdown(brand.raceDate)
   return (
     <section id="top" className="relative pt-20 md:pt-28 pb-20">
       <div className="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-12 items-center">
@@ -27,14 +10,14 @@ export default function Hero({ brand }) {
             <span>iOS · TestFlight beta coming soon</span>
           </div>
           <h1 className="font-display font-bold tracking-tight text-5xl md:text-7xl leading-[1.02]">
-            <span className="glow-text">{brand.tagline.split('.')[0]}.</span>
+            <span className="glow-text">Where the work</span>
             <br />
-            <span className="text-white/90">{brand.tagline.split('.').slice(1).join('.').trim()}</span>
+            <span className="text-white/90">gets shaped.</span>
           </h1>
           <p className="mt-6 text-lg muted max-w-xl">
-            An iPhone training dashboard for Ironman athletes. Pulls your workouts from TrainingPeaks,
-            your biometrics from Apple Health, your body composition from InBody, your nutrition from
-            Cronometer — into a single morning screen with AI-assisted coaching insight.
+            The anvil isn’t the smith, the hammer, or the fire. It’s the surface — heavy, stable, unmoved —
+            that everything else gets shaped against. Your training, your nutrition, your recovery are the
+            strikes. Anvil makes sure every one lands somewhere solid, gets measured, and gets remembered.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={brand.betaSignupUrl} className="btn-primary">
@@ -45,20 +28,10 @@ export default function Hero({ brand }) {
             </a>
           </div>
 
-          <div className="mt-10 flex items-center gap-6">
-            <div>
-              <div className="text-xs uppercase tracking-widest muted">Ironman Texas</div>
-              <div className="font-display font-bold text-2xl">April 24, 2027</div>
-            </div>
-            <div className="h-10 w-px bg-white/10" />
-            <div className="grid grid-cols-4 gap-3 font-mono">
-              {[['d',c.d],['h',c.h],['m',c.m],['s',c.s]].map(([k,v]) => (
-                <div key={k} className="text-center">
-                  <div className="text-2xl font-bold tabular-nums">{String(v).padStart(2,'0')}</div>
-                  <div className="text-[10px] uppercase muted">{k}</div>
-                </div>
-              ))}
-            </div>
+          <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
+            <Stat label="Mass" body="Calm. Durable. The same on a hard day." />
+            <Stat label="Surface" body="Every screen earns its place." />
+            <Stat label="Tools" body="Specialized. Built into the shape." />
           </div>
         </div>
 
@@ -72,11 +45,11 @@ export default function Hero({ brand }) {
                 <span className="flex items-center gap-1"><Smartphone size={10}/> 100%</span>
               </div>
               <div className="rounded-xl bg-gradient-to-br from-flame-600 to-flame-800 p-3">
-                <div className="text-[8px] uppercase opacity-80">Race day in</div>
-                <div className="font-display font-bold text-2xl">{c.d}d {c.h}h</div>
-                <div className="text-[9px] opacity-90 mt-1">Phase: Pre-Build · Wk 0/45</div>
+                <div className="text-[8px] uppercase opacity-80">Today</div>
+                <div className="font-display font-bold text-2xl">Tuesday</div>
+                <div className="text-[9px] opacity-90 mt-1">Phase: Base · Wk 4</div>
               </div>
-              <MiniCard title="Today" body="Z2 Bike · 90min · 142 TSS" />
+              <MiniCard title="Training" body="Z2 Bike · 90min · 142 TSS" />
               <MiniCard title="Body Metrics" body="HRV 68 · RHR 47 · Sleep 7h22m" />
               <MiniCard title="Nutrition" body="2,180 / 2,800 kcal · 142g protein" />
               <MiniCard title="Recovery" body="Cold plunge · Normatec · Sauna" />
@@ -85,6 +58,15 @@ export default function Hero({ brand }) {
         </div>
       </div>
     </section>
+  )
+}
+
+function Stat({ label, body }) {
+  return (
+    <div>
+      <div className="text-xs uppercase tracking-widest text-flame-400 font-semibold">{label}</div>
+      <div className="text-sm text-white/70 mt-1 leading-relaxed">{body}</div>
+    </div>
   )
 }
 

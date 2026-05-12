@@ -2,9 +2,9 @@ import { Flame } from 'lucide-react'
 
 export default function Nav({ brand }) {
   const links = [
+    { href: '#philosophy', label: 'The metaphor' },
     { href: '#who', label: 'Who it’s for' },
-    { href: '#features', label: 'Features' },
-    { href: '#screens', label: 'Screens' },
+    { href: '#features', label: 'Tools' },
     { href: '#demo', label: 'Live demo' },
   ]
   return (

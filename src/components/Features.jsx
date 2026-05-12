@@ -44,12 +44,13 @@ export default function Features() {
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
           <div className="max-w-2xl">
-            <div className="pill mb-4"><span>The five widgets</span></div>
-            <h2 className="section-title">Five signals. One morning screen.</h2>
+            <div className="pill mb-4"><span>The five tools</span></div>
+            <h2 className="section-title">Five tools. One working surface.</h2>
             <p className="mt-4 text-lg muted">
-              Each widget is its own focused tool — but they share a single header that tells you the
-              <span className="text-white"> race countdown, training phase, and the chronic / acute / form (CTL / ATL / TSB) </span>
-              numbers that frame the day.
+              Each widget is its own focused tool — but they share a single header that frames the day:
+              <span className="text-white"> where you are in the block, today’s training phase, and the
+              CTL / ATL / TSB numbers </span>
+              that tell you what kind of body you woke up in.
             </p>
           </div>
           <div className="pill text-flame-300 border-flame-500/30 bg-flame-500/10">

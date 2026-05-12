@@ -1,40 +1,41 @@
-import { Target, Database, Watch, Salad } from 'lucide-react'
+import { Mountain, Dumbbell, Shuffle, Hammer } from 'lucide-react'
 
 const personas = [
   {
-    icon: Target,
+    icon: Mountain,
     title: 'The endurance athlete',
-    body: 'You’re training for a long-course triathlon, marathon, ultra, or cycling event. You need one place to see the workout, the readiness, and the trend — not five apps stitched together.'
+    body: 'Marathons, ultras, triathlons, gravel. You already live in TrainingPeaks and a watch app. You want a calmer morning view that ties the plan to the body that woke up.'
   },
   {
-    icon: Database,
-    title: 'The data-driven trainee',
-    body: 'You already use TrainingPeaks, Oura, Apple Health, and a body-composition tool. You want them surfaced together with the context that actually matters this morning.'
+    icon: Dumbbell,
+    title: 'The lifter',
+    body: 'Strength, hypertrophy, powerlifting blocks. Body comp matters. Sleep matters. Anvil treats InBody scans, HRV, and recovery as first-class signals next to your training.'
   },
   {
-    icon: Watch,
-    title: 'The coached athlete',
-    body: 'Your coach builds the plan in TrainingPeaks. The app pulls it via iCal so you never re-enter workouts — just open your phone, see today, and go.'
+    icon: Shuffle,
+    title: 'The hybrid athlete',
+    body: 'You don’t fit one category. Run, lift, climb, swim, ruck. Anvil doesn’t care which sport — every widget reads the same regardless of how you spent the morning.'
   },
   {
-    icon: Salad,
-    title: 'The body-comp focused',
-    body: 'You track InBody scans and care about skeletal muscle mass, phase angle, and trends — not just bodyweight. The dashboard treats those as first-class signals.'
+    icon: Hammer,
+    title: 'Anyone who treats training as craft',
+    body: 'No specific sport, no specific body type, no specific goal. If you show up to the same surface most days and put in honest reps, this is your app.'
   }
 ]
 
 export default function WhoItsFor() {
   return (
-    <section id="who" className="relative py-20 md:py-28">
+    <section id="who" className="relative py-20 md:py-28 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <div className="max-w-3xl">
           <div className="pill mb-4"><span>Who it’s for</span></div>
           <h2 className="section-title">
-            Built for athletes who already <span className="text-flame-400">measure everything</span> — and want one screen to make sense of it.
+            For anyone who treats training as <span className="text-flame-400">craft.</span>
           </h2>
           <p className="mt-5 text-lg muted">
-            Most apps own one slice: the plan, the watch, the scale, the food log. This is the morning glance
-            that pulls them together so the workout you’re about to do is informed by the body you woke up in.
+            The name doesn’t pin Anvil to a sport, a body type, or a goal — it pins it to a relationship
+            with the work. Endurance athletes, lifters, hybrid athletes, anyone shaping themselves
+            through consistent effort and wanting to see what’s actually changing.
           </p>
         </div>
 
