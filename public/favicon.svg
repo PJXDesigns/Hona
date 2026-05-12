@@ -1,13 +1,18 @@
-<!-- Placeholder H mark — single ink color, geometric, works at 16x16.
-     Replace with the final logo when it's designed.
-     The crossbar is offset slightly off-center to give the mark one
-     distinguishing detail, per the design brief. -->
+<!-- Hona H mark — approximation of the supplied wordmark.
+     Doubled parallel-line lowercase "h" letterform, monoline, geometric.
+     Replace this file with the exported SVG from your design tool when ready
+     for pixel-perfect fidelity. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#141412"/>
-  <!-- Left stroke -->
-  <rect x="14" y="14" width="8" height="36" fill="#F8F7F2"/>
-  <!-- Right stroke -->
-  <rect x="42" y="14" width="8" height="36" fill="#F8F7F2"/>
-  <!-- Crossbar — slightly above center for the one distinguishing detail -->
-  <rect x="14" y="28" width="36" height="6" fill="#F8F7F2"/>
+  <rect width="64" height="64" rx="12" fill="#F8F7F2"/>
+  <g fill="none" stroke="#5A3D1F" stroke-width="2.4" stroke-linecap="butt">
+    <!-- Left vertical pair (full-height ascender) -->
+    <line x1="20" y1="8"  x2="20" y2="56" />
+    <line x1="26" y1="8"  x2="26" y2="56" />
+    <!-- Right vertical pair (shorter descender of the hump) -->
+    <line x1="40" y1="26" x2="40" y2="56" />
+    <line x1="46" y1="26" x2="46" y2="56" />
+    <!-- Doubled diagonal shoulder -->
+    <line x1="26" y1="8"  x2="46" y2="26" />
+    <line x1="20" y1="14" x2="40" y2="32" />
+  </g>
 </svg>

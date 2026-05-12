@@ -1,11 +1,15 @@
 import { Github, Mail } from 'lucide-react'
 
-function HonaMark({ size = 18 }) {
+function HonaMark({ size = 20 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
-      <rect x="14" y="14" width="8" height="36" fill="currentColor" />
-      <rect x="42" y="14" width="8" height="36" fill="currentColor" />
-      <rect x="14" y="28" width="36" height="6" fill="currentColor" />
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true"
+         fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="butt">
+      <line x1="20" y1="8"  x2="20" y2="56" />
+      <line x1="26" y1="8"  x2="26" y2="56" />
+      <line x1="40" y1="26" x2="40" y2="56" />
+      <line x1="46" y1="26" x2="46" y2="56" />
+      <line x1="26" y1="8"  x2="46" y2="26" />
+      <line x1="20" y1="14" x2="40" y2="32" />
     </svg>
   )
 }

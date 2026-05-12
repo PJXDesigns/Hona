@@ -30,16 +30,17 @@ export default {
           900: '#141412'    // primary headings
         },
         // --- Single accent --------------------------------------------------
-        // Deep teal — quiet, exact, instrument-panel. Adjust here if you want
-        // slate-blue / sage / muted-bronze instead.
+        // Warm umber brown — matches the Hona wordmark/logo color.
+        // Adjust the whole palette here if the final logo color shifts.
         accent: {
-          50:  '#E6F1F1',
-          100: '#C9E1E0',
-          200: '#9AC5C3',
-          400: '#3F8A88',
-          500: '#1A6868',   // default accent
-          600: '#125454',
-          700: '#0E4040'
+          50:  '#F5EFE5',
+          100: '#E8DDC8',
+          200: '#D0BB94',
+          300: '#B49265',
+          400: '#8A6535',
+          500: '#5A3D1F',   // default accent — matches the logo
+          600: '#4A3018',
+          700: '#3A2412'
         },
 
         // --- App widget tints (Live demo only) ------------------------------
