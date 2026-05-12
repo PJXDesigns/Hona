@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(255, 61, 46, 0.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(62, 193, 255, 0.08), transparent 60%),
+      #07070b;
+    background-attachment: fixed;
+  }
+  ::selection { background: rgba(255, 61, 46, 0.4); color: white; }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl bg-ink-800/60 backdrop-blur border border-white/5 shadow-card;
+  }
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium border border-white/10 bg-white/5;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-flame-500 hover:bg-flame-400 text-white px-6 py-3 font-semibold transition-all shadow-glow;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 hover:border-white/30 hover:bg-white/5 text-white px-6 py-3 font-semibold transition-all;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-5xl font-bold tracking-tight;
+  }
+  .muted { @apply text-white/60; }
+  .glow-text {
+    background: linear-gradient(90deg, #fff 0%, #ffb6aa 50%, #fff 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 5s linear infinite;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* Hide horizontal scrollbar for marquee-style rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
