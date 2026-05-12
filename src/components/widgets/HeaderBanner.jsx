@@ -1,4 +1,4 @@
-import { Hammer, Activity, Gauge, Battery } from 'lucide-react'
+import { CalendarDays, Activity, Gauge, Battery } from 'lucide-react'
 
 export default function HeaderBanner() {
   // Example demo values — in the real app these come from Apple Calendar,
@@ -10,31 +10,29 @@ export default function HeaderBanner() {
   const progress = block.week / block.of
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-flame-600 via-flame-700 to-flame-900 border border-flame-500/40 p-5 md:p-7 shadow-glow">
-      <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
+    // The header is the heavy anvil itself — dark warm steel against the workshop's cream surface.
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sand-800 via-sand-900 to-sand-900 border border-sand-700 p-5 md:p-7 shadow-card">
+      <div className="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-strava-accent/15 blur-3xl" />
       <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-5">
         <div>
-          <div className="flex items-center gap-2 text-white/80 text-xs uppercase tracking-widest">
-            <Hammer size={14} /> Today · {today}
+          <div className="flex items-center gap-2 text-paper-300 text-[11px] font-semibold uppercase tracking-[0.18em]">
+            <CalendarDays size={13} /> Today · {today}
           </div>
-          <div className="mt-1 font-display font-extrabold text-4xl md:text-5xl leading-none">
-            {block.name} <span className="text-white/70 text-2xl md:text-3xl font-bold">block</span>
+          <div className="mt-1 font-display font-extrabold text-4xl md:text-5xl leading-none text-sand-50">
+            {block.name} <span className="text-sand-300 text-2xl md:text-3xl font-bold">block</span>
           </div>
           <div className="mt-2 flex items-center gap-3 text-sm">
-            <span className="px-2.5 py-0.5 rounded-full bg-black/30 border border-white/10 font-semibold">
+            <span className="px-2.5 py-0.5 rounded-full bg-sand-50/10 border border-sand-50/15 font-semibold text-sand-100">
               Wk {block.week} of {block.of}
             </span>
-            <span className="text-white/70">{Math.round((1 - progress) * block.of)} weeks remaining</span>
+            <span className="text-sand-300">{Math.round((1 - progress) * block.of)} weeks remaining</span>
           </div>
-          {/* progress */}
           <div className="mt-4 max-w-md">
-            <div className="h-2 rounded-full bg-black/30 overflow-hidden">
-              <div
-                className="h-full bg-white/90 rounded-full transition-all"
-                style={{ width: `${progress * 100}%` }}
-              />
+            <div className="h-2 rounded-full bg-sand-50/10 overflow-hidden">
+              <div className="h-full bg-strava-accent rounded-full transition-all"
+                   style={{ width: `${progress * 100}%` }} />
             </div>
-            <div className="mt-1 flex justify-between text-[10px] text-white/60 font-mono">
+            <div className="mt-1 flex justify-between text-[10px] text-sand-400 font-mono">
               <span>Block start</span><span>Goal date</span>
             </div>
           </div>
@@ -53,12 +51,16 @@ export default function HeaderBanner() {
 
 function Stat({ icon: Icon, label, value, sub, highlight }) {
   return (
-    <div className={`rounded-xl border border-white/10 px-3 py-2.5 ${highlight ? 'bg-emerald-500/15' : 'bg-black/30'}`}>
-      <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-white/70">
+    <div className={`rounded-xl border px-3 py-2.5 ${
+      highlight
+        ? 'bg-fueling/20 border-fueling/40'
+        : 'bg-sand-50/5 border-sand-50/10'
+    }`}>
+      <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-sand-300">
         <Icon size={11} /> {label}
       </div>
-      <div className="font-display font-bold text-xl tabular-nums">{value}</div>
-      <div className="text-[10px] text-white/50">{sub}</div>
+      <div className="font-display font-bold text-xl tabular-nums text-sand-50">{value}</div>
+      <div className="text-[10px] text-sand-400">{sub}</div>
     </div>
   )
 }

@@ -1,11 +1,13 @@
+<!-- Placeholder H mark — single ink color, geometric, works at 16x16.
+     Replace with the final logo when it's designed.
+     The crossbar is offset slightly off-center to give the mark one
+     distinguishing detail, per the design brief. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff8a1f"/>
-      <stop offset="100%" stop-color="#e22418"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="14" fill="#07070b"/>
-  <path d="M32 8 C 36 18, 46 22, 44 34 C 42 45, 34 48, 32 56 C 30 48, 22 45, 20 34 C 18 22, 28 18, 32 8 Z" fill="url(#g)"/>
-  <path d="M32 22 C 34 28, 38 30, 37 36 C 36 42, 33 44, 32 48 C 31 44, 28 42, 27 36 C 26 30, 30 28, 32 22 Z" fill="#fff" fill-opacity="0.35"/>
+  <rect width="64" height="64" rx="14" fill="#141412"/>
+  <!-- Left stroke -->
+  <rect x="14" y="14" width="8" height="36" fill="#F8F7F2"/>
+  <!-- Right stroke -->
+  <rect x="42" y="14" width="8" height="36" fill="#F8F7F2"/>
+  <!-- Crossbar — slightly above center for the one distinguishing detail -->
+  <rect x="14" y="28" width="36" height="6" fill="#F8F7F2"/>
 </svg>

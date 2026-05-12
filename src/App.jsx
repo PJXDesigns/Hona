@@ -11,8 +11,9 @@ import Footer from './components/Footer.jsx'
 
 // Single source of truth for branding — change these to rename / re-tagline the site.
 export const BRAND = {
-  name: 'Anvil',
-  tagline: 'Where the work gets shaped.',
+  name: 'Hona',
+  pronunciation: 'HOH-na',           // from the brand brief
+  tagline: 'Sharpen the athlete.',
   betaSignupUrl: '#beta',            // wire to TestFlight public link later
   contactEmail: 'hello@example.com'  // replace with your address
 }

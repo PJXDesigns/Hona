@@ -59,12 +59,14 @@ const week = [
 const typeIcon = {
   Bike: Bike, Run: Footprints, Swim: Waves, Lift: Dumbbell, Rest: Moon
 }
+
+// Colors mirror AppTheme.swift exactly — each discipline has its pastel + deep-text pairing.
 const typeColor = {
-  Bike: 'text-flame-400 bg-flame-500/10 border-flame-500/30',
-  Run:  'text-ember-400 bg-ember-500/10 border-ember-500/30',
-  Swim: 'text-ice-400  bg-ice-500/10  border-ice-500/30',
-  Lift: 'text-purple-300 bg-purple-500/10 border-purple-500/30',
-  Rest: 'text-white/50 bg-white/5 border-white/10'
+  Bike: 'text-bike-text bg-bike border-bike-text/20',
+  Run:  'text-run-text  bg-run  border-run-text/20',
+  Swim: 'text-swim-text bg-swim border-swim-text/20',
+  Lift: 'text-strength-text bg-strength border-strength-text/20',
+  Rest: 'text-rest-text bg-rest border-rest-text/15'
 }
 
 export default function TrainingWidget({ day, onDayChange }) {
@@ -77,8 +79,8 @@ export default function TrainingWidget({ day, onDayChange }) {
     <div className="card p-5">
       <header className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Calendar size={18} className="text-flame-400" />
-          <h3 className="font-display font-bold text-lg">Training · This Week</h3>
+          <Calendar size={18} className="text-sand-900" />
+          <h3 className="font-display font-bold text-lg text-sand-900">Training · This Week</h3>
         </div>
         <div className="text-xs muted">Tue → Sun · Mon rest</div>
       </header>
@@ -90,10 +92,10 @@ export default function TrainingWidget({ day, onDayChange }) {
             onClick={() => onDayChange?.(d.day)}
             className={`text-center rounded-lg py-2 border transition ${
               d.today
-                ? 'bg-flame-500/15 border-flame-500/50 text-white'
+                ? 'bg-sand-900 border-sand-900 text-sand-50'
                 : d.rest
-                ? 'bg-white/[0.02] border-white/5 text-white/40'
-                : 'bg-white/5 border-white/10 hover:border-white/20'
+                ? 'bg-sand-100 border-sand-200 text-sand-500'
+                : 'bg-sand-50 border-sand-300 text-sand-800 hover:border-sand-500'
             }`}
           >
             <div className="text-[10px] uppercase tracking-wider">{d.day}</div>
@@ -108,35 +110,35 @@ export default function TrainingWidget({ day, onDayChange }) {
           const Icon = typeIcon[w.type] || Calendar
           const open = expanded.includes(key)
           return (
-            <div key={key} className={`rounded-xl border ${typeColor[w.type] || typeColor.Rest} bg-white/[0.02]`}>
+            <div key={key} className={`rounded-xl border ${typeColor[w.type] || typeColor.Rest}`}>
               <button
                 onClick={() => toggle(key)}
                 className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className={`w-9 h-9 rounded-lg border ${typeColor[w.type]} grid place-items-center`}>
+                  <div className={`w-9 h-9 rounded-lg border bg-sand-50/70 grid place-items-center`}>
                     <Icon size={16} />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xs uppercase tracking-wider text-white/50">
-                      {d.day} · {d.date} {d.today && <span className="text-flame-400 ml-1">· Today</span>}
+                    <div className="text-xs uppercase tracking-wider opacity-70">
+                      {d.day} · {d.date} {d.today && <span className="font-bold ml-1">· Today</span>}
                     </div>
                     <div className="font-semibold truncate">{w.title}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-xs font-mono shrink-0">
-                  <span className="muted hidden sm:inline">{w.zone}</span>
-                  <span className="muted">{w.dur}</span>
-                  {w.tss > 0 && <span className="text-white">{w.tss} TSS</span>}
-                  {w.steps && (open ? <ChevronUp size={16} className="muted" /> : <ChevronDown size={16} className="muted" />)}
+                  <span className="opacity-60 hidden sm:inline">{w.zone}</span>
+                  <span className="opacity-60">{w.dur}</span>
+                  {w.tss > 0 && <span className="font-bold">{w.tss} TSS</span>}
+                  {w.steps && (open ? <ChevronUp size={16} className="opacity-60" /> : <ChevronDown size={16} className="opacity-60" />)}
                 </div>
               </button>
               {open && w.steps && (
-                <div className="border-t border-white/5 px-4 py-3 space-y-1.5">
+                <div className="border-t border-current/10 px-4 py-3 space-y-1.5 bg-sand-50/40">
                   {w.steps.map((s, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
-                      <span className="w-1.5 h-1.5 rounded-full bg-flame-400" />
-                      <span className="font-mono text-white/80">{s}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60" />
+                      <span className="font-mono opacity-90">{s}</span>
                     </div>
                   ))}
                 </div>

@@ -13,6 +13,14 @@ const days = [
 
 const goal = { kcal: 2800, p: 180, c: 350, f: 92 }
 
+// Colors from AppTheme widget palette
+const COLORS = {
+  kcal:    '#486820', // fueling-mid
+  protein: '#8A4A28', // nutrition-mid
+  carbs:   '#C44000', // strava-accent
+  fat:     '#1A6AB0'  // volume-accent
+}
+
 function Ring({ value, max, color, size = 96, stroke = 10, children }) {
   const r = (size - stroke) / 2
   const C = 2 * Math.PI * r
@@ -20,7 +28,7 @@ function Ring({ value, max, color, size = 96, stroke = 10, children }) {
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size/2} cy={size/2} r={r} stroke="rgba(255,255,255,0.08)" strokeWidth={stroke} fill="none" />
+        <circle cx={size/2} cy={size/2} r={r} stroke="#E4D8C4" strokeWidth={stroke} fill="none" />
         <circle cx={size/2} cy={size/2} r={r}
                 stroke={color} strokeWidth={stroke} fill="none"
                 strokeLinecap="round"
@@ -38,23 +46,23 @@ export default function NutritionWidget() {
     <div className="card p-5">
       <header className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Apple size={18} className="text-emerald-400" />
-          <h3 className="font-display font-bold text-lg">Nutrition</h3>
+          <Apple size={18} className="text-nutrition-mid" />
+          <h3 className="font-display font-bold text-lg text-sand-900">Nutrition</h3>
         </div>
         <div className="text-xs muted">Cronometer · 7-day</div>
       </header>
 
       <div className="grid grid-cols-[auto_1fr] gap-5 items-center">
-        <Ring value={d.kcal} max={goal.kcal} color="#10b981" size={120} stroke={12}>
+        <Ring value={d.kcal} max={goal.kcal} color={COLORS.kcal} size={120} stroke={12}>
           <div>
-            <div className="font-display font-bold text-2xl tabular-nums">{d.kcal}</div>
+            <div className="font-display font-bold text-2xl tabular-nums text-sand-900">{d.kcal}</div>
             <div className="text-[10px] muted uppercase tracking-wider">/ {goal.kcal} kcal</div>
           </div>
         </Ring>
         <div className="grid grid-cols-3 gap-2">
-          <MacroCard label="Protein" value={d.p} goal={goal.p} unit="g" color="#ff5d3f" />
-          <MacroCard label="Carbs"   value={d.c} goal={goal.c} unit="g" color="#ffb14a" />
-          <MacroCard label="Fat"     value={d.f} goal={goal.f} unit="g" color="#7ad7ff" />
+          <MacroCard label="Protein" value={d.p} goal={goal.p} unit="g" color={COLORS.protein} />
+          <MacroCard label="Carbs"   value={d.c} goal={goal.c} unit="g" color={COLORS.carbs} />
+          <MacroCard label="Fat"     value={d.f} goal={goal.f} unit="g" color={COLORS.fat} />
         </div>
       </div>
 
@@ -69,9 +77,9 @@ export default function NutritionWidget() {
                 <div className="w-full rounded-t-md transition-all"
                      style={{
                        height: `${h}%`,
-                       background: active ? '#10b981' : dd.partial ? 'rgba(16,185,129,0.35)' : 'rgba(255,255,255,0.1)'
+                       background: active ? COLORS.kcal : dd.partial ? 'rgba(72,104,32,0.35)' : '#D4C4A8'
                      }} />
-                <div className={`text-[10px] ${active ? 'text-white' : 'muted'}`}>{dd.label}</div>
+                <div className={`text-[10px] ${active ? 'text-sand-900 font-semibold' : 'muted'}`}>{dd.label}</div>
               </button>
             )
           })}
@@ -84,10 +92,10 @@ export default function NutritionWidget() {
 function MacroCard({ label, value, goal, unit, color }) {
   const pct = Math.min(100, Math.round((value / goal) * 100))
   return (
-    <div className="rounded-lg bg-white/5 border border-white/10 p-2.5">
+    <div className="rounded-lg bg-sand-100 border border-sand-300 p-2.5">
       <div className="text-[10px] uppercase muted tracking-wider">{label}</div>
-      <div className="font-display font-bold text-base tabular-nums">{value}<span className="text-[10px] muted">{unit}</span></div>
-      <div className="mt-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+      <div className="font-display font-bold text-base tabular-nums text-sand-900">{value}<span className="text-[10px] muted">{unit}</span></div>
+      <div className="mt-1 h-1.5 rounded-full bg-sand-300 overflow-hidden">
         <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: color }} />
       </div>
       <div className="text-[10px] muted mt-1 font-mono">{pct}% of {goal}{unit}</div>

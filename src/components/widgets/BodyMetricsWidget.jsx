@@ -12,6 +12,10 @@ const metrics = [
     spark: [14.4,14.1,14.0,14.3,14.2,14.1,14.2] }
 ]
 
+// Map to AppTheme.metricsMid (#5A3A80) for primary, recovery-done for good, strava-accent for bad
+const COL_GOOD = '#3A6A50' // inbody-mid
+const COL_BAD  = '#C44000' // strava-accent
+
 const sampleInsight = `Readiness is solid — HRV is trending +4 over the 7-day rolling average and resting HR has dropped 2 bpm. Sleep landed at 7h22 with 88% efficiency, so the planned Z2 bike (142 TSS) is well within scope today. Hold endurance intent; resist the temptation to push to sweet spot just because legs feel good. Wednesday’s double (run + lift + swim) is the test of whether this recovery sticks.`
 
 export default function BodyMetricsWidget() {
@@ -21,7 +25,6 @@ export default function BodyMetricsWidget() {
   const generate = () => {
     setLoading(true)
     setInsight(null)
-    // Simulated streaming-style reveal
     setTimeout(() => {
       setLoading(false)
       setInsight(sampleInsight)
@@ -32,23 +35,23 @@ export default function BodyMetricsWidget() {
     <div className="card p-5">
       <header className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <HeartPulse size={18} className="text-ice-400" />
-          <h3 className="font-display font-bold text-lg">Body Metrics</h3>
+          <HeartPulse size={18} className="text-metrics-mid" />
+          <h3 className="font-display font-bold text-lg text-sand-900">Body Metrics</h3>
         </div>
         <div className="text-xs muted">HealthKit · Oura</div>
       </header>
 
       <div className="grid grid-cols-2 gap-2">
         {metrics.map(m => (
-          <div key={m.key} className="rounded-xl bg-white/[0.03] border border-white/10 p-3">
+          <div key={m.key} className="rounded-xl bg-metrics/40 border border-metrics-mid/20 p-3">
             <div className="flex items-center justify-between">
-              <div className="text-[10px] uppercase muted tracking-wider">{m.label}</div>
-              <Sparkline data={m.spark} color={m.good ? '#10b981' : '#ff5d3f'} />
+              <div className="text-[10px] uppercase tracking-wider text-metrics-text/70">{m.label}</div>
+              <Sparkline data={m.spark} color={m.good ? COL_GOOD : COL_BAD} />
             </div>
-            <div className="font-display font-bold text-2xl tabular-nums mt-0.5">
-              {m.value}<span className="text-[10px] muted ml-0.5">{m.unit}</span>
+            <div className="font-display font-bold text-2xl tabular-nums mt-0.5 text-metrics-text">
+              {m.value}<span className="text-[10px] opacity-60 ml-0.5">{m.unit}</span>
             </div>
-            <div className={`text-[11px] mt-0.5 ${m.good ? 'text-emerald-400' : 'text-flame-400'}`}>{m.trend}</div>
+            <div className={`text-[11px] mt-0.5 ${m.good ? 'text-recovery-done' : 'text-strava-accent'}`}>{m.trend}</div>
           </div>
         ))}
       </div>
@@ -56,14 +59,14 @@ export default function BodyMetricsWidget() {
       <button
         onClick={generate}
         disabled={loading}
-        className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-flame-500 to-flame-700 hover:from-flame-400 hover:to-flame-600 transition px-4 py-2.5 font-semibold text-sm disabled:opacity-70"
+        className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-sand-900 hover:bg-sand-800 text-sand-50 transition px-4 py-2.5 font-semibold text-sm disabled:opacity-70 shadow-card"
       >
         {loading ? <><Loader2 size={16} className="animate-spin" /> Thinking…</> : <><Sparkles size={16} /> Generate coaching insight</>}
       </button>
 
       {insight && (
-        <div className="mt-3 rounded-xl border border-flame-500/30 bg-flame-500/5 p-3 text-sm leading-relaxed">
-          <div className="text-[10px] uppercase tracking-wider text-flame-300 mb-1">Coaching insight · Claude</div>
+        <div className="mt-3 rounded-xl border border-metrics-mid/30 bg-metrics/40 p-3 text-sm leading-relaxed text-metrics-text">
+          <div className="text-[10px] uppercase tracking-wider text-metrics-mid mb-1 font-semibold">Coaching insight · Claude</div>
           {insight}
         </div>
       )}

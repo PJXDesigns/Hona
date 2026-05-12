@@ -22,11 +22,12 @@ const scans = {
   ]
 }
 
+// Chart colors mirror AppTheme widget palette
 const metrics = [
-  { key: 'smm',    label: 'SMM (lb)',     color: '#ff5d3f', goal: 75.0 },
-  { key: 'weight', label: 'Weight (lb)',  color: '#7ad7ff' },
-  { key: 'bf',     label: 'Body Fat %',   color: '#ffb14a' },
-  { key: 'pa',     label: 'Phase Angle',  color: '#a78bfa' }
+  { key: 'smm',    label: 'SMM (lb)',     color: '#3A6A50', goal: 75.0 },   // inbody-mid
+  { key: 'weight', label: 'Weight (lb)',  color: '#1A6AB0' },               // volume-accent
+  { key: 'bf',     label: 'Body Fat %',   color: '#C44000' },               // strava-accent
+  { key: 'pa',     label: 'Phase Angle',  color: '#5A3A80' }                // metrics-mid
 ]
 
 export default function InBodyWidget() {
@@ -43,15 +44,17 @@ export default function InBodyWidget() {
     <div className="card p-5">
       <header className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <Activity size={18} className="text-flame-400" />
-          <h3 className="font-display font-bold text-lg">InBody</h3>
+          <Activity size={18} className="text-inbody-mid" />
+          <h3 className="font-display font-bold text-lg text-sand-900">InBody</h3>
         </div>
         <div className="flex gap-1 text-xs">
           {['3m','6m'].map(r => (
             <button key={r} onClick={() => setRange(r)}
               className={`px-2 py-1 rounded-md border transition ${
-                range === r ? 'bg-flame-500/20 border-flame-500/50 text-white'
-                            : 'border-white/10 muted hover:text-white'}`}>
+                range === r
+                  ? 'bg-sand-900 border-sand-900 text-sand-50'
+                  : 'bg-sand-50 border-sand-300 text-sand-600 hover:text-sand-900'
+              }`}>
               {r}
             </button>
           ))}
@@ -64,9 +67,12 @@ export default function InBodyWidget() {
           return (
             <button key={x.key} onClick={() => setMetric(x.key)}
               className={`rounded-lg border p-2.5 text-left transition ${
-                metric === x.key ? 'bg-white/10 border-white/30' : 'bg-white/[0.02] border-white/10 hover:bg-white/5'}`}>
+                metric === x.key
+                  ? 'bg-sand-200 border-sand-400'
+                  : 'bg-sand-50 border-sand-300 hover:bg-sand-100'
+              }`}>
               <div className="text-[10px] uppercase muted tracking-wider truncate">{x.label}</div>
-              <div className="font-display font-bold text-lg tabular-nums" style={{ color: metric === x.key ? x.color : 'white' }}>
+              <div className="font-display font-bold text-lg tabular-nums" style={{ color: metric === x.key ? x.color : '#2A1E08' }}>
                 {v}
               </div>
             </button>
@@ -77,12 +83,12 @@ export default function InBodyWidget() {
       <div className="h-44 -ml-2">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 5, right: 8, bottom: 0, left: 8 }}>
-            <XAxis dataKey="date" stroke="#666" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
-            <YAxis stroke="#666" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}
+            <XAxis dataKey="date" stroke="#8A7A60" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+            <YAxis stroke="#8A7A60" tick={{ fontSize: 10 }} axisLine={false} tickLine={false}
                    domain={['dataMin - 0.5','dataMax + 0.5']} width={30} />
             <Tooltip
-              contentStyle={{ background: '#14161d', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }}
-              labelStyle={{ color: 'white' }}
+              contentStyle={{ background: '#FBF8F1', border: '1px solid #D4C4A8', borderRadius: 8, fontSize: 12, color: '#2A1E08' }}
+              labelStyle={{ color: '#2A1E08' }}
             />
             {m.goal && <ReferenceLine y={m.goal} stroke={m.color} strokeDasharray="3 3" strokeOpacity={0.5} label={{ value: 'Goal', fill: m.color, fontSize: 10, position: 'right' }} />}
             <Line type="monotone" dataKey={metric} stroke={m.color} strokeWidth={2.5} dot={{ r: 4, fill: m.color }} activeDot={{ r: 6 }} />
@@ -92,7 +98,7 @@ export default function InBodyWidget() {
 
       <div className="mt-3 flex items-center justify-between text-sm">
         <div className="muted">Last scan · {latest.date}</div>
-        <div className={`font-mono ${deltaPositive ? 'text-emerald-400' : 'text-flame-400'}`}>
+        <div className={`font-mono ${deltaPositive ? 'text-recovery-done' : 'text-strava-accent'}`}>
           {deltaPositive ? '↑' : '↓'} {Math.abs(delta)} since {baseline.date}
         </div>
       </div>

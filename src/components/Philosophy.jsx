@@ -1,62 +1,54 @@
-import { Anchor, Layers, Wrench } from 'lucide-react'
-
+// Three qualities from /Hona-brand-positioning.md — Consistency, Patience, Versatility.
 const qualities = [
   {
-    icon: Anchor,
-    name: 'Mass',
-    headline: 'It doesn’t move.',
-    body: 'An anvil works because it doesn’t move — it absorbs the blow so the work gets shaped, not the foundation. Anvil should feel like that. Calm. Durable. The same on a hard day as on an easy one. No streak-shaming. No notifications begging for attention. It’s there when you need it.'
+    num: '01',
+    name: 'Consistency',
+    headline: 'The same on a hard day as an easy one.',
+    body: 'Training is a refinement process — small, consistent adjustments compounding over months. Hona is built to feel exactly the same whether the morning is brutal or boring. No streak-shaming. No notifications begging for attention. The same surface every day, every entry, every read.'
   },
   {
-    icon: Layers,
-    name: 'A working surface',
-    headline: 'Every inch earns its place.',
-    body: 'An anvil isn’t decorative — every inch of it is for shaping something. Every screen in Anvil should earn its place: today’s training, today’s metrics, today’s recovery. No dashboards for the sake of dashboards. No screens you tap past because nothing’s there.'
+    num: '02',
+    name: 'Patience',
+    headline: 'The story is the slope, not the noise.',
+    body: 'Single-day numbers will jerk you around. A bad sleep, a salty meal, one missed session — none of them are the story. Hona surfaces trends over weeks: where SMM is heading, where HRV sits against your seven-day mean, whether your CTL is actually building or just oscillating. The story is the slope.'
   },
   {
-    icon: Wrench,
-    name: 'Specialized tools',
-    headline: 'Built into the shape.',
-    body: 'A real anvil has a horn for bending, a hardy hole for cutting, a flat face for striking. The widgets — Training, InBody, Nutrition, Body Metrics, Recovery — are those tools. Each one has a job. Together they cover the full work of shaping an athlete, whatever the discipline.'
+    num: '03',
+    name: 'Versatility',
+    headline: 'Any athlete. Any discipline.',
+    body: 'The five tiles — Training, InBody, Nutrition, Body Metrics, Recovery — together cover what you did, what fueled it, what your body looks like, how you’re recovering, and what’s changing over time. The structure is the same whether your training is endurance, strength, hybrid, recreational, or competitive. Hona doesn’t prescribe how you balance them.'
   }
 ]
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="relative py-20 md:py-28 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
+    <section id="philosophy" className="relative py-24 md:py-32 hairline">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="max-w-3xl">
-          <div className="pill mb-4"><span>The metaphor</span></div>
-          <h2 className="section-title">
-            Three qualities of a <span className="text-flame-400">good anvil</span> —
-            <br className="hidden md:block" /> three qualities of a good app.
+          <span className="eyebrow">The idea</span>
+          <h2 className="section-title mt-4">
+            Three qualities. <span className="text-accent-500">One daily practice.</span>
           </h2>
-          <p className="mt-5 text-lg muted">
-            You’re doing the work. Anvil doesn’t lift the hammer. It’s the surface every strike lands on.
+          <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
+            You don’t transform overnight. You make small, consistent adjustments that
+            compound over months. Hona is the dashboard that keeps you honest about
+            those adjustments.
           </p>
         </div>
 
-        <div className="mt-14 space-y-6">
-          {qualities.map((q, i) => {
-            const Icon = q.icon
-            return (
-              <div key={q.name} className="card p-7 md:p-10 grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 items-start">
-                <div className="flex md:flex-col items-center md:items-start gap-4 md:gap-3">
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-flame-500 to-flame-800 grid place-items-center shadow-glow shrink-0">
-                    <Icon size={28} />
-                  </div>
-                  <div className="font-mono text-xs uppercase tracking-widest muted">
-                    0{i + 1}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-flame-400 text-sm uppercase tracking-widest font-semibold">{q.name}</div>
-                  <h3 className="font-display font-bold text-3xl md:text-4xl mt-1 leading-tight">{q.headline}</h3>
-                  <p className="mt-4 text-white/70 text-lg leading-relaxed max-w-2xl">{q.body}</p>
-                </div>
+        <div className="mt-16 grid md:grid-cols-3 gap-px bg-paper-300 border border-paper-300 rounded-2xl overflow-hidden">
+          {qualities.map((q) => (
+            <article key={q.num} className="bg-paper-50 p-8 md:p-10">
+              <div className="flex items-center justify-between mb-8">
+                <span className="font-mono text-xs tracking-widest text-ink-300">{q.num}</span>
+                <span className="eyebrow !text-ink-400">{q.name}</span>
               </div>
-            )
-          })}
+              <h3 className="font-display font-bold text-2xl md:text-[28px] leading-snug tracking-tight text-ink-900">
+                {q.headline}
+              </h3>
+              <p className="mt-4 text-ink-500 leading-relaxed">{q.body}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
