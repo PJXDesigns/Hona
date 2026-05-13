@@ -2,7 +2,6 @@ import Nav from './components/Nav.jsx'
 import Showcase from './components/Showcase.jsx'
 import WhoItsFor from './components/WhoItsFor.jsx'
 import ScreenshotGallery from './components/ScreenshotGallery.jsx'
-import InteractiveDemo from './components/InteractiveDemo.jsx'
 import NotThis from './components/NotThis.jsx'
 import CTA from './components/CTA.jsx'
 import Footer from './components/Footer.jsx'
@@ -31,7 +30,6 @@ export default function App() {
         <Showcase brand={BRAND} />
         <WhoItsFor />
         <ScreenshotGallery />
-        <InteractiveDemo />
         <NotThis />
         <CTA brand={BRAND} />
       </main>

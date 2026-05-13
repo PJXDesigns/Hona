@@ -8,7 +8,7 @@ export default function Nav({ brand }) {
     { href: '#showcase', label: 'How it works' },
     { href: '#who',      label: 'Who it’s for' },
     { href: '#screens',  label: 'Screens' },
-    { href: '#demo',     label: 'Live demo' },
+    { href: '#beta',     label: 'Beta' },
   ]
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-100/85 border-b border-paper-300">

@@ -329,30 +329,39 @@ export default function Showcase({ brand }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const sectionRefs = useRef([])
 
+  // Active-scene detection by direct scroll position, not IntersectionObserver.
+  // A scene becomes active only once its top edge has crossed *above* the
+  // viewport top — meaning the scene's content is now fully filling the
+  // viewport and the reader has reached it. That timing keeps the phone in
+  // sync with what's actually on screen on the left.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the entry closest to viewport center
-        const candidates = entries
-          .filter(e => e.isIntersecting)
-          .map(e => ({
-            i: Number(e.target.dataset.index),
-            dist: Math.abs((e.boundingClientRect.top + e.boundingClientRect.height / 2) - window.innerHeight / 2)
-          }))
-        if (candidates.length) {
-          candidates.sort((a, b) => a.dist - b.dist)
-          setActiveIndex(candidates[0].i)
-        }
-      },
-      {
-        // fire when section's center is within middle 40% of viewport
-        rootMargin: '-30% 0px -30% 0px',
-        threshold: 0
-      }
-    )
-
-    sectionRefs.current.forEach(el => el && observer.observe(el))
-    return () => observer.disconnect()
+    let raf = 0
+    const update = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        let activeI = 0
+        // Walk top-to-bottom; the last scene whose top has crossed wins.
+        sectionRefs.current.forEach((el, i) => {
+          if (!el) return
+          const rect = el.getBoundingClientRect()
+          // ~80px hysteresis above the viewport top stabilises the transition
+          // through nav-height padding and prevents flicker right at the edge.
+          if (rect.top <= 80) {
+            activeI = i
+          }
+        })
+        setActiveIndex(activeI)
+      })
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      if (raf) cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   return (
@@ -402,8 +411,8 @@ function SceneContent({ scene, index, brand }) {
           <a href={brand.betaSignupUrl} className="btn-primary">
             Join the beta <ArrowRight size={16} />
           </a>
-          <a href="#demo" className="btn-ghost">
-            <Play size={14} /> See the dashboard
+          <a href="#screens" className="btn-ghost">
+            <Play size={14} /> See the screens
           </a>
         </div>
       )}
@@ -445,7 +454,9 @@ function ShowcasePhone({ activeIndex }) {
         className="relative h-full"
         style={{
           transform: `translateY(-${activeIndex * 100}%)`,
-          transition: 'transform 800ms cubic-bezier(0.16, 1, 0.3, 1)'
+          // Symmetric ease-in-out, slightly slower than before so the motion
+          // reads as a deliberate scroll instead of a flick.
+          transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
         }}
       >
         {scenes.map((scene, i) => (
