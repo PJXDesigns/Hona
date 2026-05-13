@@ -5,10 +5,10 @@ const markUrl = `${import.meta.env.BASE_URL}logo-mark.svg`
 
 export default function Nav({ brand }) {
   const links = [
-    { href: '#philosophy', label: 'The idea' },
-    { href: '#who',        label: 'Who it’s for' },
-    { href: '#features',   label: 'Tiles' },
-    { href: '#demo',       label: 'Live demo' },
+    { href: '#showcase', label: 'How it works' },
+    { href: '#who',      label: 'Who it’s for' },
+    { href: '#screens',  label: 'Screens' },
+    { href: '#demo',     label: 'Live demo' },
   ]
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-100/85 border-b border-paper-300">
