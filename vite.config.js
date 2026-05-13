@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// GitHub Pages serves the site at https://<user>.github.io/<repo>/ so Vite needs
-// to emit asset URLs with that prefix. For a user/custom-domain site set base: '/'.
+// Site is served from the custom domain hona.fitness at the root, so base is '/'.
+// If you ever revert to the github.io subpath, change back to '/Hona/'.
 export default defineConfig({
-  base: '/Hona/',
+  base: '/',
   plugins: [react()],
   server: {
     port: 5173,
