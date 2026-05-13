@@ -345,9 +345,11 @@ export default function Showcase({ brand }) {
         sectionRefs.current.forEach((el, i) => {
           if (!el) return
           const rect = el.getBoundingClientRect()
-          // ~80px hysteresis above the viewport top stabilises the transition
-          // through nav-height padding and prevents flicker right at the edge.
-          if (rect.top <= 80) {
+          // Fires the phone transition once the scene's top has scrolled to
+          // ~160px from the viewport top — i.e. the scene's headline is about
+          // to enter the comfortable reading zone. Tune this number to taste:
+          // bigger = phone changes sooner, smaller = phone changes later.
+          if (rect.top <= 160) {
             activeI = i
           }
         })
