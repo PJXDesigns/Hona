@@ -177,33 +177,39 @@ function MiniPhone({ children }) {
 }
 
 function ShowcasePhone({ activeIndex }) {
+  // Bezel uses padding (not border) so the inner screen owns the 9:19.5
+  // aspect ratio exactly — that way images of the same aspect fit without
+  // object-cover cropping anything (= no "slightly zoomed" look).
   return (
-    <div className="relative w-[320px] xl:w-[360px] aspect-[9/19.5] rounded-[42px] bg-ink-900 border-[10px] border-ink-900 shadow-cardLift overflow-hidden">
-      {/* notch */}
-      <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-ink-900 z-30" />
-      {/* progress rail */}
-      <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
+    <div className="relative w-[336px] xl:w-[376px] rounded-[46px] bg-ink-900 shadow-cardLift p-3 xl:p-[14px]">
+      {/* Inner screen — this is where the aspect lock lives */}
+      <div className="relative aspect-[9/19.5] rounded-[34px] overflow-hidden">
+        {/* notch */}
+        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-ink-900 z-30" />
+        {/* progress rail */}
+        <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
+          <div
+            className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
+            style={{
+              top: `${(activeIndex / Math.max(1, scenes.length - 1)) * 100}%`,
+              height: '14%'
+            }}
+          />
+        </div>
+        {/* Inner content column — all scenes stacked; translateY scrolls between them */}
         <div
-          className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
+          className="relative h-full"
           style={{
-            top: `${(activeIndex / Math.max(1, scenes.length - 1)) * 100}%`,
-            height: '14%'
+            transform: `translateY(-${activeIndex * 100}%)`,
+            transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
           }}
-        />
-      </div>
-      {/* Inner content column — all scenes stacked; translateY scrolls between them */}
-      <div
-        className="relative h-full"
-        style={{
-          transform: `translateY(-${activeIndex * 100}%)`,
-          transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
-        }}
-      >
-        {scenes.map((scene) => (
-          <div key={scene.key} className="relative h-full w-full">
-            {scene.render && scene.render()}
-          </div>
-        ))}
+        >
+          {scenes.map((scene) => (
+            <div key={scene.key} className="relative h-full w-full">
+              {scene.render && scene.render()}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
