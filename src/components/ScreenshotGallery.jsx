@@ -8,13 +8,13 @@ const base = import.meta.env.BASE_URL
 const screens = [
   {
     key: 'header',
-    src: `${base}screens/01-header.png`,
+    src: `${base}screens/01-header.jpg`,
     label: 'The morning glance',
     caption: 'Race day, training phase, and the training-load numbers that frame the day — together with today’s session.'
   },
   {
     key: 'nutrition',
-    src: `${base}screens/02-nutrition.png`,
+    src: `${base}screens/02-nutrition.jpg`,
     label: 'Nutrition, with context',
     caption: 'Macros, calories, and the 7-day trend — read against what you burned and what your training calls for.'
   }
