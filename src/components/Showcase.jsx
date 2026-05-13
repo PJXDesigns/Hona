@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Play, Calendar, Bike, Footprints, Waves, Dumbbell, Apple, HeartPulse, Snowflake, Sparkles, Check, Wind, Flame } from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
 
-// Inline H mark so the welcome screen doesn't need an extra HTTP request
+const base = import.meta.env.BASE_URL
+
+// Inline H mark for the welcome scene — saves one extra HTTP request.
 function HonaMark({ size = 56 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 1024 1024" aria-hidden="true">
@@ -14,10 +16,6 @@ function HonaMark({ size = 56 }) {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/*  Phone screen contents — narrow-form JSX mockups for each scene     */
-/* ------------------------------------------------------------------ */
-
 function StatusBar({ darkText = false }) {
   return (
     <div className={`absolute top-0 inset-x-0 h-7 z-20 flex items-center justify-between px-6 text-[9px] font-semibold ${darkText ? 'text-ink-900' : 'text-paper-50'}`}>
@@ -27,6 +25,8 @@ function StatusBar({ darkText = false }) {
   )
 }
 
+// Welcome scene — stays as JSX for now. Replace with a real onboarding
+// screenshot whenever the app gets one and the visual will pop in cleanly.
 function WelcomeScreen() {
   return (
     <div className="absolute inset-0 bg-paper-100 flex flex-col items-center justify-center px-7 text-center">
@@ -47,227 +47,16 @@ function WelcomeScreen() {
   )
 }
 
-function HeaderScreen() {
+// Helper for image-based scenes. Image is pre-padded to 9:19.5 aspect with the
+// app's paper background, so `object-cover` fills the phone screen exactly.
+function ScreenImage({ src, alt }) {
   return (
-    <div className="absolute inset-0 bg-paper-100 px-3 pt-9 pb-3 overflow-hidden">
-      <StatusBar darkText />
-      <div className="text-[8px] font-semibold tracking-[0.2em] uppercase text-ink-400 text-center -mt-1 mb-2">
-        Peter Jones · Ironman TX
-      </div>
-      <div className="rounded-2xl bg-ink-900 text-paper-50 p-3.5 shadow-card">
-        <div className="text-[7px] uppercase tracking-[0.18em] opacity-60">Ironman Texas · Apr 24, 2027</div>
-        <div className="mt-1 font-display font-extrabold text-2xl leading-none">49 weeks out</div>
-        <div className="text-[9px] mt-1 opacity-75">346 days · Week 1 of 44</div>
-        <div className="mt-3 h-px bg-paper-50/15" />
-        <div className="grid grid-cols-4 gap-1.5 mt-3">
-          {[
-            { label: 'Fitness', v: '40', sub: 'CTL' },
-            { label: 'Fatigue', v: '92', sub: 'ATL' },
-            { label: 'Form',    v: '-52', sub: 'TSB' },
-            { label: 'Week TSS',v: '972', sub: 'pts' },
-          ].map((s) => (
-            <div key={s.label} className="rounded-md bg-paper-50/5 px-1.5 py-1.5">
-              <div className="text-[6px] uppercase tracking-wider opacity-60">{s.label}</div>
-              <div className="font-display font-bold text-[13px] leading-tight tabular-nums">{s.v}</div>
-              <div className="text-[6px] opacity-50">{s.sub}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-3 rounded-xl bg-paper-50 border border-paper-300 p-3 shadow-card">
-        <div className="text-[7px] uppercase tracking-[0.18em] text-ink-400">Training · Today</div>
-        <div className="mt-0.5 font-display font-bold text-[13px] text-ink-900 leading-tight">Swim: Drills — Early Vertical Forearm</div>
-        <div className="mt-1.5 text-[9px] text-ink-500 leading-snug">
-          Drills, drills & drills. Reinforce high elbow, early vertical forearm catch…
-        </div>
-        <div className="mt-2 text-[9px] text-accent-500 font-semibold">See full description →</div>
-      </div>
-    </div>
-  )
-}
-
-function TrainingScreen() {
-  const week = [
-    { d: 'M', dt: '11', t: 'Rest', rest: true },
-    { d: 'T', dt: '12', t: 'Bike', tint: 'bike',  today: true },
-    { d: 'W', dt: '13', t: 'Run',  tint: 'run' },
-    { d: 'T', dt: '14', t: 'Bike', tint: 'bike' },
-    { d: 'F', dt: '15', t: 'Run',  tint: 'run' },
-    { d: 'S', dt: '16', t: 'Bike', tint: 'bike' },
-    { d: 'S', dt: '17', t: 'Run',  tint: 'run' },
-  ]
-  const tintBg = { bike: 'bg-bike', run: 'bg-run', swim: 'bg-swim' }
-  return (
-    <div className="absolute inset-0 bg-paper-100 px-3 pt-9 pb-3 overflow-hidden">
-      <StatusBar darkText />
-      <div className="text-[8px] font-semibold tracking-[0.2em] uppercase text-ink-400 mb-2 px-1">Training · This week</div>
-      <div className="grid grid-cols-7 gap-1 mb-3">
-        {week.map((d) => (
-          <div key={d.d + d.dt} className={`rounded-md py-1.5 text-center border ${
-            d.today ? 'bg-ink-900 text-paper-50 border-ink-900' :
-            d.rest  ? 'bg-paper-100 border-paper-300 text-ink-400' :
-            'bg-paper-50 border-paper-300 text-ink-700'
-          }`}>
-            <div className="text-[7px] uppercase tracking-wider opacity-70">{d.d}</div>
-            <div className="font-bold text-[10px] leading-none mt-0.5">{d.dt}</div>
-          </div>
-        ))}
-      </div>
-      <div className={`rounded-xl ${tintBg.bike} px-3 py-2.5 mb-2`}>
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-paper-50/70 grid place-items-center text-bike-text"><Bike size={12}/></div>
-          <div>
-            <div className="text-[7px] uppercase tracking-wider text-bike-text/70">Tue · Today</div>
-            <div className="text-[11px] font-semibold text-bike-text leading-tight">Z2 Bike · 90 min</div>
-          </div>
-          <div className="ml-auto text-[10px] font-bold font-mono text-bike-text">142 TSS</div>
-        </div>
-      </div>
-      <div className="space-y-1.5 px-1">
-        {['WU · 10 min Z1', 'Main · 70 min Z2 (200–220W)', 'CD · 10 min Z1'].map(s => (
-          <div key={s} className="flex items-center gap-1.5 text-[9px] text-ink-500">
-            <span className="w-1 h-1 rounded-full bg-accent-500" />
-            <span className="font-mono">{s}</span>
-          </div>
-        ))}
-      </div>
-      <div className={`mt-2 rounded-xl ${tintBg.run} px-3 py-2`}>
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-md bg-paper-50/70 grid place-items-center text-run-text"><Footprints size={12}/></div>
-          <div>
-            <div className="text-[7px] uppercase tracking-wider text-run-text/70">Wed</div>
-            <div className="text-[11px] font-semibold text-run-text leading-tight">AM Easy · 45 min</div>
-          </div>
-          <div className="ml-auto text-[10px] font-bold font-mono text-run-text">48 TSS</div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function NutritionScreen() {
-  return (
-    <div className="absolute inset-0 bg-paper-100 px-3 pt-9 pb-3 overflow-hidden">
-      <StatusBar darkText />
-      <div className="text-[8px] font-semibold tracking-[0.2em] uppercase text-ink-400 text-center mb-1">Nutrition · Today</div>
-      <div className="text-center mb-3">
-        <div className="font-display font-extrabold text-3xl text-ink-900 tabular-nums">2,180 <span className="text-base text-ink-400 font-medium">/ 2,800 kcal</span></div>
-      </div>
-      <div className="flex justify-center mb-3">
-        <Ring value={2180} max={2800} color="#486820" size={86} />
-      </div>
-      <div className="space-y-1.5">
-        {[
-          ['Protein','142','180','g','#8A4A28'],
-          ['Carbs','246','350','g','#C44000'],
-          ['Fat','78','92','g','#1A6AB0'],
-        ].map(([k,v,g,u,c]) => (
-          <div key={k} className="bg-paper-50 border border-paper-300 rounded-lg px-2.5 py-1.5">
-            <div className="flex items-center justify-between text-[9px] mb-0.5">
-              <span className="text-ink-700 font-semibold">{k}</span>
-              <span className="font-mono text-ink-500"><b className="text-ink-900">{v}</b>{u} / {g}{u}</span>
-            </div>
-            <div className="h-1 rounded-full bg-paper-300 overflow-hidden">
-              <div className="h-full rounded-full" style={{ width: `${(parseInt(v)/parseInt(g))*100}%`, background: c }} />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function Ring({ value, max, color, size = 86 }) {
-  const stroke = 9
-  const r = (size - stroke) / 2
-  const C = 2 * Math.PI * r
-  const pct = Math.min(1, value / max)
-  return (
-    <div className="relative" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size/2} cy={size/2} r={r} stroke="#E8E5DC" strokeWidth={stroke} fill="none" />
-        <circle cx={size/2} cy={size/2} r={r} stroke={color} strokeWidth={stroke} fill="none" strokeLinecap="round" strokeDasharray={`${pct*C} ${C}`} />
-      </svg>
-      <div className="absolute inset-0 grid place-items-center">
-        <div className="text-center">
-          <div className="font-display font-bold text-base text-ink-900 tabular-nums leading-none">78<span className="text-[8px] text-ink-400">%</span></div>
-          <div className="text-[7px] uppercase text-ink-400 tracking-wider mt-0.5">of goal</div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function MetricsScreen() {
-  const data = [
-    { k: 'HRV',        v: '68',     u: 'ms',   trend: '+4 vs 7d', good: true },
-    { k: 'Resting HR', v: '47',     u: 'bpm',  trend: '-2 vs 7d', good: true },
-    { k: 'Sleep',      v: '7h22',   u: '',     trend: '88% eff.', good: true },
-    { k: 'Resp. rate', v: '14.2',   u: '/min', trend: 'In range', good: true },
-  ]
-  return (
-    <div className="absolute inset-0 bg-paper-100 px-3 pt-9 pb-3 overflow-hidden">
-      <StatusBar darkText />
-      <div className="text-[8px] font-semibold tracking-[0.2em] uppercase text-ink-400 mb-2 px-1">Body Metrics · Today</div>
-      <div className="grid grid-cols-2 gap-1.5 mb-2">
-        {data.map(m => (
-          <div key={m.k} className="rounded-xl bg-metrics border border-metrics-mid/20 p-2">
-            <div className="text-[7px] uppercase tracking-wider text-metrics-text/70">{m.k}</div>
-            <div className="font-display font-bold text-lg text-metrics-text tabular-nums leading-tight">{m.v}<span className="text-[8px] opacity-60 ml-0.5">{m.u}</span></div>
-            <div className="text-[7px] text-recovery-done font-semibold mt-0.5">{m.trend}</div>
-          </div>
-        ))}
-      </div>
-      <div className="rounded-xl bg-ink-900 text-paper-50 p-3 mt-2">
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <Sparkles size={10} className="text-accent-200" />
-          <span className="text-[8px] font-semibold tracking-[0.16em] uppercase opacity-80">Coaching insight</span>
-        </div>
-        <p className="text-[9px] leading-snug opacity-90">
-          Readiness is solid — HRV +4 over 7-day mean, RHR down 2 bpm. Today's Z2 bike is well within scope. Hold endurance intent.
-        </p>
-      </div>
-    </div>
-  )
-}
-
-function RecoveryScreen() {
-  const items = [
-    { k: 'Normatec',   done: true,  icon: Wind },
-    { k: 'Cold Plunge',done: true,  icon: Snowflake },
-    { k: 'Sauna',      done: false, icon: Flame },
-    { k: 'Steam Room', done: false, icon: Waves },
-    { k: 'Stretch',    done: false, icon: Dumbbell },
-    { k: 'Roll out',   done: false, icon: HeartPulse },
-  ]
-  return (
-    <div className="absolute inset-0 bg-paper-100 px-3 pt-9 pb-3 overflow-hidden">
-      <StatusBar darkText />
-      <div className="flex items-center justify-between mb-2 px-1">
-        <div className="text-[8px] font-semibold tracking-[0.2em] uppercase text-ink-400">Recovery · Today</div>
-        <div className="text-[8px] font-mono text-ink-500">2 / 6</div>
-      </div>
-      <div className="grid grid-cols-2 gap-1.5">
-        {items.map(({k, done, icon: Icon}) => (
-          <div key={k} className={`rounded-xl border px-2 py-2 flex items-center gap-1.5 ${
-            done
-              ? 'bg-recovery border-recovery-mid/30 text-recovery-text'
-              : 'bg-paper-50 border-paper-300 text-ink-500'
-          }`}>
-            <div className={`w-5 h-5 rounded-md grid place-items-center ${done ? 'bg-recovery-card' : 'bg-paper-200'}`}>
-              {done ? <Check size={10} className="text-recovery-done" /> : <Icon size={10} />}
-            </div>
-            <span className="text-[9px] font-medium leading-none">{k}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2.5 rounded-xl bg-paper-50 border border-paper-300 p-2.5">
-        <div className="text-[7px] uppercase tracking-[0.16em] text-ink-400 mb-1">Notes</div>
-        <p className="text-[9px] text-ink-700 leading-snug">
-          Left hip a bit tight after Tuesday's bike. Spent extra time on glute med.
-        </p>
-      </div>
-    </div>
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
   )
 }
 
@@ -289,35 +78,35 @@ const scenes = [
     eyebrow: 'Training metrics',
     title: 'Where you are in the block.',
     body: 'Every morning, Hona surfaces the training-load numbers that frame the day — race day, training phase, week-in-block, and the CTL / ATL / TSB readout that tells you what kind of body you woke up in.',
-    render: HeaderScreen
+    render: () => <ScreenImage src={`${base}screens/prototype-2-metrics.jpg`} alt="Hona dashboard header showing the Ironman Texas countdown, CTL, ATL, TSB, and a 42-day TSS chart." />
   },
   {
     key: 'training',
     eyebrow: 'Training',
     title: 'Today’s session, ready.',
     body: 'Workouts pulled from your plan via Apple Calendar (TrainingPeaks syncs through iCal). Tap any session to expand into step-by-step intervals, target zones, and TSS. Week view shows the full block at a glance.',
-    render: TrainingScreen
+    render: () => <ScreenImage src={`${base}screens/prototype-3-training.jpg`} alt="Hona training calendar — May 2026 view with completed and upcoming sessions, plus today’s coaching program." />
   },
   {
     key: 'nutrition',
     eyebrow: 'Nutrition',
     title: 'What fueled the work.',
     body: 'Drop in a Cronometer CSV. Daily kcal, protein, carbs, fat — read against today’s burn and what the training calls for. 7-day trend shows the story the food log is actually telling.',
-    render: NutritionScreen
+    render: () => <ScreenImage src={`${base}screens/prototype-4-nutrition.jpg`} alt="Hona nutrition screen — daily macros and calorie totals." />
   },
   {
     key: 'body-metrics',
     eyebrow: 'Body Metrics',
     title: 'How you woke up.',
     body: 'HRV, resting heart rate, sleep, and respiratory rate pulled from HealthKit (Oura → Apple Health). One tap for an AI-written readiness insight that frames the data against your week.',
-    render: MetricsScreen
+    render: () => <ScreenImage src={`${base}screens/prototype-5-body-metrics.jpg`} alt="Hona body metrics screen — HRV, sleep, SpO2, VO2 Max, body composition, and Generate coaching insight button." />
   },
   {
     key: 'recovery',
     eyebrow: 'Recovery',
     title: 'What you actually did.',
     body: 'A daily check-list — Normatec, cold plunge, sauna, steam, stretching, roll-out — plus a notes field for niggles or wins. Builds a longitudinal record of what your recovery routine looks like.',
-    render: RecoveryScreen
+    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen — three of six modalities complete, with notes." />
   }
 ]
 
@@ -330,10 +119,9 @@ export default function Showcase({ brand }) {
   const sectionRefs = useRef([])
 
   // Active-scene detection by direct scroll position, not IntersectionObserver.
-  // A scene becomes active only once its top edge has crossed *above* the
-  // viewport top — meaning the scene's content is now fully filling the
-  // viewport and the reader has reached it. That timing keeps the phone in
-  // sync with what's actually on screen on the left.
+  // A scene becomes active once its top edge has scrolled to ~160px from the
+  // viewport top — meaning its headline is just entering the reading zone.
+  // Tune the `160` to taste: bigger = phone changes sooner.
   useEffect(() => {
     let raf = 0
     const update = () => {
@@ -341,14 +129,9 @@ export default function Showcase({ brand }) {
       raf = requestAnimationFrame(() => {
         raf = 0
         let activeI = 0
-        // Walk top-to-bottom; the last scene whose top has crossed wins.
         sectionRefs.current.forEach((el, i) => {
           if (!el) return
           const rect = el.getBoundingClientRect()
-          // Fires the phone transition once the scene's top has scrolled to
-          // ~160px from the viewport top — i.e. the scene's headline is about
-          // to enter the comfortable reading zone. Tune this number to taste:
-          // bigger = phone changes sooner, smaller = phone changes later.
           if (rect.top <= 160) {
             activeI = i
           }
@@ -419,7 +202,7 @@ function SceneContent({ scene, index, brand }) {
         </div>
       )}
 
-      {/* Inline mini phone for mobile (since the sticky phone is hidden on mobile) */}
+      {/* Inline mini phone for mobile (sticky phone is hidden on small screens) */}
       <div className="lg:hidden mt-10 flex justify-center">
         <MiniPhone>{scene.render && scene.render()}</MiniPhone>
       </div>
@@ -441,7 +224,7 @@ function ShowcasePhone({ activeIndex }) {
     <div className="relative w-[320px] xl:w-[360px] aspect-[9/19.5] rounded-[42px] bg-ink-900 border-[10px] border-ink-900 shadow-cardLift overflow-hidden">
       {/* notch */}
       <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-ink-900 z-30" />
-      {/* progress rail — tiny indicator on the right edge showing scene position */}
+      {/* progress rail */}
       <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
         <div
           className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
@@ -456,12 +239,10 @@ function ShowcasePhone({ activeIndex }) {
         className="relative h-full"
         style={{
           transform: `translateY(-${activeIndex * 100}%)`,
-          // Symmetric ease-in-out, slightly slower than before so the motion
-          // reads as a deliberate scroll instead of a flick.
           transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
         }}
       >
-        {scenes.map((scene, i) => (
+        {scenes.map((scene) => (
           <div key={scene.key} className="relative h-full w-full">
             {scene.render && scene.render()}
           </div>
