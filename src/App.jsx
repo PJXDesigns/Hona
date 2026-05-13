@@ -17,8 +17,11 @@ export const BRAND = {
 }
 
 export default function App() {
+  // NOTE: keep `overflow-hidden` off this root div — any ancestor with that
+  // property silently disables `position: sticky` on every descendant,
+  // including the Showcase phone.
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative">
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.35]" />
       <Nav brand={BRAND} />
       <main className="relative">
