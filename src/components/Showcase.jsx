@@ -194,13 +194,13 @@ function ShowcasePhone({ activeIndex }) {
 
       {/* Outer phone shell — titanium-tone metal frame */}
       <div
-        className="relative w-[284px] xl:w-[320px] rounded-[48px] shadow-cardLift p-[7px]"
+        className="relative w-[260px] xl:w-[296px] rounded-[44px] shadow-cardLift p-[7px]"
         style={{ background: BEZEL_GRADIENT }}
       >
         {/* Inner black chamfer — the realistic detail between metal and screen */}
-        <div className="relative rounded-[42px] p-[2px]" style={{ background: CHAMFER }}>
+        <div className="relative rounded-[38px] p-[2px]" style={{ background: CHAMFER }}>
           {/* Screen — this is where the aspect lock lives */}
-          <div className="relative aspect-[9/19.5] rounded-[40px] overflow-hidden bg-paper-100">
+          <div className="relative aspect-[9/19.5] rounded-[36px] overflow-hidden bg-paper-100">
             {/* Dynamic Island */}
             <div
               className="absolute top-[9px] left-1/2 -translate-x-1/2 w-[92px] h-[26px] rounded-full z-30"
