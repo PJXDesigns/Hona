@@ -176,39 +176,61 @@ function MiniPhone({ children }) {
   )
 }
 
+// Bezel colors approximate iPhone 16 Pro "Desert Titanium" — warm copper that
+// complements the brand brown. The thin black inner band is the realistic
+// "chamfer" between the metal frame and the glass display.
+const BEZEL_GRADIENT = 'linear-gradient(135deg, #D19764 0%, #B57746 45%, #9A6234 100%)'
+const BEZEL_FLAT     = '#B57746'   // for side-button strips
+const CHAMFER        = '#0A0A0A'
+
 function ShowcasePhone({ activeIndex }) {
-  // Bezel uses padding (not border) so the inner screen owns the 9:19.5
-  // aspect ratio exactly — that way images of the same aspect fit without
-  // object-cover cropping anything (= no "slightly zoomed" look).
   return (
-    <div className="relative w-[336px] xl:w-[376px] rounded-[46px] bg-ink-900 shadow-cardLift p-3 xl:p-[14px]">
-      {/* Inner screen — this is where the aspect lock lives */}
-      <div className="relative aspect-[9/19.5] rounded-[34px] overflow-hidden">
-        {/* notch */}
-        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-ink-900 z-30" />
-        {/* progress rail */}
-        <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
-          <div
-            className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
-            style={{
-              top: `${(activeIndex / Math.max(1, scenes.length - 1)) * 100}%`,
-              height: '14%'
-            }}
-          />
-        </div>
-        {/* Inner content column — all scenes stacked; translateY scrolls between them */}
-        <div
-          className="relative h-full"
-          style={{
-            transform: `translateY(-${activeIndex * 100}%)`,
-            transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
-          }}
-        >
-          {scenes.map((scene) => (
-            <div key={scene.key} className="relative h-full w-full">
-              {scene.render && scene.render()}
+    <div className="relative">
+      {/* Side buttons — same titanium color as the bezel, sit slightly proud */}
+      <div className="absolute -left-[3px] top-[78px]  w-[3px] h-7  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -left-[3px] top-[120px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -left-[3px] top-[180px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -right-[3px] top-[110px] w-[3px] h-16 rounded-r z-10" style={{ background: BEZEL_FLAT }} />
+
+      {/* Outer phone shell — titanium-tone metal frame */}
+      <div
+        className="relative w-[284px] xl:w-[320px] rounded-[48px] shadow-cardLift p-[7px]"
+        style={{ background: BEZEL_GRADIENT }}
+      >
+        {/* Inner black chamfer — the realistic detail between metal and screen */}
+        <div className="relative rounded-[42px] p-[2px]" style={{ background: CHAMFER }}>
+          {/* Screen — this is where the aspect lock lives */}
+          <div className="relative aspect-[9/19.5] rounded-[40px] overflow-hidden bg-paper-100">
+            {/* Dynamic Island */}
+            <div
+              className="absolute top-[9px] left-1/2 -translate-x-1/2 w-[92px] h-[26px] rounded-full z-30"
+              style={{ background: CHAMFER }}
+            />
+            {/* progress rail */}
+            <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
+              <div
+                className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
+                style={{
+                  top: `${(activeIndex / Math.max(1, scenes.length - 1)) * 100}%`,
+                  height: '14%'
+                }}
+              />
             </div>
-          ))}
+            {/* Inner content column — all scenes stacked; translateY scrolls between them */}
+            <div
+              className="relative h-full"
+              style={{
+                transform: `translateY(-${activeIndex * 100}%)`,
+                transition: 'transform 1000ms cubic-bezier(0.65, 0, 0.35, 1)'
+              }}
+            >
+              {scenes.map((scene) => (
+                <div key={scene.key} className="relative h-full w-full">
+                  {scene.render && scene.render()}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
