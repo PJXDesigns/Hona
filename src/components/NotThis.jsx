@@ -2,7 +2,7 @@
 const items = [
   {
     title: 'Not a coach.',
-    body: 'Hona shows what’s happening — it doesn’t tell you what to do. Bring your own plan: from TrainingPeaks, a coach, or a program you wrote yourself. The dashboard holds it steady; it doesn’t prescribe it.'
+    body: 'Hona shows what’s happening — it doesn’t tell you what to do. Bring your own plan: from a coaching service, a coach, or a program you wrote yourself. The dashboard holds it steady; it doesn’t prescribe it.'
   },
   {
     title: 'Not a trophy case.',

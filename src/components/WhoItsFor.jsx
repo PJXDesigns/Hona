@@ -1,7 +1,7 @@
 const personas = [
   {
     title: 'The endurance athlete',
-    body: 'Marathons, triathlons, ultras, gravel. Your TrainingPeaks plan, your watch data, your race calendar all in one calm read.'
+    body: 'Marathons, triathlons, ultras, gravel. Your training plan, your watch data, your race calendar — all in one calm read.'
   },
   {
     title: 'The lifter',

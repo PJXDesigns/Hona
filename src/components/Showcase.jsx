@@ -41,28 +41,28 @@ const scenes = [
     key: 'training',
     eyebrow: 'Training',
     title: 'Today’s session, ready.',
-    body: 'Workouts pulled from your plan via Apple Calendar (TrainingPeaks syncs through iCal). Tap any session to expand into step-by-step intervals, target zones, and TSS. Week view shows the full block at a glance.',
+    body: 'Workouts from your training plan, surfaced for today and the rest of the week. Tap any session to expand into step-by-step intervals, target zones, and TSS. Connect once and the plan stays in sync as your coach updates it.',
     render: () => <ScreenImage src={`${base}screens/prototype-3-training.jpg`} alt="Hona training calendar — May 2026 view with completed and upcoming sessions, plus today’s coaching program." />
   },
   {
     key: 'nutrition',
     eyebrow: 'Nutrition',
     title: 'What fueled the work.',
-    body: 'Drop in a Cronometer CSV. Daily kcal, protein, carbs, fat — read against today’s burn and what the training calls for. 7-day trend shows the story the food log is actually telling.',
+    body: 'Bring in your nutrition log — daily kcal, protein, carbs, fat — read against today’s burn and what the training calls for. The 7-day trend shows the story the food log is actually telling.',
     render: () => <ScreenImage src={`${base}screens/prototype-4-nutrition.jpg`} alt="Hona nutrition screen — daily macros and calorie totals." />
   },
   {
     key: 'body-metrics',
     eyebrow: 'Body Metrics',
     title: 'How you woke up.',
-    body: 'HRV, resting heart rate, sleep, and respiratory rate pulled from HealthKit (Oura → Apple Health). One tap for an AI-written readiness insight that frames the data against your week.',
+    body: 'HRV, resting heart rate, sleep, and respiratory rate, pulled from whichever wearable you already wear. One tap for an AI-written readiness insight that frames the data against your week.',
     render: () => <ScreenImage src={`${base}screens/prototype-5-body-metrics.jpg`} alt="Hona body metrics screen — HRV, sleep, SpO2, VO2 Max, body composition, and Generate coaching insight button." />
   },
   {
     key: 'recovery',
     eyebrow: 'Recovery',
     title: 'What you actually did.',
-    body: 'A daily check-list — Normatec, cold plunge, sauna, steam, stretching, roll-out — plus a notes field for niggles or wins. Builds a longitudinal record of what your recovery routine looks like.',
+    body: 'A daily check-list — compression, cold plunge, sauna, steam, stretching, roll-out — plus a notes field for niggles or wins. Builds a longitudinal record of what your recovery routine looks like.',
     render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen — three of six modalities complete, with notes." />
   }
 ]
