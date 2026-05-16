@@ -61,9 +61,9 @@ const scenes = [
   {
     key: 'recovery',
     eyebrow: 'Recovery',
-    title: 'What you actually did.',
-    body: 'A daily check-list — compression, cold plunge, sauna, steam, stretching, roll-out — plus a notes field for niggles or wins. Builds a longitudinal record of what your recovery routine looks like.',
-    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen — three of six modalities complete, with notes." />
+    title: 'What you did to recover.',
+    body: 'Pick the recovery modalities that matter to you and check them off daily. Add notes for niggles, breakthroughs, or anything you want to remember. Over weeks it builds a real record of how you actually take care of yourself between sessions.',
+    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen — daily check-list with notes." />
   }
 ]
 
