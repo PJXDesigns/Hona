@@ -12,7 +12,7 @@ export const BRAND = {
   pronunciation: 'HOH-na',
   tagline: 'Sharpen the athlete.',
   betaSignupUrl: '#beta',
-  contactEmail: 'hello@example.com'
+  contactEmail: 'peter@pjxdesigns.com'
 }
 
 export default function App() {
