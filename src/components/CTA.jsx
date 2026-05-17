@@ -9,7 +9,7 @@ export default function CTA({ brand }) {
     if (!email.includes('@')) return
     // TODO: wire to a real form service (Formspree, Buttondown, ConvertKit) so
     // submissions actually reach you. Right now this just shows the confirmation
-    // state — emails are not collected anywhere.
+    // state. Emails are not collected anywhere.
     console.log('Beta signup:', email)
     setSubmitted(true)
   }
@@ -22,7 +22,7 @@ export default function CTA({ brand }) {
         </h2>
         <p className="mt-6 text-lg md:text-xl text-ink-500 max-w-xl mx-auto leading-relaxed">
           Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
-          Build notes only — no spam, no upsells.
+          Build notes only. No spam, no upsells.
         </p>
 
         {!submitted ? (

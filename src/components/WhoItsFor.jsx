@@ -1,15 +1,15 @@
 const personas = [
   {
     title: 'The endurance athlete',
-    body: 'Marathons, ultras, triathlons, gravel. Your plan, your watch, your race calendar — one calm read every morning.'
+    body: 'Marathons, ultras, triathlons, gravel. Your plan, your watch, your race calendar. One calm read every morning.'
   },
   {
     title: 'The lifter',
-    body: 'Strength blocks, hypertrophy, recomp. Body composition and recovery sit alongside the training — not in a separate app.'
+    body: 'Strength blocks, hypertrophy, recomp. Body composition and recovery sit alongside the training, not in a separate app.'
   },
   {
     title: 'The hybrid athlete',
-    body: 'Run, lift, climb, swim, ruck — pick your stack. Every tile reads the same regardless of how you spent the morning.'
+    body: 'Run, lift, climb, swim, ruck. Pick your stack. Every tile reads the same regardless of how you spent the morning.'
   },
   {
     title: 'Anyone with a daily practice',

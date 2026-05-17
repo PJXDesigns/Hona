@@ -41,7 +41,7 @@
   }
   .muted { @apply text-ink-400; }
 
-  /* Hairline rule used between sections — like a draftsman's pencil line */
+  /* Hairline rule used between sections, like a draftsman's pencil line */
   .hairline {
     @apply border-t border-paper-300;
   }

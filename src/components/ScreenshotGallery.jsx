@@ -10,13 +10,13 @@ const screens = [
     key: 'header',
     src: `${base}screens/01-header.jpg`,
     label: 'The morning glance',
-    caption: 'Race day, training phase, and the training-load numbers that frame the day — together with today’s session.'
+    caption: 'Race day, training phase, and the training-load numbers that frame the day, together with today’s session.'
   },
   {
     key: 'nutrition',
     src: `${base}screens/02-nutrition.jpg`,
     label: 'Nutrition, with context',
-    caption: 'Macros, calories, and the 7-day trend — read against what you burned and what your training calls for.'
+    caption: 'Macros, calories, and the 7-day trend, read against what you burned and what your training calls for.'
   }
 ]
 
@@ -66,7 +66,7 @@ export default function ScreenshotGallery() {
         </div>
 
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-center">
-          {/* Full-bleed image — no extra phone frame because the renders include their own device.
+          {/* Full-bleed image. No extra phone frame because the renders include their own device.
               Swipe handlers live on this container so touch users can flick left/right. */}
           <div
             className="relative rounded-2xl overflow-hidden bg-paper-200 border border-paper-300 shadow-card select-none touch-pan-y"
@@ -75,7 +75,7 @@ export default function ScreenshotGallery() {
             onTouchEnd={onTouchEnd}
             onTouchCancel={onTouchEnd}
             role="region"
-            aria-label="Screen carousel — swipe left or right to navigate"
+            aria-label="Screen carousel. Swipe left or right to navigate"
           >
             <div className="aspect-[4/3]">
               <img

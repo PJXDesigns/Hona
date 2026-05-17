@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, Play, Activity, Calendar, Apple, HeartPulse, Snowflake } from 'lucide-react'
 
 const base = import.meta.env.BASE_URL
 
@@ -18,70 +18,82 @@ function ScreenImage({ src, alt }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Scene definitions — left-side content + phone screen for each      */
+/*  Scene definitions: left-side content + phone screen for each       */
 /* ------------------------------------------------------------------ */
 
 const scenes = [
   {
     key: 'welcome',
+    tab: 'Welcome',
+    icon: Play,
     eyebrow: 'iOS · TestFlight beta · free',
     title: 'Sharpen the athlete.',
-    body: 'A daily dashboard that keeps you honest about the small, consistent work that compounds. Training, nutrition, body composition, recovery — one calm view, every morning.',
+    body: 'A daily dashboard that keeps you honest about the small, consistent work that compounds. Training, nutrition, body composition, recovery. One calm view, every morning.',
     cta: true,
-    render: () => <ScreenImage src={`${base}screens/prototype-1-start.jpg`} alt="Hona opening screen — the entry point into the daily dashboard." />
+    render: () => <ScreenImage src={`${base}screens/prototype-1-start.jpg`} alt="Hona opening screen, the entry point into the daily dashboard." />
   },
   {
     key: 'metrics',
+    tab: 'Metrics',
+    icon: Activity,
     eyebrow: 'Training metrics',
     title: 'Where you are in the block.',
-    body: 'Every morning, Hona surfaces the training-load numbers that frame the day — race day, training phase, week-in-block, and the CTL / ATL / TSB readout that tells you what kind of body you woke up in.',
+    body: 'Every morning, Hona surfaces the training-load numbers that frame the day: race day, training phase, week-in-block, and the CTL / ATL / TSB readout that tells you what kind of body you woke up in.',
     render: () => <ScreenImage src={`${base}screens/prototype-2-metrics.jpg`} alt="Hona dashboard header showing the Ironman Texas countdown, CTL, ATL, TSB, and a 42-day TSS chart." />
   },
   {
     key: 'training',
+    tab: 'Training',
+    icon: Calendar,
     eyebrow: 'Training',
     title: 'Today’s session, ready.',
     body: 'Workouts from your training plan, surfaced for today and the rest of the week. Tap any session to expand into step-by-step intervals, target zones, and TSS. Connect once and the plan stays in sync as your coach updates it.',
-    render: () => <ScreenImage src={`${base}screens/prototype-3-training.jpg`} alt="Hona training calendar — May 2026 view with completed and upcoming sessions, plus today’s coaching program." />
+    render: () => <ScreenImage src={`${base}screens/prototype-3-training.jpg`} alt="Hona training calendar showing May 2026 with completed and upcoming sessions plus today’s coaching program." />
   },
   {
     key: 'nutrition',
+    tab: 'Nutrition',
+    icon: Apple,
     eyebrow: 'Nutrition',
     title: 'What fueled the work.',
-    body: 'Bring in your nutrition log — daily kcal, protein, carbs, fat — read against today’s burn and what the training calls for. The 7-day trend shows the story the food log is actually telling.',
-    render: () => <ScreenImage src={`${base}screens/prototype-4-nutrition.jpg`} alt="Hona nutrition screen — daily macros and calorie totals." />
+    body: 'Bring in your nutrition log of daily kcal, protein, carbs, and fat. Read it against today’s burn and what the training calls for. The 7-day trend shows the story the food log is actually telling.',
+    render: () => <ScreenImage src={`${base}screens/prototype-4-nutrition.jpg`} alt="Hona nutrition screen with daily macros and calorie totals." />
   },
   {
     key: 'body-metrics',
+    tab: 'Body',
+    icon: HeartPulse,
     eyebrow: 'Body Metrics',
     title: 'How you woke up.',
     body: 'HRV, resting heart rate, sleep, and respiratory rate, pulled from whichever wearable you already wear. One tap for an AI-written readiness insight that frames the data against your week.',
-    render: () => <ScreenImage src={`${base}screens/prototype-5-body-metrics.jpg`} alt="Hona body metrics screen — HRV, sleep, SpO2, VO2 Max, body composition, and Generate coaching insight button." />
+    render: () => <ScreenImage src={`${base}screens/prototype-5-body-metrics.jpg`} alt="Hona body metrics screen showing HRV, sleep, SpO2, VO2 Max, body composition, and a Generate coaching insight button." />
   },
   {
     key: 'recovery',
+    tab: 'Recovery',
+    icon: Snowflake,
     eyebrow: 'Recovery',
     title: 'What you did to recover.',
     body: 'Pick the recovery modalities that matter to you and check them off daily. Add notes for niggles, breakthroughs, or anything you want to remember. Over weeks it builds a real record of how you actually take care of yourself between sessions.',
-    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen — daily check-list with notes." />
+    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen with a daily check-list and notes." />
   }
 ]
 
 /* ------------------------------------------------------------------ */
-/*  Main Showcase component — sticky phone + scrolling left content    */
+/*  Main Showcase component: sticky phone + scrolling left content     */
+/*  on desktop, tabbed phone switcher on mobile                        */
 /* ------------------------------------------------------------------ */
 
 export default function Showcase({ brand }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const sectionRefs = useRef([])
 
-  // Active-scene detection by direct scroll position, not IntersectionObserver.
-  // A scene becomes active once its top edge has scrolled to ~160px from the
-  // viewport top — meaning its headline is just entering the reading zone.
-  // Tune the `160` to taste: bigger = phone changes sooner.
+  // Active-scene detection by direct scroll position. Bails out on mobile so
+  // the tap-driven tab interaction below `lg` isn't fighting the scroll.
   useEffect(() => {
     let raf = 0
     const update = () => {
+      if (window.innerWidth < 1024) return  // mobile uses tabs, not scroll
       if (raf) return
       raf = requestAnimationFrame(() => {
         raf = 0
@@ -106,11 +118,45 @@ export default function Showcase({ brand }) {
     }
   }, [])
 
+  const active = scenes[activeIndex]
+
   return (
     <section id="showcase" className="relative">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="grid lg:grid-cols-[1fr_minmax(340px,auto)] gap-8 lg:gap-16">
-          {/* ============ LEFT: scrolling content ============ */}
+
+        {/* ============ MOBILE: tabbed prototype switcher ============ */}
+        <div className="lg:hidden py-16 sm:py-20">
+          <div className="flex justify-center mb-6">
+            <ShowcasePhone activeIndex={activeIndex} />
+          </div>
+
+          {/* App-style tab bar */}
+          <TabBar activeIndex={activeIndex} onSelect={setActiveIndex} />
+
+          {/* Active scene content */}
+          <div className="max-w-lg mx-auto text-center mt-10 px-2">
+            <span className="eyebrow">{active.eyebrow}</span>
+            <h2 className="font-display font-extrabold tracking-tightest text-ink-900 text-3xl sm:text-4xl leading-[1.05] mt-3">
+              {active.title}
+            </h2>
+            <p className="mt-5 text-base sm:text-lg text-ink-500 leading-relaxed">
+              {active.body}
+            </p>
+            {active.cta && (
+              <div className="mt-7 flex flex-wrap gap-3 justify-center">
+                <a href={brand.betaSignupUrl} className="btn-primary">
+                  Join the beta <ArrowRight size={16} />
+                </a>
+                <a href="#screens" className="btn-ghost">
+                  <Play size={14} /> See the screens
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ============ DESKTOP: sticky scroll ============ */}
+        <div className="hidden lg:grid lg:grid-cols-[1fr_minmax(340px,auto)] gap-8 lg:gap-16">
           <div>
             {scenes.map((scene, i) => (
               <div
@@ -124,8 +170,7 @@ export default function Showcase({ brand }) {
             ))}
           </div>
 
-          {/* ============ RIGHT: sticky phone (desktop only) ============ */}
-          <aside className="hidden lg:block">
+          <aside>
             <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none">
               <ShowcasePhone activeIndex={activeIndex} />
             </div>
@@ -135,6 +180,48 @@ export default function Showcase({ brand }) {
     </section>
   )
 }
+
+/* ------------------------------------------------------------------ */
+/*  TabBar — mobile only. Styled like an iOS in-app tab bar but lighter.  */
+/* ------------------------------------------------------------------ */
+
+function TabBar({ activeIndex, onSelect }) {
+  return (
+    <div className="flex justify-center px-1">
+      <nav
+        role="tablist"
+        aria-label="Prototype views"
+        className="inline-flex items-stretch gap-1 bg-paper-50 border border-paper-300 rounded-full p-1.5 shadow-card max-w-full overflow-x-auto no-scrollbar"
+      >
+        {scenes.map((scene, i) => {
+          const Icon = scene.icon
+          const isActive = i === activeIndex
+          return (
+            <button
+              key={scene.key}
+              role="tab"
+              aria-selected={isActive}
+              aria-controls={`scene-${scene.key}`}
+              onClick={() => onSelect(i)}
+              className={`flex flex-col items-center justify-center gap-0.5 px-2.5 sm:px-3 py-1.5 rounded-full transition-colors min-w-[58px] sm:min-w-[64px] ${
+                isActive
+                  ? 'bg-ink-900 text-paper-50'
+                  : 'text-ink-400 hover:text-ink-900'
+              }`}
+            >
+              <Icon size={16} aria-hidden="true" />
+              <span className="text-[10px] font-semibold tracking-tight leading-tight">{scene.tab}</span>
+            </button>
+          )
+        })}
+      </nav>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Desktop scene block — left-side content                             */
+/* ------------------------------------------------------------------ */
 
 function SceneContent({ scene, index, brand }) {
   return (
@@ -158,25 +245,15 @@ function SceneContent({ scene, index, brand }) {
           </a>
         </div>
       )}
-
-      {/* Inline mini phone for mobile (sticky phone is hidden on small screens) */}
-      <div className="lg:hidden mt-10 flex justify-center">
-        <MiniPhone>{scene.render && scene.render()}</MiniPhone>
-      </div>
     </div>
   )
 }
 
-function MiniPhone({ children }) {
-  return (
-    <div className="relative w-[260px] aspect-[9/19.5] rounded-[36px] bg-ink-900 border-[8px] border-ink-900 shadow-card overflow-hidden">
-      <div className="absolute top-1 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-ink-900 z-10" />
-      {children}
-    </div>
-  )
-}
+/* ------------------------------------------------------------------ */
+/*  ShowcasePhone — titanium-bezel iPhone with translateY scrolly inside */
+/* ------------------------------------------------------------------ */
 
-// Bezel colors approximate iPhone 16 Pro "Desert Titanium" — warm copper that
+// Bezel colors approximate iPhone 16 Pro "Desert Titanium", a warm copper that
 // complements the brand brown. The thin black inner band is the realistic
 // "chamfer" between the metal frame and the glass display.
 const BEZEL_GRADIENT = 'linear-gradient(135deg, #D19764 0%, #B57746 45%, #9A6234 100%)'
@@ -186,21 +263,21 @@ const CHAMFER        = '#0A0A0A'
 function ShowcasePhone({ activeIndex }) {
   return (
     <div className="relative">
-      {/* Side buttons — same titanium color as the bezel, sit slightly proud */}
+      {/* Side buttons in the same titanium color as the bezel, sitting slightly proud */}
       <div className="absolute -left-[3px] top-[78px]  w-[3px] h-7  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
       <div className="absolute -left-[3px] top-[120px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
       <div className="absolute -left-[3px] top-[180px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
       <div className="absolute -right-[3px] top-[110px] w-[3px] h-16 rounded-r z-10" style={{ background: BEZEL_FLAT }} />
 
-      {/* Outer phone shell — titanium-tone metal frame */}
+      {/* Outer phone shell: titanium-tone metal frame */}
       <div
-        className="relative w-[228px] xl:w-[260px] rounded-[40px] shadow-cardLift p-[6px]"
+        className="relative w-[244px] sm:w-[264px] xl:w-[260px] rounded-[42px] shadow-cardLift p-[6px]"
         style={{ background: BEZEL_GRADIENT }}
       >
-        {/* Inner black chamfer — the realistic detail between metal and screen */}
-        <div className="relative rounded-[34px] p-[2px]" style={{ background: CHAMFER }}>
-          {/* Screen — this is where the aspect lock lives */}
-          <div className="relative aspect-[9/19.5] rounded-[32px] overflow-hidden bg-paper-100">
+        {/* Inner black chamfer, the realistic detail between metal and screen */}
+        <div className="relative rounded-[36px] p-[2px]" style={{ background: CHAMFER }}>
+          {/* Screen, where the aspect lock lives */}
+          <div className="relative aspect-[9/19.5] rounded-[34px] overflow-hidden bg-paper-100">
             {/* Dynamic Island */}
             <div
               className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[78px] h-[22px] rounded-full z-30"
@@ -216,7 +293,7 @@ function ShowcasePhone({ activeIndex }) {
                 }}
               />
             </div>
-            {/* Inner content column — all scenes stacked; translateY scrolls between them */}
+            {/* Inner content column: all scenes stacked; translateY scrolls between them */}
             <div
               className="relative h-full"
               style={{

@@ -1,7 +1,7 @@
 import { Github, Mail } from 'lucide-react'
 
 const base = import.meta.env.BASE_URL
-// Logo mark — same /public/logo-mark.svg the Nav and favicon use.
+// Logo mark, the same /public/logo-mark.svg the Nav and favicon use.
 const markUrl = `${base}logo-mark.svg`
 // Legal pages live as static HTML in /public/ so they render outside the React app.
 const termsUrl   = `${base}terms.html`

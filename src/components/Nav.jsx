@@ -1,4 +1,4 @@
-// Logo mark — referenced from /public/logo-mark.svg so it's a single source of
+// Logo mark, referenced from /public/logo-mark.svg so it's a single source of
 // truth across Nav, Footer, favicon, and any future use. To update the logo:
 // replace /public/logo-mark.svg (or logo.svg / logo-on-dark.svg) and you're done.
 const markUrl = `${import.meta.env.BASE_URL}logo-mark.svg`
