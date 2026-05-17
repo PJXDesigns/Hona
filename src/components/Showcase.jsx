@@ -24,8 +24,8 @@ function ScreenImage({ src, alt }) {
 const scenes = [
   {
     key: 'welcome',
-    tab: 'Welcome',
-    icon: Play,
+    // No `tab` field on the welcome scene: it is the section hero on mobile
+    // and the opening sticky scene on desktop, but never a tab option.
     eyebrow: 'iOS · TestFlight beta · free',
     title: 'Sharpen the athlete.',
     body: 'A daily dashboard that keeps you honest about the small, consistent work that compounds. Training, nutrition, body composition, recovery. One calm view, every morning.',
@@ -79,21 +79,27 @@ const scenes = [
   }
 ]
 
+// Tabs exclude the welcome scene (index 0).
+const tabScenes = scenes.slice(1)
+
 /* ------------------------------------------------------------------ */
-/*  Main Showcase component: sticky phone + scrolling left content     */
-/*  on desktop, tabbed phone switcher on mobile                        */
+/*  Main Showcase component                                            */
 /* ------------------------------------------------------------------ */
 
 export default function Showcase({ brand }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  // On mobile the welcome scene is shown as the section hero, so the
+  // interactive prototype starts at the first widget (Metrics, index 1).
+  const [activeIndex, setActiveIndex] = useState(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return 1
+    return 0
+  })
   const sectionRefs = useRef([])
 
-  // Active-scene detection by direct scroll position. Bails out on mobile so
-  // the tap-driven tab interaction below `lg` isn't fighting the scroll.
+  // Desktop scroll-driven active scene. Bails on mobile.
   useEffect(() => {
     let raf = 0
     const update = () => {
-      if (window.innerWidth < 1024) return  // mobile uses tabs, not scroll
+      if (window.innerWidth < 1024) return
       if (raf) return
       raf = requestAnimationFrame(() => {
         raf = 0
@@ -118,44 +124,61 @@ export default function Showcase({ brand }) {
     }
   }, [])
 
-  const active = scenes[activeIndex]
+  // For mobile: if for any reason activeIndex is 0 (welcome), the tab bar would
+  // show nothing as selected. Treat 0 as the first widget for display purposes.
+  const displayIndex = activeIndex === 0 ? 1 : activeIndex
+  const welcome = scenes[0]
+  const active = scenes[displayIndex]
 
   return (
     <section id="showcase" className="relative">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
 
-        {/* ============ MOBILE: tabbed prototype switcher ============ */}
-        <div className="lg:hidden py-16 sm:py-20">
-          <div className="flex justify-center mb-6">
-            <ShowcasePhone activeIndex={activeIndex} />
-          </div>
-
-          {/* App-style tab bar */}
-          <TabBar activeIndex={activeIndex} onSelect={setActiveIndex} />
-
-          {/* Active scene content */}
-          <div className="max-w-lg mx-auto text-center mt-10 px-2">
-            <span className="eyebrow">{active.eyebrow}</span>
-            <h2 className="font-display font-extrabold tracking-tightest text-ink-900 text-3xl sm:text-4xl leading-[1.05] mt-3">
-              {active.title}
+        {/* ============ MOBILE LAYOUT ============ */}
+        <div className="lg:hidden">
+          {/* Welcome hero — always visible at the top of the section */}
+          <div className="pt-16 pb-10 text-center max-w-lg mx-auto">
+            <span className="eyebrow">{welcome.eyebrow}</span>
+            <h2 className="font-display font-extrabold tracking-tightest text-ink-900 text-4xl sm:text-5xl leading-[1.05] mt-3">
+              {welcome.title}
             </h2>
             <p className="mt-5 text-base sm:text-lg text-ink-500 leading-relaxed">
-              {active.body}
+              {welcome.body}
             </p>
-            {active.cta && (
-              <div className="mt-7 flex flex-wrap gap-3 justify-center">
-                <a href={brand.betaSignupUrl} className="btn-primary">
-                  Join the beta <ArrowRight size={16} />
-                </a>
-                <a href="#screens" className="btn-ghost">
-                  <Play size={14} /> See the screens
-                </a>
-              </div>
-            )}
+            <div className="mt-7 flex flex-wrap gap-3 justify-center">
+              <a href={brand.betaSignupUrl} className="btn-primary">
+                Join the beta <ArrowRight size={16} />
+              </a>
+              <a href="#screens" className="btn-ghost">
+                <Play size={14} /> See the screens
+              </a>
+            </div>
+          </div>
+
+          {/* Prototype area — phone, scene text, then tabs. Compact so all three
+              elements fit in a single mobile viewport. */}
+          <div className="pb-16">
+            <div className="flex justify-center mb-5">
+              <ShowcasePhone activeIndex={displayIndex} />
+            </div>
+
+            {/* Active scene text */}
+            <div className="text-center max-w-lg mx-auto mb-5 px-2">
+              <span className="eyebrow">{active.eyebrow}</span>
+              <h3 className="font-display font-bold tracking-tight text-ink-900 text-2xl sm:text-3xl leading-snug mt-2">
+                {active.title}
+              </h3>
+              <p className="mt-3 text-sm sm:text-base text-ink-500 leading-relaxed">
+                {active.body}
+              </p>
+            </div>
+
+            {/* Tab bar (5 tabs, no Welcome) */}
+            <TabBar activeIndex={displayIndex} onSelect={setActiveIndex} />
           </div>
         </div>
 
-        {/* ============ DESKTOP: sticky scroll ============ */}
+        {/* ============ DESKTOP LAYOUT ============ */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_minmax(340px,auto)] gap-8 lg:gap-16">
           <div>
             {scenes.map((scene, i) => (
@@ -182,7 +205,8 @@ export default function Showcase({ brand }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  TabBar — mobile only. Styled like an iOS in-app tab bar but lighter.  */
+/*  TabBar — mobile only. Styled like an iOS in-app tab bar.            */
+/*  Skips the welcome scene; 5 tabs total.                              */
 /* ------------------------------------------------------------------ */
 
 function TabBar({ activeIndex, onSelect }) {
@@ -193,16 +217,17 @@ function TabBar({ activeIndex, onSelect }) {
         aria-label="Prototype views"
         className="inline-flex items-stretch gap-1 bg-paper-50 border border-paper-300 rounded-full p-1.5 shadow-card max-w-full overflow-x-auto no-scrollbar"
       >
-        {scenes.map((scene, i) => {
+        {tabScenes.map((scene) => {
           const Icon = scene.icon
-          const isActive = i === activeIndex
+          // The scene's true index in the full `scenes` array is +1 since we sliced off welcome.
+          const sceneIndex = scenes.indexOf(scene)
+          const isActive = sceneIndex === activeIndex
           return (
             <button
               key={scene.key}
               role="tab"
               aria-selected={isActive}
-              aria-controls={`scene-${scene.key}`}
-              onClick={() => onSelect(i)}
+              onClick={() => onSelect(sceneIndex)}
               className={`flex flex-col items-center justify-center gap-0.5 px-2.5 sm:px-3 py-1.5 rounded-full transition-colors min-w-[58px] sm:min-w-[64px] ${
                 isActive
                   ? 'bg-ink-900 text-paper-50'
@@ -263,27 +288,29 @@ const CHAMFER        = '#0A0A0A'
 function ShowcasePhone({ activeIndex }) {
   return (
     <div className="relative">
-      {/* Side buttons in the same titanium color as the bezel, sitting slightly proud */}
-      <div className="absolute -left-[3px] top-[78px]  w-[3px] h-7  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
-      <div className="absolute -left-[3px] top-[120px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
-      <div className="absolute -left-[3px] top-[180px] w-[3px] h-12 rounded-l z-10" style={{ background: BEZEL_FLAT }} />
-      <div className="absolute -right-[3px] top-[110px] w-[3px] h-16 rounded-r z-10" style={{ background: BEZEL_FLAT }} />
+      {/* Side buttons sit slightly proud. Positioned in percentages so they
+          stay correct across all phone sizes. */}
+      <div className="absolute -left-[3px] top-[15%]  w-[3px] h-[5%]  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -left-[3px] top-[23%]  w-[3px] h-[9%]  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -left-[3px] top-[34%]  w-[3px] h-[9%]  rounded-l z-10" style={{ background: BEZEL_FLAT }} />
+      <div className="absolute -right-[3px] top-[21%] w-[3px] h-[12%] rounded-r z-10" style={{ background: BEZEL_FLAT }} />
 
-      {/* Outer phone shell: titanium-tone metal frame */}
+      {/* Outer phone shell: titanium-tone metal frame.
+          Sizes: 196px on small mobile, 216px sm, 228px desktop, 260px xl. */}
       <div
-        className="relative w-[244px] sm:w-[264px] xl:w-[260px] rounded-[42px] shadow-cardLift p-[6px]"
+        className="relative w-[196px] sm:w-[216px] lg:w-[228px] xl:w-[260px] rounded-[38px] sm:rounded-[40px] lg:rounded-[42px] shadow-cardLift p-[6px]"
         style={{ background: BEZEL_GRADIENT }}
       >
-        {/* Inner black chamfer, the realistic detail between metal and screen */}
-        <div className="relative rounded-[36px] p-[2px]" style={{ background: CHAMFER }}>
-          {/* Screen, where the aspect lock lives */}
-          <div className="relative aspect-[9/19.5] rounded-[34px] overflow-hidden bg-paper-100">
+        {/* Inner black chamfer */}
+        <div className="relative rounded-[32px] sm:rounded-[34px] lg:rounded-[36px] p-[2px]" style={{ background: CHAMFER }}>
+          {/* Screen */}
+          <div className="relative aspect-[9/19.5] rounded-[30px] sm:rounded-[32px] lg:rounded-[34px] overflow-hidden bg-paper-100">
             {/* Dynamic Island */}
             <div
-              className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[78px] h-[22px] rounded-full z-30"
+              className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[70px] sm:w-[74px] lg:w-[78px] h-[20px] sm:h-[21px] lg:h-[22px] rounded-full z-30"
               style={{ background: CHAMFER }}
             />
-            {/* progress rail */}
+            {/* Progress rail showing scene position */}
             <div className="absolute right-1 top-12 bottom-12 w-0.5 bg-paper-50/10 z-20 rounded-full overflow-hidden">
               <div
                 className="absolute left-0 right-0 bg-accent-500 transition-all duration-700"
