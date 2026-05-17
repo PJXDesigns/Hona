@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 
 // Drop new mockup images into /public/screens/, then add a row to this array.
@@ -20,11 +20,36 @@ const screens = [
   }
 ]
 
+// How far the user must swipe (in pixels) before we treat it as a directional
+// swipe rather than a tap or wobble. 50 is comfortable on most touchscreens.
+const SWIPE_THRESHOLD = 50
+
 export default function ScreenshotGallery() {
   const [i, setI] = useState(0)
   const next = () => setI(v => (v + 1) % screens.length)
   const prev = () => setI(v => (v - 1 + screens.length) % screens.length)
   const s = screens[i]
+
+  // Track horizontal travel of the touch so we can fire next/prev on touchend.
+  const touchStartX = useRef(null)
+  const touchDeltaX = useRef(0)
+
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+    touchDeltaX.current = 0
+  }
+  const onTouchMove = (e) => {
+    if (touchStartX.current === null) return
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current
+  }
+  const onTouchEnd = () => {
+    if (touchStartX.current === null) return
+    const dx = touchDeltaX.current
+    if (dx <= -SWIPE_THRESHOLD) next()     // swiped left → next
+    else if (dx >= SWIPE_THRESHOLD) prev() // swiped right → previous
+    touchStartX.current = null
+    touchDeltaX.current = 0
+  }
 
   return (
     <section id="screens" className="relative py-24 md:py-32 hairline">
@@ -41,15 +66,25 @@ export default function ScreenshotGallery() {
         </div>
 
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-center">
-          {/* Full-bleed image — no extra phone frame because the renders include their own device */}
-          <div className="relative rounded-2xl overflow-hidden bg-paper-200 border border-paper-300 shadow-card">
+          {/* Full-bleed image — no extra phone frame because the renders include their own device.
+              Swipe handlers live on this container so touch users can flick left/right. */}
+          <div
+            className="relative rounded-2xl overflow-hidden bg-paper-200 border border-paper-300 shadow-card select-none touch-pan-y"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+            onTouchCancel={onTouchEnd}
+            role="region"
+            aria-label="Screen carousel — swipe left or right to navigate"
+          >
             <div className="aspect-[4/3]">
               <img
                 key={s.key}
                 src={s.src}
                 alt={s.label}
                 loading="lazy"
-                className="w-full h-full object-cover object-center"
+                draggable={false}
+                className="w-full h-full object-cover object-center pointer-events-none"
               />
             </div>
           </div>
@@ -74,6 +109,7 @@ export default function ScreenshotGallery() {
                   />
                 ))}
               </div>
+              <span className="ml-auto text-xs text-ink-300 lg:hidden">Swipe to navigate</span>
             </div>
           </div>
         </div>
