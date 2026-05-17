@@ -162,7 +162,7 @@
     <p>Most data Hona uses stays on your iPhone in the app’s local storage and in Apple HealthKit. We do not run a server that stores your training history, biometrics, or body-composition data.</p>
     <p>Exceptions:</p>
     <ul>
-      <li><strong>Email addresses</strong> entered into the beta waitlist form on hona.fitness are not currently transmitted to or stored by any third-party service. The waitlist form is a placeholder during early development and will be wired up to a mailing-list provider before public launch; this policy will be updated at that time.</li>
+      <li><strong>Email addresses</strong> entered into the beta waitlist form on hona.fitness are processed by Formspree, a form-submission service. Formspree forwards each submission to peter@pjxdesigns.com so we can reply with a TestFlight invitation. Formspree stores the submission in its own systems under its <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</li>
       <li><strong>AI coaching insight</strong> requests are processed by Anthropic. See Section 4.</li>
     </ul>
 
@@ -198,6 +198,11 @@
           <td>Anthropic</td>
           <td>De-identified metric summaries (see Section 4)</td>
           <td>Generates the AI coaching insight</td>
+        </tr>
+        <tr>
+          <td>Formspree</td>
+          <td>Email address you enter in the beta waitlist form</td>
+          <td>Forwards the submission to peter@pjxdesigns.com</td>
         </tr>
         <tr>
           <td>GitHub Pages</td>
