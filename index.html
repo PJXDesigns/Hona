@@ -13,18 +13,15 @@
     <meta property="og:site_name" content="Hona" />
     <meta property="og:title" content="Hona — Sharpen the athlete." />
     <meta property="og:description" content="A calm, daily dashboard for athletes. Training, nutrition, body composition, recovery — one screen, one slope, one practice." />
-    <!-- Landscape (1.91:1) — used by Facebook, LinkedIn, Slack, Discord, X large card. -->
-    <meta property="og:image" content="https://hona.fitness/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Hona — Sharpen the athlete." />
-    <!-- Square (1:1) — used by iMessage, WhatsApp, and other platforms that prefer a square thumbnail. -->
+    <!-- Single OG image — square. Most messengers (iMessage, WhatsApp, Slack)
+         render best with 1:1, and listing multiple og:image tags makes iMessage
+         show them all side-by-side. Twitter gets its own landscape image below. -->
     <meta property="og:image" content="https://hona.fitness/og-image-square.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="1200" />
     <meta property="og:image:alt" content="Hona — Sharpen the athlete." />
 
-    <!-- Twitter / X Card -->
+    <!-- Twitter / X Card uses its own image tag, separate from og:image -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Hona — Sharpen the athlete." />
     <meta name="twitter:description" content="A calm, daily dashboard for athletes. One screen, one slope, one practice." />
