@@ -2,15 +2,15 @@
 const items = [
   {
     title: 'Not a coach.',
-    body: 'Hona shows what’s happening — it doesn’t tell you what to do. Bring your own plan: from a coaching service, a coach, or a program you wrote yourself. The dashboard holds it steady; it doesn’t prescribe it.'
+    body: 'Hona shows what’s happening. It doesn’t tell you what to do. Bring your own plan — from a service, a coach, or a program you wrote yourself. The dashboard holds it steady.'
   },
   {
     title: 'Not a trophy case.',
-    body: 'It’s a working tool, not a feed. No streaks. No badges. No leaderboard. No celebratory animations when you log a workout. The work is the reward.'
+    body: 'A working tool, not a feed. No streaks. No badges. No leaderboard. The work is the reward.'
   },
   {
     title: 'Not loud.',
-    body: 'No streak counters. No notifications begging for attention. No motivational pop-ups. Hona is exact and unhurried, the way an instrument panel is exact and unhurried.'
+    body: 'No nudges. No notifications begging for attention. No motivational pop-ups. Exact and unhurried, the way an instrument panel is.'
   }
 ]
 

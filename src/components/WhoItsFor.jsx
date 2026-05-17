@@ -1,19 +1,19 @@
 const personas = [
   {
     title: 'The endurance athlete',
-    body: 'Marathons, triathlons, ultras, gravel. Your training plan, your watch data, your race calendar — all in one calm read.'
+    body: 'Marathons, ultras, triathlons, gravel. Your plan, your watch, your race calendar — one calm read every morning.'
   },
   {
     title: 'The lifter',
-    body: 'Strength and hypertrophy blocks. Body composition matters. Sleep matters. Hona treats InBody scans, HRV, and recovery as first-class signals.'
+    body: 'Strength blocks, hypertrophy, recomp. Body composition and recovery sit alongside the training — not in a separate app.'
   },
   {
     title: 'The hybrid athlete',
     body: 'Run, lift, climb, swim, ruck — pick your stack. Every tile reads the same regardless of how you spent the morning.'
   },
   {
-    title: 'Anyone who treats training as a daily practice',
-    body: 'No specific sport, no specific body type, no specific goal. The bar is consistent attention.'
+    title: 'Anyone with a daily practice',
+    body: 'No sport. No body type. No goal. The only bar is consistent attention.'
   }
 ]
 
@@ -24,11 +24,11 @@ export default function WhoItsFor() {
         <div className="max-w-3xl">
           <span className="eyebrow">Who it’s for</span>
           <h2 className="section-title mt-4">
-            For athletes treating training as a <span className="text-accent-500">daily practice.</span>
+            For athletes who treat training as a <span className="text-accent-500">daily practice.</span>
           </h2>
           <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
-            The name doesn’t pin Hona to a sport, a body type, or a goal — it names the relationship
-            between you and your training: daily, patient, refining.
+            The name doesn’t pin Hona to a sport, a body type, or a goal. It names the relationship:
+            daily, patient, refining.
           </p>
         </div>
 

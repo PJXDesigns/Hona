@@ -24,9 +24,9 @@ function ScreenImage({ src, alt }) {
 const scenes = [
   {
     key: 'welcome',
-    eyebrow: 'iOS · TestFlight beta · coming soon',
+    eyebrow: 'iOS · TestFlight beta · free',
     title: 'Sharpen the athlete.',
-    body: 'Hona is the daily dashboard that keeps you honest about the small, consistent adjustments that compound into real change. Training, nutrition, body composition, recovery — one calm view, every morning.',
+    body: 'A daily dashboard that keeps you honest about the small, consistent work that compounds. Training, nutrition, body composition, recovery — one calm view, every morning.',
     cta: true,
     render: () => <ScreenImage src={`${base}screens/prototype-1-start.jpg`} alt="Hona opening screen — the entry point into the daily dashboard." />
   },

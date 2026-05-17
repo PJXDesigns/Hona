@@ -7,20 +7,22 @@ export default function CTA({ brand }) {
   const onSubmit = (e) => {
     e.preventDefault()
     if (!email.includes('@')) return
-    // TODO: wire to actual mailing-list service (Buttondown, ConvertKit, Mailchimp) or TestFlight public link
+    // TODO: wire to a real form service (Formspree, Buttondown, ConvertKit) so
+    // submissions actually reach you. Right now this just shows the confirmation
+    // state — emails are not collected anywhere.
     console.log('Beta signup:', email)
     setSubmitted(true)
   }
   return (
     <section id="beta" className="relative py-24 hairline">
       <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-        <span className="eyebrow">TestFlight beta</span>
+        <span className="eyebrow">TestFlight beta · Free</span>
         <h2 className="section-title mt-4 max-w-2xl mx-auto">
-          A little sharper, <span className="text-accent-500">every day.</span>
+          Try the <span className="text-accent-500">private beta.</span>
         </h2>
         <p className="mt-6 text-lg md:text-xl text-ink-500 max-w-xl mx-auto leading-relaxed">
-          Drop your email and you’ll get a TestFlight link when the next build ships.
-          No spam — only build notes. Cancel anytime.
+          Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
+          Build notes only — no spam, no upsells.
         </p>
 
         {!submitted ? (
@@ -37,17 +39,14 @@ export default function CTA({ brand }) {
               />
             </div>
             <button type="submit" className="btn-primary whitespace-nowrap">
-              Sign me up <ArrowRight size={16} />
+              Request invite <ArrowRight size={16} />
             </button>
           </form>
         ) : (
           <div className="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-accent-50 border border-accent-200 text-accent-700">
-            <Check size={18} /> You’re on the list — I’ll be in touch.
+            <Check size={18} /> You’re on the list. TestFlight invite incoming when the next build ships.
           </div>
         )}
-        <p className="text-[11px] text-ink-300 mt-6 font-mono">
-          Hook this form up to your mailing list provider, or replace the form with a direct TestFlight public link.
-        </p>
       </div>
     </section>
   )
