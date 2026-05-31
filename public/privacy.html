@@ -72,24 +72,6 @@
       background: var(--paper-50); border-radius: 0 12px 12px 0;
     }
     .callout p:last-child { margin-bottom: 0; }
-    .placeholder {
-      display: inline-block; padding: 1px 6px; border-radius: 4px;
-      background: rgba(90, 61, 31, 0.10); color: var(--accent);
-      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em;
-    }
-    table.disclosure {
-      width: 100%; border-collapse: collapse; margin: 20px 0 8px;
-      font-size: 14px;
-    }
-    table.disclosure th, table.disclosure td {
-      text-align: left; vertical-align: top; padding: 10px 12px;
-      border-bottom: 1px solid var(--paper-300);
-    }
-    table.disclosure th {
-      font-weight: 600; color: var(--ink-900); font-size: 12px;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      background: var(--paper-50);
-    }
     footer.site {
       max-width: 880px; margin: 0 auto; padding: 24px 28px 48px;
       border-top: 1px solid var(--paper-300); color: var(--ink-400); font-size: 13px;
@@ -120,128 +102,138 @@
   <main>
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="effective">Effective May 17, 2026 · Last updated May 17, 2026</p>
+    <p class="effective">Last updated May 30, 2026 · Effective May 30, 2026</p>
 
-    <p>This Privacy Policy explains how Peter Jones Experience Design LLC (“we,” “us,” “our”) collects, uses, and shares information when you use the Hona iOS application and the website at hona.fitness (together, the “Service”).</p>
+    <p>This Privacy Policy explains how Hona (“Hona,” “we,” “us,” or “our”) collects, uses, stores, and shares information when you use the Hona iOS app, its Apple Watch companion, the optional Hona Garmin Connect IQ data field, and related services (together, the “Service”).</p>
 
+    <p>Hona is operated by <strong>Peter Jones Experience Design LLC</strong>. For privacy questions or requests, contact <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>.</p>
+
+    <h2>1. Who this policy covers</h2>
+    <p>Hona supports two types of accounts:</p>
+    <ul>
+      <li><strong>Athletes</strong>, who track their own training, recovery, and nutrition.</li>
+      <li><strong>Coaches</strong>, who are linked to one or more athletes and can view those athletes’ training and recovery data and exchange messages with them.</li>
+    </ul>
+    <p>This policy applies to both. Where a practice differs by role, we say so.</p>
+
+    <h2>2. Information we collect</h2>
+
+    <h3>2.1 Account information</h3>
+    <p>When you create an account we collect:</p>
+    <ul>
+      <li>Your <strong>name</strong> (display name) and <strong>email address</strong>.</li>
+      <li>Your <strong>role</strong> (athlete or coach).</li>
+      <li>Authentication credentials. If you sign up with email and password, your password is handled by Google Firebase Authentication and is never stored by us in plain text. If you sign in with <strong>Apple</strong> or <strong>Google</strong>, we receive a unique account identifier and, where you permit it, your name and email.</li>
+    </ul>
+
+    <h3>2.2 Health, fitness, and biometric data</h3>
+    <p>The core function of Hona is to compute your daily readiness, training load, and recovery trends. To do this we process health and fitness data, which may include:</p>
+    <ul>
+      <li><strong>Apple Health (HealthKit):</strong> heart rate variability, resting heart rate, sleep, workouts, and body metrics that you authorize Hona to read. With your permission, Hona also writes workouts and nutrition you log in-app back to Apple Health.</li>
+      <li><strong>Connected wearables and services that you choose to link</strong> via their own secure sign-in:
+        <ul>
+          <li><strong>Oura:</strong> sleep, heart-rate variability, heart rate, and readiness data.</li>
+          <li><strong>Strava:</strong> your activities, including duration, distance, and GPS routes/maps.</li>
+          <li><strong>Whoop:</strong> recovery, daily cycle, and sleep data.</li>
+        </ul>
+      </li>
+      <li><strong>Manually entered data:</strong> workouts, nutrition and food logs, body weight, training notes, race and goal information.</li>
+      <li><strong>Derived metrics that Hona calculates:</strong> for example your Hona readiness score, training load (fitness/fatigue/form), and macronutrient targets.</li>
+    </ul>
+    <p>Health and biometric data is sensitive personal information, and we treat it accordingly (see Sections 4–6).</p>
+
+    <h3>2.3 Device permissions</h3>
+    <p>With your consent, Hona may access:</p>
+    <ul>
+      <li><strong>Calendar:</strong> read-only, to display upcoming training and fueling reminders alongside your day. Calendar events are read on your device only and are never modified or uploaded.</li>
+      <li><strong>Camera:</strong> to scan nutrition barcodes and read nutrition labels so you can log foods.</li>
+      <li><strong>Photo library:</strong> to read a saved photo of a nutrition label you want to log.</li>
+    </ul>
+    <p>You can change or revoke these permissions at any time in the iOS Settings app.</p>
+
+    <h3>2.4 Information we do not collect</h3>
+    <p>Hona does not use third-party advertising networks, and the current build does not include third-party analytics, marketing, or crash-reporting SDKs.</p>
+
+    <h2>3. How we use your information</h2>
+    <p>We use the information above to:</p>
+    <ul>
+      <li>Provide the Service: compute your readiness, training load, recovery trends, and nutrition targets, and display your dashboard.</li>
+      <li>Maintain your account and authenticate you.</li>
+      <li>Enable the coach–athlete relationship: if you link to a coach (or, as a coach, accept an athlete), share the relevant training, recovery, activity, and message data between you.</li>
+      <li>Generate AI-assisted insights and coaching suggestions (see Section 5).</li>
+      <li>Communicate with you about the Service, including service-related emails such as password resets.</li>
+      <li>Maintain the security and integrity of the Service and comply with legal obligations.</li>
+    </ul>
+    <p>We do <strong>not</strong> sell your personal information, and we do not use your health data for advertising.</p>
+
+    <h2>4. Where your data is stored and how it is protected</h2>
+    <ul>
+      <li><strong>On your device:</strong> Connected-service access tokens (Oura, Strava, Whoop) and your personal encryption key are stored in the iOS <strong>Keychain</strong>. Some activity data is cached locally for performance.</li>
+      <li><strong>In the cloud:</strong> Account data and your training/recovery data are stored in <strong>Google Firebase / Cloud Firestore</strong>. Sensitive health, activity, and message fields are <strong>encrypted on your device using AES-256-GCM before they are uploaded</strong>, using a key held in your device Keychain. A copy of that key is stored in your account record so that a coach you have explicitly linked to can decrypt the data you share with them.</li>
+      <li><strong>Access controls:</strong> Firestore Security Rules restrict each athlete’s data so it is readable only by that athlete and their linked coach. Coach workout templates are private to the coach. Messages are readable only by the two participants.</li>
+    </ul>
+    <p>No method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
+
+    <h2>5. AI-assisted features</h2>
+    <p>Hona uses <strong>Anthropic’s Claude</strong> models to generate training insights and nutrition suggestions. When you use these features, a set of <strong>de-identified training and biometric numbers</strong> (for example your readiness score, heart-rate variability, resting heart rate, sleep hours, training load, and your race name and training phase) is sent to Anthropic to produce the insight.</p>
+    <p>Based on the current implementation, this data <strong>does not include</strong> your name, email address, location, exact birthdate, or raw GPS data.</p>
+
+    <h2>6. How we share information</h2>
+    <p>We share information only as described here:</p>
+    <ul>
+      <li><strong>With your linked coach (or athletes):</strong> If you are an athlete linked to a coach, your shared training, recovery, activity, and message data is visible to that coach. If you are a coach, your athletes can exchange messages with you. Linking is initiated by you.</li>
+      <li><strong>Service providers (sub-processors) that process data on our behalf:</strong>
+        <ul>
+          <li><strong>Google LLC (Firebase Authentication, Cloud Firestore):</strong> account, authentication, and encrypted data hosting.</li>
+          <li><strong>Anthropic, PBC (Claude API):</strong> AI insight generation, as described in Section 5.</li>
+        </ul>
+      </li>
+      <li><strong>Data sources you authorize:</strong> Oura, Strava, and Whoop. When you connect these, you are subject to their own privacy policies, and you can disconnect them at any time in Hona.</li>
+      <li><strong>Food databases:</strong> when you search for or scan a food, the search term or barcode is sent to the <strong>USDA FoodData Central</strong> and <strong>Open Food Facts</strong> services. These requests contain food queries, not your personal or health data.</li>
+      <li><strong>Legal and safety:</strong> we may disclose information if required by law, or to protect the rights, safety, or property of users or the public.</li>
+      <li><strong>Business transfers:</strong> if Hona or Peter Jones Experience Design LLC is involved in a merger, acquisition, or asset sale, your information may be transferred, subject to this policy.</li>
+    </ul>
+    <p>We do not sell your personal information and do not share it with advertisers.</p>
+
+    <h2>7. Apple Health (HealthKit) data</h2>
     <div class="callout">
-      <p><strong>The short version.</strong> Hona is designed to keep your training data with you. Health and training information you bring into Hona is stored locally on your device unless you explicitly choose a feature that requires it to leave (notably, the AI coaching insight). We don’t sell your data. We don’t share it with advertisers. We don’t use it to train AI models.</p>
+      <p>Consistent with Apple’s requirements, data Hona reads from or writes to Apple Health:</p>
+      <ul>
+        <li>is used only to provide you with the Service’s health, fitness, and recovery features;</li>
+        <li>is <strong>not</strong> used for advertising, marketing, or data-mining;</li>
+        <li>is <strong>not</strong> sold, rented, or disclosed to data brokers; and</li>
+        <li>is <strong>not</strong> shared with any third party except as needed to provide the Service to you (for example, your linked coach), and never for that third party’s own marketing.</li>
+      </ul>
     </div>
 
-    <h2>1. Information We Collect</h2>
-
-    <h3>1.1 Information you provide</h3>
+    <h2>8. Data retention and deletion</h2>
+    <p>We retain your data for as long as your account is active. You can:</p>
     <ul>
-      <li><strong>Email address:</strong> when you join the beta waitlist on hona.fitness.</li>
-      <li><strong>Manual entries in the app:</strong> InBody body-composition scans, recovery notes, and similar logs you type in.</li>
-      <li><strong>Files you import:</strong> Cronometer CSV exports, if you choose to use the nutrition feature.</li>
+      <li>Disconnect any wearable or service (Oura, Strava, Whoop) at any time, which deletes the stored tokens for that service.</li>
+      <li>Request deletion of your account and associated data by contacting <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>.</li>
     </ul>
+    <p>When you delete your account, we delete or de-identify your personal data, except where we must retain it to comply with legal obligations.</p>
 
-    <h3>1.2 Information you authorize from your device</h3>
-    <ul>
-      <li><strong>Apple HealthKit data:</strong> heart rate variability (HRV), resting heart rate, sleep, respiratory rate, body weight, and similar metrics. Only the categories you grant permission to in iOS.</li>
-      <li><strong>Apple Calendar events (EventKit):</strong> workouts pulled from a calendar you connect, typically a TrainingPeaks-synced calendar.</li>
-    </ul>
+    <h2>9. Your privacy rights</h2>
+    <p>Depending on where you live, you may have rights to access, correct, delete, or export your personal data, to object to or restrict certain processing, and to withdraw consent. This includes rights under the EU/UK GDPR and the California Consumer Privacy Act (CCPA/CPRA). To exercise any of these rights, contact <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>. We will not discriminate against you for exercising them.</p>
+    <p>If you are in the EEA or UK, our legal bases for processing are your <strong>consent</strong> (for health data and connected services), <strong>performance of a contract</strong> (to provide the Service), and our <strong>legitimate interests</strong> (to secure and improve the Service).</p>
 
-    <h3>1.3 Information collected automatically</h3>
-    <ul>
-      <li><strong>Crash and diagnostic data:</strong> if you opt in to share with Apple, standard iOS crash reports may be shared with us via Apple’s tooling. No personally-identifying training content is included.</li>
-      <li><strong>Website analytics:</strong> we currently do not run analytics on hona.fitness.</li>
-    </ul>
+    <h2>10. International data transfers</h2>
+    <p>Hona’s cloud infrastructure (Google Firebase) and AI provider (Anthropic) are based in the <strong>United States</strong>, so your data may be processed there. Where required, we rely on appropriate safeguards such as Standard Contractual Clauses for international transfers.</p>
 
-    <h2>2. How We Use Information</h2>
-    <ul>
-      <li>To operate the Service and present your training, nutrition, body-composition, and recovery information back to you.</li>
-      <li>To generate the AI coaching insight when you tap the button to request one (see Section 4).</li>
-      <li>To send you the TestFlight beta invitation and occasional build notes, if you signed up for the waitlist.</li>
-      <li>To diagnose bugs and improve the Service.</li>
-    </ul>
-    <p>We do <strong>not</strong> use your training, health, or body-composition data to train machine-learning models, sell it to third parties, or share it with advertisers.</p>
+    <h2>11. Children</h2>
+    <p>Hona is not directed to children. You must be at least <strong>16 years old</strong> to use the Service. We do not knowingly collect personal data from children under that age. If you believe a child has provided us personal data, contact us and we will delete it.</p>
 
-    <h2>3. Where Your Data Lives</h2>
-    <p>Most data Hona uses stays on your iPhone in the app’s local storage and in Apple HealthKit. We do not run a server that stores your training history, biometrics, or body-composition data.</p>
-    <p>Exceptions:</p>
-    <ul>
-      <li><strong>Email addresses</strong> entered into the beta waitlist form on hona.fitness are processed by Formspree, a form-submission service. Formspree forwards each submission to peter@pjxdesigns.com so we can reply with a TestFlight invitation. Formspree stores the submission in its own systems under its <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</li>
-      <li><strong>AI coaching insight</strong> requests are processed by Anthropic. See Section 4.</li>
-    </ul>
+    <h2>12. Changes to this policy</h2>
+    <p>We may update this policy from time to time. We will post the updated version with a new “Last updated” date and, for material changes, provide notice in the app or by email.</p>
 
-    <h2>4. AI Coaching Insight (Anthropic API)</h2>
-    <p>The “Generate coaching insight” button in the Body Metrics widget sends a small payload of your recent training and body-metrics summary to <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>, the maker of Claude, for processing. The response is returned to your device and displayed in the app.</p>
-    <p>What is sent:</p>
-    <ul>
-      <li>Numeric summaries of the metrics shown in the widget (HRV, resting heart rate, sleep duration, respiratory rate, recent training-load numbers).</li>
-      <li>Brief contextual labels (training phase, weeks-to-race) so the response is relevant.</li>
-    </ul>
-    <p>What is <strong>not</strong> sent:</p>
-    <ul>
-      <li>Your name, email, location, or any direct identifier.</li>
-      <li>Raw HealthKit time-series data.</li>
-      <li>Nutrition logs, recovery notes, or InBody scan history.</li>
-    </ul>
-    <p>Anthropic processes the request under its own <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Privacy Policy</a>. Anthropic does not use API content to train its models (per Anthropic’s commercial terms in effect at the time of this writing; verify the current policy).</p>
-
-    <h2>5. Third-Party Services</h2>
-    <p>The following services may receive information about you, depending on which features of Hona you use:</p>
-
-    <table class="disclosure">
-      <thead>
-        <tr><th>Service</th><th>What they receive</th><th>Why</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Apple HealthKit / Apple Calendar</td>
-          <td>Permission to read selected data on your device</td>
-          <td>Powers the Body Metrics and Training widgets</td>
-        </tr>
-        <tr>
-          <td>Anthropic</td>
-          <td>De-identified metric summaries (see Section 4)</td>
-          <td>Generates the AI coaching insight</td>
-        </tr>
-        <tr>
-          <td>Formspree</td>
-          <td>Email address you enter in the beta waitlist form</td>
-          <td>Forwards the submission to peter@pjxdesigns.com</td>
-        </tr>
-        <tr>
-          <td>GitHub Pages</td>
-          <td>Standard web server logs for hona.fitness</td>
-          <td>Hosts the website</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>6. Cookies and Tracking</h2>
-    <p>The website at hona.fitness does not set tracking cookies and does not use any web analytics service. If this changes in the future, this section will be updated before any tracking is deployed. The iOS application does not use third-party SDKs for analytics or advertising.</p>
-
-    <h2>7. Children</h2>
-    <p>The Service is not intended for children under 16. We do not knowingly collect information from anyone under 16. If you believe we have collected information from a child, contact us and we will delete it.</p>
-
-    <h2>8. Your Choices and Rights</h2>
-    <ul>
-      <li><strong>Revoke HealthKit / Calendar access</strong> at any time in iOS Settings → Privacy & Security.</li>
-      <li><strong>Delete the app</strong> to remove all locally-stored Hona data from your device.</li>
-      <li><strong>Unsubscribe from build emails</strong> using the unsubscribe link in any email we send you.</li>
-      <li><strong>Access, correct, or delete</strong> any other information we hold about you. Contact us using the address below.</li>
-    </ul>
-    <p>If you are in the European Economic Area, the United Kingdom, or California, you have additional rights under the GDPR or CCPA, including the right to portability and the right to object to certain processing. To exercise these rights, contact us at the email below.</p>
-
-    <h2>9. Data Security</h2>
-    <p>We use commercially reasonable measures to protect information processed by the Service. No system is perfectly secure, and we cannot guarantee that information will never be accessed or disclosed in ways that contravene this Policy.</p>
-
-    <h2>10. International Transfers</h2>
-    <p>The Service is operated from the United States. If you use the Service from outside the US, information processed by the Service may be transferred to the US, where data-protection laws may differ from those of your jurisdiction.</p>
-
-    <h2>11. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. We’ll update the “Effective” date above and, where appropriate, notify you in the app or via email. Continued use of the Service after a change means you accept the revised Policy.</p>
-
-    <h2>12. Contact</h2>
-    <p>For questions about this Privacy Policy or to exercise your rights, contact us at <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>.</p>
+    <h2>13. Contact us</h2>
+    <p><strong>Hona — Peter Jones Experience Design LLC</strong><br>
+    Email: <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a></p>
   </main>
 
   <footer class="site">
-    <span>© <span id="y"></span> Hona</span>
+    <span>© <span id="y"></span> Peter Jones Experience Design LLC</span>
     <span><a href="/">Home</a> &nbsp;·&nbsp; <a href="/terms.html">Terms</a></span>
   </footer>
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
