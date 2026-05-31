@@ -102,7 +102,7 @@
   <main>
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="effective">Last updated May 30, 2026 · Effective May 30, 2026</p>
+    <p class="effective">Last updated May 31, 2026 · Effective May 31, 2026</p>
 
     <p>This Privacy Policy explains how Hona (“Hona,” “we,” “us,” or “our”) collects, uses, stores, and shares information when you use the Hona iOS app, its Apple Watch companion, the optional Hona Garmin Connect IQ data field, and related services (together, the “Service”).</p>
 
@@ -176,6 +176,7 @@
 
     <h2>5. AI-assisted features</h2>
     <p>Hona uses <strong>Anthropic’s Claude</strong> models to generate training insights and nutrition suggestions. When you use these features, a set of <strong>de-identified training and biometric numbers</strong> (for example your readiness score, heart-rate variability, resting heart rate, sleep hours, training load, and your race name and training phase) is sent to Anthropic to produce the insight.</p>
+    <p>Some of these values (for example, heart-rate variability, resting heart rate, sleep duration, and workout summaries) may originate from <strong>Apple HealthKit</strong>. When they do, they leave your device only in this de-identified, numeric form — Anthropic does not receive your name, email, account identifier, location, exact birthdate, or raw GPS, route, or sample-level HealthKit data.</p>
     <p>Based on the current implementation, this data <strong>does not include</strong> your name, email address, location, exact birthdate, or raw GPS data.</p>
 
     <h2>6. How we share information</h2>
@@ -212,7 +213,8 @@
       <li>Disconnect any wearable or service (Oura, Strava, Whoop) at any time, which deletes the stored tokens for that service.</li>
       <li>Request deletion of your account and associated data by contacting <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>.</li>
     </ul>
-    <p>When you delete your account, we delete or de-identify your personal data, except where we must retain it to comply with legal obligations.</p>
+    <p>When you request account deletion, we remove your live account data from our cloud database (Firebase / Cloud Firestore) within <strong>30 days</strong>. Encrypted copies may persist in our cloud provider's automated, rolling backups for up to an additional <strong>90 days</strong> before they age out; during that window the data is inaccessible to us in normal operations and is overwritten as backups cycle. We may retain a minimal set of records — for example, abuse-prevention or security logs and any documentation we are required to keep for tax or legal compliance — for the period the law requires, stored separately from live account data and not used to personalize the Service.</p>
+    <p>Disconnecting a third-party service (Oura, Strava, Whoop) removes its access tokens from your device immediately. Any data we already received from that service before you disconnected remains on your account until you delete it or close your account.</p>
 
     <h2>9. Your privacy rights</h2>
     <p>Depending on where you live, you may have rights to access, correct, delete, or export your personal data, to object to or restrict certain processing, and to withdraw consent. This includes rights under the EU/UK GDPR and the California Consumer Privacy Act (CCPA/CPRA). To exercise any of these rights, contact <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>. We will not discriminate against you for exercising them.</p>
@@ -221,8 +223,10 @@
     <h2>10. International data transfers</h2>
     <p>Hona’s cloud infrastructure (Google Firebase) and AI provider (Anthropic) are based in the <strong>United States</strong>, so your data may be processed there. Where required, we rely on appropriate safeguards such as Standard Contractual Clauses for international transfers.</p>
 
-    <h2>11. Children</h2>
-    <p>Hona is not directed to children. You must be at least <strong>16 years old</strong> to use the Service. We do not knowingly collect personal data from children under that age. If you believe a child has provided us personal data, contact us and we will delete it.</p>
+    <h2>11. Children's privacy</h2>
+    <p>Hona is not directed to children. You must be at least <strong>16 years old</strong> to create an account or use the Service.</p>
+    <p>In the United States, we comply with the <strong>Children's Online Privacy Protection Act (COPPA)</strong>: we do not knowingly collect, use, or disclose personal information from children under 13. In jurisdictions that set a higher minimum age for digital consent (for example, age 16 under the EU GDPR), we apply that higher threshold. If we discover that we have collected personal information from a child below the applicable age, we will delete that information and close the associated account promptly.</p>
+    <p>Parents or guardians who believe a child has provided us personal data can contact <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a> and we will act on the request without delay.</p>
 
     <h2>12. Changes to this policy</h2>
     <p>We may update this policy from time to time. We will post the updated version with a new “Last updated” date and, for material changes, provide notice in the app or by email.</p>
