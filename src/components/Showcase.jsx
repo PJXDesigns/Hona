@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Play, Activity, Calendar, Apple, HeartPulse, Snowflake } from 'lucide-react'
+import { ArrowRight, Play, Activity, Calendar, Apple, HeartPulse, ClipboardList } from 'lucide-react'
 
 const base = import.meta.env.BASE_URL
 
@@ -69,13 +69,13 @@ const scenes = [
     render: () => <ScreenImage src={`${base}screens/prototype-5-body-metrics.jpg`} alt="Hona body metrics screen showing HRV, sleep, SpO2, VO2 Max, body composition, and a Generate coaching insight button." />
   },
   {
-    key: 'recovery',
-    tab: 'Recovery',
-    icon: Snowflake,
-    eyebrow: 'Recovery',
-    title: 'What you did to recover.',
-    body: 'Pick the recovery modalities that matter to you and check them off daily. Add notes for niggles, breakthroughs, or anything you want to remember. Over weeks it builds a real record of how you actually take care of yourself between sessions.',
-    render: () => <ScreenImage src={`${base}screens/prototype-6-recovery.jpg`} alt="Hona recovery screen with a daily check-list and notes." />
+    key: 'coach',
+    tab: 'Coach',
+    icon: ClipboardList,
+    eyebrow: 'Coach program',
+    title: 'Your coach’s plan, in your pocket.',
+    body: 'When you join a coach’s program, the full plan lands here. Phase, week, and session detail, plus the coach’s own guidance for each block. Read the week ahead, jump into any workout, leave when you’re ready.',
+    render: () => <ScreenImage src={`${base}screens/prototype-6-coach.jpg`} alt="Hona coach program screen showing a 45-week advanced plan with the current week’s schedule and workouts." />
   }
 ]
 
