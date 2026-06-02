@@ -29,7 +29,10 @@ export default function Hero({ brand }) {
             </div>
           </div>
 
-          {/* Video: inline below the text on mobile, absolutely positioned over the right side on lg+ */}
+          {/* Video: inline below the text on mobile, absolutely positioned over the right side on lg+.
+              MP4 only — the paper-100 background is baked into the file so it blends seamlessly with the
+              section bg on every browser and avoids the iOS Safari VP9-alpha bug that renders transparent
+              WebMs as solid black. */}
           <div className="mt-10 lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[55%] xl:w-[50%] z-20 flex justify-center pointer-events-none">
             <video
               autoPlay
@@ -38,9 +41,8 @@ export default function Hero({ brand }) {
               playsInline
               preload="auto"
               aria-hidden="true"
-              className="w-full max-w-[260px] sm:max-w-xs lg:max-w-md xl:max-w-lg"
+              className="w-full max-w-sm sm:max-w-md lg:max-w-xl xl:max-w-2xl"
             >
-              <source src={`${base}hero.webm`} type="video/webm" />
               <source src={`${base}hero.mp4`} type="video/mp4" />
             </video>
           </div>
