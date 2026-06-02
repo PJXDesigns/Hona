@@ -23,16 +23,6 @@ function ScreenImage({ src, alt }) {
 
 const scenes = [
   {
-    key: 'welcome',
-    // No `tab` field on the welcome scene: it is the section hero on mobile
-    // and the opening sticky scene on desktop, but never a tab option.
-    eyebrow: 'iOS · TestFlight beta · free',
-    title: 'Sharpen the athlete.',
-    body: 'A daily dashboard that keeps you honest about the small, consistent work that compounds. Training, nutrition, body composition, recovery. One calm view, every morning.',
-    cta: true,
-    render: () => <ScreenImage src={`${base}screens/prototype-1-start.jpg`} alt="Hona opening screen, the entry point into the daily dashboard." />
-  },
-  {
     key: 'metrics',
     tab: 'Metrics',
     icon: Activity,
@@ -79,20 +69,16 @@ const scenes = [
   }
 ]
 
-// Tabs exclude the welcome scene (index 0).
-const tabScenes = scenes.slice(1)
+// All scenes are tabbable (the welcome / Sharpen-the-athlete moment now lives in the Hero above).
+const tabScenes = scenes
 
 /* ------------------------------------------------------------------ */
 /*  Main Showcase component                                            */
 /* ------------------------------------------------------------------ */
 
-export default function Showcase({ brand }) {
-  // On mobile the welcome scene is shown as the section hero, so the
-  // interactive prototype starts at the first widget (Metrics, index 1).
-  const [activeIndex, setActiveIndex] = useState(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) return 1
-    return 0
-  })
+export default function Showcase() {
+  // Start on the first widget (Metrics). Desktop overrides this based on scroll position.
+  const [activeIndex, setActiveIndex] = useState(0)
   const sectionRefs = useRef([])
 
   // Desktop scroll-driven active scene. Bails on mobile.
@@ -124,11 +110,7 @@ export default function Showcase({ brand }) {
     }
   }, [])
 
-  // For mobile: if for any reason activeIndex is 0 (welcome), the tab bar would
-  // show nothing as selected. Treat 0 as the first widget for display purposes.
-  const displayIndex = activeIndex === 0 ? 1 : activeIndex
-  const welcome = scenes[0]
-  const active = scenes[displayIndex]
+  const active = scenes[activeIndex]
 
   return (
     <section id="showcase" className="relative">
@@ -136,30 +118,11 @@ export default function Showcase({ brand }) {
 
         {/* ============ MOBILE LAYOUT ============ */}
         <div className="lg:hidden">
-          {/* Welcome hero — always visible at the top of the section */}
-          <div className="pt-16 pb-10 text-center max-w-lg mx-auto">
-            <span className="eyebrow">{welcome.eyebrow}</span>
-            <h2 className="font-display font-extrabold tracking-tightest text-ink-900 text-4xl sm:text-5xl leading-[1.05] mt-3">
-              {welcome.title}
-            </h2>
-            <p className="mt-5 text-base sm:text-lg text-ink-500 leading-relaxed">
-              {welcome.body}
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3 justify-center">
-              <a href={brand.betaSignupUrl} className="btn-primary">
-                Join the beta <ArrowRight size={16} />
-              </a>
-              <a href="#screens" className="btn-ghost">
-                <Play size={14} /> See the screens
-              </a>
-            </div>
-          </div>
-
-          {/* Prototype area — phone, scene text, then tabs. Compact so all three
+          {/* Prototype area: phone, scene text, then tabs. Compact so all three
               elements fit in a single mobile viewport. */}
-          <div className="pb-16">
+          <div className="pt-12 pb-16">
             <div className="flex justify-center mb-5">
-              <ShowcasePhone activeIndex={displayIndex} />
+              <ShowcasePhone activeIndex={activeIndex} />
             </div>
 
             {/* Active scene text */}
@@ -173,8 +136,8 @@ export default function Showcase({ brand }) {
               </p>
             </div>
 
-            {/* Tab bar (5 tabs, no Welcome) */}
-            <TabBar activeIndex={displayIndex} onSelect={setActiveIndex} />
+            {/* Tab bar — one tab per widget scene */}
+            <TabBar activeIndex={activeIndex} onSelect={setActiveIndex} />
           </div>
         </div>
 
@@ -188,7 +151,7 @@ export default function Showcase({ brand }) {
                 data-index={i}
                 className="min-h-screen flex items-center py-16 first:pt-24 md:first:pt-32"
               >
-                <SceneContent scene={scene} index={i} brand={brand} />
+                <SceneContent scene={scene} />
               </div>
             ))}
           </div>
@@ -206,7 +169,7 @@ export default function Showcase({ brand }) {
 
 /* ------------------------------------------------------------------ */
 /*  TabBar — mobile only. Styled like an iOS in-app tab bar.            */
-/*  Skips the welcome scene; 5 tabs total.                              */
+/*  One tab per widget scene (5 total).                                 */
 /* ------------------------------------------------------------------ */
 
 function TabBar({ activeIndex, onSelect }) {
@@ -217,10 +180,8 @@ function TabBar({ activeIndex, onSelect }) {
         aria-label="Prototype views"
         className="inline-flex items-stretch gap-1 bg-paper-50 border border-paper-300 rounded-full p-1.5 shadow-card max-w-full overflow-x-auto no-scrollbar"
       >
-        {tabScenes.map((scene) => {
+        {tabScenes.map((scene, sceneIndex) => {
           const Icon = scene.icon
-          // The scene's true index in the full `scenes` array is +1 since we sliced off welcome.
-          const sceneIndex = scenes.indexOf(scene)
           const isActive = sceneIndex === activeIndex
           return (
             <button
@@ -248,28 +209,16 @@ function TabBar({ activeIndex, onSelect }) {
 /*  Desktop scene block — left-side content                             */
 /* ------------------------------------------------------------------ */
 
-function SceneContent({ scene, index, brand }) {
+function SceneContent({ scene }) {
   return (
     <div className="max-w-xl">
       <span className="eyebrow">{scene.eyebrow}</span>
-      <h2 className={`mt-4 font-display font-extrabold tracking-tightest text-ink-900 leading-[1.05] ${
-        index === 0 ? 'text-5xl md:text-7xl' : 'text-4xl md:text-6xl'
-      }`}>
+      <h2 className="mt-4 font-display font-extrabold tracking-tightest text-ink-900 leading-[1.05] text-4xl md:text-6xl">
         {scene.title}
       </h2>
       <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
         {scene.body}
       </p>
-      {scene.cta && (
-        <div className="mt-10 flex flex-wrap gap-3">
-          <a href={brand.betaSignupUrl} className="btn-primary">
-            Join the beta <ArrowRight size={16} />
-          </a>
-          <a href="#screens" className="btn-ghost">
-            <Play size={14} /> See the screens
-          </a>
-        </div>
-      )}
     </div>
   )
 }

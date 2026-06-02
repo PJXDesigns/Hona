@@ -1,4 +1,5 @@
 import Nav from './components/Nav.jsx'
+import Hero from './components/Hero.jsx'
 import Showcase from './components/Showcase.jsx'
 import WhoItsFor from './components/WhoItsFor.jsx'
 import ScreenshotGallery from './components/ScreenshotGallery.jsx'
@@ -23,9 +24,9 @@ export default function App() {
       <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.35]" />
       <Nav brand={BRAND} />
       <main className="relative">
-        {/* The Showcase folds in what used to be Hero + Philosophy + Features,
-            one scrolly section walking through Welcome + the 5 widgets with a
-            sticky phone on the right. */}
+        {/* Video hero with the layered "Hona / Sharpen the athlete" text */}
+        <Hero brand={BRAND} />
+        {/* Showcase walks through the 5 widget scenes (Metrics, Training, Nutrition, Body, Coach) */}
         <Showcase brand={BRAND} />
         <WhoItsFor />
         <ScreenshotGallery />
