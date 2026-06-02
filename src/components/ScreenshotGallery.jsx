@@ -1,22 +1,46 @@
 import { useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 
-// Drop new mockup images into /public/screens/, then add a row to this array.
-// Files are referenced via BASE_URL so paths work in both dev and on the
-// custom domain (hona.fitness/screens/...).
+// Rotato-rendered phone mockups with transparent backgrounds.
+// Drop files into /public/mockups/ named mockup-1.png through mockup-6.png.
+// Reorder by renaming the files; copy lives in this array.
 const base = import.meta.env.BASE_URL
 const screens = [
   {
-    key: 'header',
-    src: `${base}screens/01-header.jpg`,
-    label: 'The morning glance',
-    caption: 'Race day, training phase, and the training-load numbers that frame the day, together with today’s session.'
+    key: 'coach-build',
+    src: `${base}mockups/mockup-1.png`,
+    label: 'Down to the week.',
+    caption: 'Phase, intensity, weekly macros, and what your coach planned for the block.'
+  },
+  {
+    key: 'coach-schedule',
+    src: `${base}mockups/mockup-2.png`,
+    label: 'Your coach’s plan, in your pocket.',
+    caption: 'Phase, week, and session detail with the coach’s guidance for every block.'
   },
   {
     key: 'nutrition',
-    src: `${base}screens/02-nutrition.jpg`,
-    label: 'Nutrition, with context',
-    caption: 'Macros, calories, and the 7-day trend, read against what you burned and what your training calls for.'
+    src: `${base}mockups/mockup-3.png`,
+    label: 'What fueled the work.',
+    caption: 'Daily energy balance, macros, electrolytes, and hydration, read against today’s burn.'
+  },
+  {
+    key: 'countdown',
+    src: `${base}mockups/mockup-4.png`,
+    label: 'Race day, in view.',
+    caption: 'The countdown, the phase, and one tap to your race plan.'
+  },
+  {
+    key: 'today',
+    src: `${base}mockups/mockup-5.png`,
+    label: 'One calm view, every morning.',
+    caption: 'Today’s session, your recovery score, and the fuel you need, pulled together before you start the day.'
+  },
+  {
+    key: 'calendar',
+    src: `${base}mockups/mockup-6.png`,
+    label: 'The season at a glance.',
+    caption: 'Week TSS, volume, distance, and the full training calendar, every session in one place.'
   }
 ]
 
@@ -66,10 +90,10 @@ export default function ScreenshotGallery() {
         </div>
 
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-center">
-          {/* Full-bleed image. No extra phone frame because the renders include their own device.
-              Swipe handlers live on this container so touch users can flick left/right. */}
+          {/* Transparent PNG floats on the section's paper background. No card framing
+              because the mockups already include their own device/shadow. */}
           <div
-            className="relative rounded-2xl overflow-hidden bg-paper-200 border border-paper-300 shadow-card select-none touch-pan-y"
+            className="relative select-none touch-pan-y"
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
@@ -77,14 +101,14 @@ export default function ScreenshotGallery() {
             role="region"
             aria-label="Screen carousel. Swipe left or right to navigate"
           >
-            <div className="aspect-[4/3]">
+            <div className="aspect-[16/9] flex items-center justify-center">
               <img
                 key={s.key}
                 src={s.src}
                 alt={s.label}
                 loading="lazy"
                 draggable={false}
-                className="w-full h-full object-cover object-center pointer-events-none"
+                className="w-full h-full object-contain object-center pointer-events-none"
               />
             </div>
           </div>
