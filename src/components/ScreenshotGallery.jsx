@@ -101,7 +101,7 @@ export default function ScreenshotGallery() {
             role="region"
             aria-label="Screen carousel. Swipe left or right to navigate"
           >
-            <div className="aspect-[16/9] flex items-center justify-center">
+            <div className="aspect-[4/3] flex items-center justify-center">
               <img
                 key={s.key}
                 src={s.src}
