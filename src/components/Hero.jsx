@@ -36,7 +36,6 @@ export default function Hero({ brand }) {
           <div className="mt-10 lg:mt-0 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[55%] xl:w-[50%] z-20 flex justify-center pointer-events-none">
             <video
               autoPlay
-              loop
               muted
               playsInline
               preload="auto"
