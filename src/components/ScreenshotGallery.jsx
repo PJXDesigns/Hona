@@ -13,10 +13,10 @@ const screens = [
     caption: 'Phase, intensity, weekly macros, and what your coach planned for the block.'
   },
   {
-    key: 'coach-schedule',
+    key: 'today',
     src: `${base}mockups/mockup-2.png`,
-    label: 'Your coach’s plan, in your pocket.',
-    caption: 'Phase, week, and session detail with the coach’s guidance for every block.'
+    label: 'One calm view, every morning.',
+    caption: 'Today’s session, your recovery score, and the fuel you need, pulled together before you start the day.'
   },
   {
     key: 'nutrition',
@@ -25,16 +25,16 @@ const screens = [
     caption: 'Daily energy balance, macros, electrolytes, and hydration, read against today’s burn.'
   },
   {
-    key: 'countdown',
+    key: 'body-metrics',
     src: `${base}mockups/mockup-4.png`,
-    label: 'Race day, in view.',
-    caption: 'The countdown, the phase, and one tap to your race plan.'
+    label: 'How you woke up.',
+    caption: 'HRV, resting heart rate, sleep, VO2, body weight, every readiness number pulled in from whichever wearable you already wear.'
   },
   {
-    key: 'today',
+    key: 'workout',
     src: `${base}mockups/mockup-5.png`,
-    label: 'One calm view, every morning.',
-    caption: 'Today’s session, your recovery score, and the fuel you need, pulled together before you start the day.'
+    label: 'Every session, in detail.',
+    caption: 'Step-by-step intervals, target zones, and TSS, from your coach’s plan or built on the fly.'
   },
   {
     key: 'calendar',
@@ -101,7 +101,7 @@ export default function ScreenshotGallery() {
             role="region"
             aria-label="Screen carousel. Swipe left or right to navigate"
           >
-            <div className="aspect-[4/3] flex items-center justify-center">
+            <div className="aspect-[5/4] flex items-center justify-center">
               <img
                 key={s.key}
                 src={s.src}
