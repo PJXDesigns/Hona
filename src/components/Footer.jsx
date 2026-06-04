@@ -4,8 +4,9 @@ const base = import.meta.env.BASE_URL
 // Logo mark, the same /public/logo-mark.svg the Nav and favicon use.
 const markUrl = `${base}logo-mark.svg`
 // Legal pages live as static HTML in /public/ so they render outside the React app.
-const termsUrl   = `${base}terms.html`
-const privacyUrl = `${base}privacy.html`
+const termsUrl         = `${base}terms.html`
+const privacyUrl       = `${base}privacy.html`
+const accessibilityUrl = `${base}accessibility.html`
 
 export default function Footer({ brand }) {
   return (
@@ -35,9 +36,10 @@ export default function Footer({ brand }) {
         {/* Bottom row: legal links + copyright */}
         <div className="flex flex-col md:flex-row gap-3 md:items-center justify-between border-t border-paper-300 pt-6 text-xs text-ink-400">
           <span className="text-ink-300">© {new Date().getFullYear()} {brand.name}. All rights reserved.</span>
-          <nav className="flex items-center gap-5">
-            <a href={termsUrl}   className="hover:text-ink-900 transition-colors">Terms of Service</a>
-            <a href={privacyUrl} className="hover:text-ink-900 transition-colors">Privacy Policy</a>
+          <nav className="flex items-center gap-5 flex-wrap">
+            <a href={termsUrl}         className="hover:text-ink-900 transition-colors">Terms of Service</a>
+            <a href={privacyUrl}       className="hover:text-ink-900 transition-colors">Privacy Policy</a>
+            <a href={accessibilityUrl} className="hover:text-ink-900 transition-colors">Accessibility</a>
           </nav>
         </div>
       </div>
