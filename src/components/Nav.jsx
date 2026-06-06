@@ -2,16 +2,16 @@
 // truth across Nav, Footer, favicon, and any future use. To update the logo:
 // replace /public/logo-mark.svg (or logo.svg / logo-on-dark.svg) and you're done.
 const markUrl = `${import.meta.env.BASE_URL}logo-mark.svg`
-// Standalone HTML test build. Lives at /public/testsite.html; reachable at
-// hona.fitness/testsite (GitHub Pages extensionless URL) or .../testsite.html.
+// Standalone HTML test build at /public/testsite.html, reachable at
+// hona.fitness/testsite (GitHub Pages extensionless URL).
 const testsiteUrl = `${import.meta.env.BASE_URL}testsite.html`
 
 export default function Nav({ brand }) {
   const links = [
-    { href: '#who',         label: 'Who it’s for' },
-    { href: '#screens',     label: 'Screens' },
-    { href: '#beta',        label: 'Beta' },
-    { href: testsiteUrl,    label: 'Testsite' },
+    { href: '#who',      label: 'Who it’s for' },
+    { href: '#screens',  label: 'Screens' },
+    { href: '#beta',     label: 'Beta' },
+    { href: testsiteUrl, label: 'Testsite' },
   ]
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-100/85 border-b border-paper-300">
