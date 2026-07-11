@@ -11,7 +11,9 @@ export const BRAND = {
   pronunciation: 'HOH-na',
   tagline: 'Sharpen the athlete.',
   betaSignupUrl: '#beta',
-  contactEmail: 'peter@pjxdesigns.com'
+  contactEmail: 'peter@pjxdesigns.com',
+  // Hona web app (coach + athlete Program Builder), hosted on Firebase.
+  appUrl: 'https://hona-31051.web.app'
 }
 
 export default function App() {

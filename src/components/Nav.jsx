@@ -2,16 +2,13 @@
 // truth across Nav, Footer, favicon, and any future use. To update the logo:
 // replace /public/logo-mark.svg (or logo.svg / logo-on-dark.svg) and you're done.
 const markUrl = `${import.meta.env.BASE_URL}logo-mark.svg`
-// Standalone HTML test build at /public/testsite.html, reachable at
-// hona.fitness/testsite (GitHub Pages extensionless URL).
-const testsiteUrl = `${import.meta.env.BASE_URL}testsite.html`
 
 export default function Nav({ brand }) {
   const links = [
-    { href: '#who',      label: 'Who it’s for' },
-    { href: '#screens',  label: 'Screens' },
-    { href: '#beta',     label: 'Beta' },
-    { href: testsiteUrl, label: 'Testsite' },
+    { href: '#who',        label: 'Who it’s for' },
+    { href: '#screens',    label: 'Screens' },
+    { href: '#beta',       label: 'Beta' },
+    { href: brand.appUrl,  label: 'Web App', external: true },
   ]
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-paper-100/85 border-b border-paper-300">
@@ -22,7 +19,15 @@ export default function Nav({ brand }) {
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-ink-400">
           {links.map(l => (
-            <a key={l.href} href={l.href} className="hover:text-ink-900 transition-colors">{l.label}</a>
+            <a
+              key={l.href}
+              href={l.href}
+              target={l.external ? '_blank' : undefined}
+              rel={l.external ? 'noopener noreferrer' : undefined}
+              className="hover:text-ink-900 transition-colors"
+            >
+              {l.label}
+            </a>
           ))}
         </nav>
         <a href={brand.betaSignupUrl} className="btn-primary text-sm px-4 py-2">Join the beta</a>
