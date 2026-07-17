@@ -1,52 +1,91 @@
 import { useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 
-// Rotato-rendered phone mockups with transparent backgrounds.
-// Drop files into /public/mockups/ named mockup-1.png through mockup-6.png.
-// Reorder by renaming the files; copy lives in this array.
+// Full-screen iOS captures shown inside a coded device frame (see DeviceFrame
+// below). Source images live in /public/mockups/ as screen-N-*.jpg at native
+// iPhone resolution (1206x2622); the frame handles bezel, corners, and the
+// Dynamic Island, so the raw screenshots just need a clean status-bar area.
+// Reorder by moving entries in this array; copy lives alongside each src.
 const base = import.meta.env.BASE_URL
 const screens = [
   {
-    key: 'coach-build',
-    src: `${base}mockups/mockup-1.png`,
+    key: 'program',
+    src: `${base}mockups/screen-1-program.jpg`,
     label: 'Down to the week.',
-    caption: 'Phase, intensity, weekly macros, and what your coach planned for the block.'
+    caption: 'Phase, weekly load, and every session your coach planned, laid out block by block across the whole build.'
   },
   {
     key: 'today',
-    src: `${base}mockups/mockup-2.png`,
+    src: `${base}mockups/screen-2-home.jpg`,
     label: 'One calm view, every morning.',
-    caption: 'Today’s session, your recovery score, and the fuel you need, pulled together before you start the day.'
+    caption: 'Today’s sessions, your fueling, and what your coach assigned, pulled together before you start the day.'
   },
   {
-    key: 'nutrition',
-    src: `${base}mockups/mockup-3.png`,
+    key: 'fuel',
+    src: `${base}mockups/screen-3-fuel.jpg`,
     label: 'What fueled the work.',
-    caption: 'Daily energy balance, macros, electrolytes, and hydration, read against today’s burn.'
+    caption: 'Energy balance, hydration, and per-session fueling, read against what you actually burned today.'
   },
   {
-    key: 'body-metrics',
-    src: `${base}mockups/mockup-4.png`,
+    key: 'body',
+    src: `${base}mockups/screen-4-body.jpg`,
     label: 'How you woke up.',
-    caption: 'HRV, resting heart rate, sleep, VO2, body weight, every readiness number pulled in from whichever wearable you already wear.'
+    caption: 'Recovery, sleep, resting heart rate, and training load, pulled in from whichever wearable you already wear.'
   },
   {
     key: 'workout',
-    src: `${base}mockups/mockup-5.png`,
+    src: `${base}mockups/screen-5-workout.jpg`,
     label: 'Every session, in detail.',
-    caption: 'Step-by-step intervals, target zones, and TSS, from your coach’s plan or built on the fly.'
+    caption: 'Coach notes, target zones, structure, and TSS, so you know exactly how the session should feel.'
   },
   {
-    key: 'calendar',
-    src: `${base}mockups/mockup-6.png`,
-    label: 'The season at a glance.',
-    caption: 'Week TSS, volume, distance, and the full training calendar, every session in one place.'
+    key: 'season',
+    src: `${base}mockups/screen-6-season.jpg`,
+    label: 'The whole season at a glance.',
+    caption: 'Program progress, weeks to race, and training volume across every phase from base to taper.'
+  },
+  {
+    key: 'coach',
+    src: `${base}mockups/screen-7-ai-coach.jpg`,
+    label: 'A coach that reads your data.',
+    caption: 'Ask about training, fueling, or the week ahead, and get answers grounded in your real load and recovery.'
+  },
+  {
+    key: 'fuel-model',
+    src: `${base}mockups/screen-8-fuel-model.jpg`,
+    label: 'Dialed in from your best days.',
+    caption: 'Hona learns the carb, fluid, and sodium rates that held your power through the final third of your hardest sessions.'
   }
 ]
 
 // How far the user must swipe (in pixels) before we treat it as a directional
 // swipe rather than a tap or wobble. 50 is comfortable on most touchscreens.
 const SWIPE_THRESHOLD = 50
+
+// Coded iPhone frame. The screenshot fills the screen (object-cover, top
+// aligned); the black bezel, rounded screen, and Dynamic Island are drawn
+// here so every screen presents identically regardless of the raw capture.
+function DeviceFrame({ src, alt, imgKey }) {
+  return (
+    <div className="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+      <div className="relative rounded-[2.9rem] bg-ink-900 p-[0.7rem] ring-1 ring-black/20 shadow-[0_30px_60px_-24px_rgba(20,20,18,0.45)]">
+        {/* Screen. aspect matches the native 1206x2622 capture, so no cropping. */}
+        <div className="relative overflow-hidden rounded-[2.25rem] bg-paper-100 aspect-[1206/2622]">
+          <img
+            key={imgKey}
+            src={src}
+            alt={alt}
+            loading="lazy"
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none"
+          />
+          {/* Dynamic Island */}
+          <div className="absolute top-[0.6rem] left-1/2 -translate-x-1/2 h-[1.6rem] w-[5.5rem] rounded-full bg-black" />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function ScreenshotGallery() {
   const [i, setI] = useState(0)
@@ -83,15 +122,13 @@ export default function ScreenshotGallery() {
             <span className="eyebrow">Screens</span>
             <h2 className="section-title mt-4">A look at the app.</h2>
             <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
-              Real renders from the iOS build. More dropping in as the app comes together.
+              Real screens from the current iOS build. More dropping in as the app comes together.
             </p>
           </div>
           <div className="pill"><ImageIcon size={14} /> <span>{screens.length} so far</span></div>
         </div>
 
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-center">
-          {/* Transparent PNG floats on the section's paper background. No card framing
-              because the mockups already include their own device/shadow. */}
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
           <div
             className="relative select-none touch-pan-y"
             onTouchStart={onTouchStart}
@@ -101,16 +138,7 @@ export default function ScreenshotGallery() {
             role="region"
             aria-label="Screen carousel. Swipe left or right to navigate"
           >
-            <div className="aspect-square flex items-center justify-center">
-              <img
-                key={s.key}
-                src={s.src}
-                alt={s.label}
-                loading="lazy"
-                draggable={false}
-                className="w-full h-full object-contain object-center pointer-events-none"
-              />
-            </div>
+            <DeviceFrame src={s.src} alt={s.label} imgKey={s.key} />
           </div>
 
           <div>
@@ -123,7 +151,7 @@ export default function ScreenshotGallery() {
             <div className="mt-10 flex items-center gap-3">
               <button onClick={prev} aria-label="Previous screen" className="btn-ghost px-3 py-2"><ChevronLeft size={18} /></button>
               <button onClick={next} aria-label="Next screen"    className="btn-ghost px-3 py-2"><ChevronRight size={18} /></button>
-              <div className="ml-4 flex gap-2">
+              <div className="ml-4 flex gap-2 flex-wrap">
                 {screens.map((sc, idx) => (
                   <button
                     key={sc.key}

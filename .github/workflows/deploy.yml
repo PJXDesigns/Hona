@@ -1,4 +1,4 @@
-name: Deploy Anvil site to GitHub Pages
+name: Deploy Hona site to GitHub Pages
 
 on:
   push:
