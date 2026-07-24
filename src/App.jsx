@@ -1,7 +1,12 @@
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import WhoItsFor from './components/WhoItsFor.jsx'
+import Problem from './components/Problem.jsx'
+import HowItWorks from './components/HowItWorks.jsx'
+import Spotlight from './components/Spotlight.jsx'
+import InsideApp from './components/InsideApp.jsx'
 import ScreenshotGallery from './components/ScreenshotGallery.jsx'
+import NotThis from './components/NotThis.jsx'
+import Privacy from './components/Privacy.jsx'
 import CTA from './components/CTA.jsx'
 import Footer from './components/Footer.jsx'
 
@@ -16,17 +21,22 @@ export const BRAND = {
   appUrl: 'https://hona-31051.web.app'
 }
 
+// Page skeleton: editorial bands alternating paper / tinted surface, with one
+// dark spotlight in the middle for the core product moment, and a centered
+// serif close. Each band leads with the same unit: eyebrow, serif lead, body.
 export default function App() {
   return (
     <div className="min-h-screen relative">
-      <div className="pointer-events-none absolute inset-0 grid-bg opacity-[0.35]" />
       <Nav brand={BRAND} />
       <main className="relative">
-        {/* Video hero with the layered "Hona / Sharpen the athlete" text */}
         <Hero brand={BRAND} />
-        <WhoItsFor />
-        {/* Rotato mockup gallery — the headline visual moment for the app */}
+        <Problem />
+        <HowItWorks />
+        <Spotlight />
+        <InsideApp />
         <ScreenshotGallery />
+        <NotThis />
+        <Privacy />
         <CTA brand={BRAND} />
       </main>
       <Footer brand={BRAND} />

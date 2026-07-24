@@ -52,13 +52,14 @@ export default function CTA({ brand }) {
   }
 
   return (
-    <section id="beta" className="relative py-24 hairline">
-      <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-        <span className="eyebrow">TestFlight beta · Free</span>
-        <h2 className="section-title mt-4 max-w-2xl mx-auto">
-          Try the <span className="text-accent-500">private beta.</span>
+    <section id="beta" className="relative py-28 md:py-32 text-center">
+      <div className="max-w-4xl mx-auto px-6 md:px-8">
+        <span className="eyebrow justify-center">Start now · TestFlight beta</span>
+        {/* The serif close: the one full-serif headline on the page. */}
+        <h2 className="mt-6 font-serif font-normal text-ink-900 tracking-verytight leading-[1.06] text-4xl sm:text-5xl md:text-6xl max-w-[16ch] mx-auto">
+          Train hard. Recover honestly. <span className="italic text-accent-500">Sharpen the athlete.</span>
         </h2>
-        <p className="mt-6 text-lg md:text-xl text-ink-500 max-w-xl mx-auto leading-relaxed">
+        <p className="mt-7 text-lg text-ink-500 max-w-xl mx-auto leading-relaxed">
           Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
           Build notes only. No spam, no upsells.
         </p>

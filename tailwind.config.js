@@ -76,11 +76,12 @@ export default {
       },
 
       fontFamily: {
-        // Single typeface — Inter — for the whole site. Restrained, geometric,
-        // works in body text and in numbers. Reference brands (Linear, Stripe,
-        // Things 3, Arc) all use Inter or a near-equivalent.
+        // Inter carries the site; Lora appears ONLY inside section leads and
+        // single accent words (the editorial serif moment). Body copy, nav,
+        // buttons, and numbers stay Inter.
         sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Helvetica Neue"', 'system-ui', 'sans-serif'],
         display: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        serif: ['"Lora"', 'Georgia', '"Times New Roman"', 'serif'],
         mono: ['ui-monospace', '"JetBrains Mono"', '"SF Mono"', 'SFMono-Regular', 'Menlo', 'monospace']
       },
 

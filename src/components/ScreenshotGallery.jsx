@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
+import DeviceFrame from './DeviceFrame.jsx'
 
 // Full-screen iOS captures shown inside a coded device frame (see DeviceFrame
 // below). Source images live in /public/mockups/ as screen-N-*.jpg at native
@@ -62,31 +63,6 @@ const screens = [
 // swipe rather than a tap or wobble. 50 is comfortable on most touchscreens.
 const SWIPE_THRESHOLD = 50
 
-// Coded iPhone frame. The screenshot fills the screen (object-cover, top
-// aligned); the black bezel, rounded screen, and Dynamic Island are drawn
-// here so every screen presents identically regardless of the raw capture.
-function DeviceFrame({ src, alt, imgKey }) {
-  return (
-    <div className="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
-      <div className="relative rounded-[2.9rem] bg-ink-900 p-[0.7rem] ring-1 ring-black/20 shadow-[0_30px_60px_-24px_rgba(20,20,18,0.45)]">
-        {/* Screen. aspect matches the native 1206x2622 capture, so no cropping. */}
-        <div className="relative overflow-hidden rounded-[2.25rem] bg-paper-100 aspect-[1206/2622]">
-          <img
-            key={imgKey}
-            src={src}
-            alt={alt}
-            loading="lazy"
-            draggable={false}
-            className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none"
-          />
-          {/* Dynamic Island */}
-          <div className="absolute top-[0.6rem] left-1/2 -translate-x-1/2 h-[1.6rem] w-[5.5rem] rounded-full bg-black" />
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function ScreenshotGallery() {
   const [i, setI] = useState(0)
   const next = () => setI(v => (v + 1) % screens.length)
@@ -115,14 +91,16 @@ export default function ScreenshotGallery() {
   }
 
   return (
-    <section id="screens" className="relative py-24 md:py-32 hairline">
-      <div className="max-w-7xl mx-auto px-6 md:px-8">
+    <section id="screens" className="band">
+      <div className="wrap">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
           <div className="max-w-2xl">
-            <span className="eyebrow">Screens</span>
-            <h2 className="section-title mt-4">A look at the app.</h2>
+            <span className="eyebrow">The screens</span>
+            <h2 className="lead mt-5">
+              Real screens, <span className="lead-em">real data.</span>
+            </h2>
             <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
-              Real screens from the current iOS build. More dropping in as the app comes together.
+              Straight from the current iOS build. More dropping in as the app comes together.
             </p>
           </div>
           <div className="pill"><ImageIcon size={14} /> <span>{screens.length} so far</span></div>
