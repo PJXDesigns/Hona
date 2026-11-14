@@ -71,6 +71,13 @@
       margin: 32px 0; padding: 18px 22px; border-left: 3px solid var(--accent);
       background: var(--paper-50); border-radius: 0 12px 12px 0;
     }
+    .table-wrap { overflow-x: auto; margin: 0 0 16px; }
+    table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.5; }
+    th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--paper-300); vertical-align: top; }
+    th {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-400);
+    }
     .callout p:last-child { margin-bottom: 0; }
     footer.site {
       max-width: 880px; margin: 0 auto; padding: 24px 28px 48px;
@@ -103,7 +110,7 @@
   <main>
     <span class="eyebrow">Legal</span>
     <h1>Privacy Policy</h1>
-    <p class="effective">Last updated May 31, 2026 · Effective May 31, 2026</p>
+    <p class="effective">Last updated November 14, 2026 · Effective November 14, 2026</p>
 
     <p>This Privacy Policy explains how Hona (“Hona,” “we,” “us,” or “our”) collects, uses, stores, and shares information when you use the Hona iOS app, its Apple Watch companion, the optional Hona Garmin Connect IQ data field, and related services (together, the “Service”).</p>
 
@@ -136,6 +143,7 @@
           <li><strong>Oura:</strong> sleep, heart-rate variability, heart rate, and readiness data.</li>
           <li><strong>Strava:</strong> your activities, including duration, distance, and GPS routes/maps.</li>
           <li><strong>Whoop:</strong> recovery, daily cycle, and sleep data.</li>
+          <li><strong>Garmin:</strong> If you connect your Garmin account, Hona receives from Garmin Connect, with your permission: your runs and other activities (type, start time, duration, distance, pace, heart rate, cadence, elevation and route), and your daily summaries, sleep, heart rate variability and resting heart rate. If you use the Hona data field on a Garmin watch, the watch also sends each run to Hona directly. You choose which kinds of data to share on Garmin's own permission screen, and you can change that in Garmin Connect at any time.</li>
         </ul>
       </li>
       <li><strong>Manually entered data:</strong> workouts, nutrition and food logs, body weight, training notes, race and goal information.</li>
@@ -159,6 +167,9 @@
     <p>We use the information above to:</p>
     <ul>
       <li>Provide the Service: compute your readiness, training load, recovery trends, and nutrition targets, and display your dashboard.</li>
+      <li>To mark your planned runs as done, show each run against its plan, and track your weekly mileage, using runs from Garmin and your other connected sources.</li>
+      <li>To score your daily Recovery from your sleep, heart rate variability and resting heart rate.</li>
+      <li>To send your planned runs to your Garmin Connect calendar and watch, when you ask Hona to.</li>
       <li>Maintain your account and authenticate you.</li>
       <li>Enable the coach–athlete relationship: if you link to a coach (or, as a coach, accept an athlete), share the relevant training, recovery, activity, and message data between you.</li>
       <li>Generate AI-assisted insights and coaching suggestions (see Section 5).</li>
@@ -191,11 +202,24 @@
         </ul>
       </li>
       <li><strong>Data sources you authorize:</strong> Oura, Strava, and Whoop. When you connect these, you are subject to their own privacy policies, and you can disconnect them at any time in Hona.</li>
+      <li><strong>Garmin:</strong> When you connect Garmin, Hona receives data from Garmin Connect as described in Section 2.2, and, when you ask, sends your planned runs to Garmin Connect. Data stored in Garmin Connect is covered by Garmin's own privacy policy. We do not sell data from Garmin or share it with advertisers or data brokers.</li>
       <li><strong>Food databases:</strong> when you search for or scan a food, the search term or barcode is sent to the <strong>USDA FoodData Central</strong> and <strong>Open Food Facts</strong> services. These requests contain food queries, not your personal or health data.</li>
       <li><strong>Legal and safety:</strong> we may disclose information if required by law, or to protect the rights, safety, or property of users or the public.</li>
       <li><strong>Business transfers:</strong> if Hona or Peter Jones Experience Design LLC is involved in a merger, acquisition, or asset sale, your information may be transferred, subject to this policy.</li>
     </ul>
-    <p>We do not sell your personal information and do not share it with advertisers.</p>
+    <p><strong>Who receives or processes your data:</strong></p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Who</th><th>What for</th><th>What they receive</th></tr></thead>
+      <tbody>
+        <tr><td>Google (Firebase, Cloud Firestore, Cloud Functions)</td><td>Hosting, database, sign-in and server processing</td><td>Your account and all data you sync to Hona</td></tr>
+        <tr><td>Anthropic</td><td>AI features (Section 5)</td><td>What Section 5 lists</td></tr>
+        <tr><td>Garmin</td><td>Connected source, and receiving your planned runs</td><td>Your planned runs, when you send them</td></tr>
+        <tr><td>Strava, Oura, Whoop, Wahoo</td><td>Connected sources you choose</td><td>Only the sign-in needed to read your data</td></tr>
+        <tr><td>Apple (HealthKit)</td><td>Reading and writing Health data on your iPhone</td><td>Nothing from Hona; Health data is read on your iPhone</td></tr>
+        <tr><td>USDA FoodData Central, Open Food Facts</td><td>Food search</td><td>Your search words or barcode, with no personal data</td></tr>
+      </tbody>
+    </table></div>
+    <p>We do not sell your personal information, and no one on this list may sell it or use it for advertising.</p>
 
     <h2>7. Apple Health (HealthKit) data</h2>
     <div class="callout">
@@ -216,9 +240,18 @@
     </ul>
     <p>When you request account deletion, we remove your live account data from our cloud database (Firebase / Cloud Firestore) within <strong>30 days</strong>. Encrypted copies may persist in our cloud provider's automated, rolling backups for up to an additional <strong>90 days</strong> before they age out; during that window the data is inaccessible to us in normal operations and is overwritten as backups cycle. We may retain a minimal set of records — for example, abuse-prevention or security logs and any documentation we are required to keep for tax or legal compliance — for the period the law requires, stored separately from live account data and not used to personalize the Service.</p>
     <p>Disconnecting a third-party service (Oura, Strava, Whoop) removes its access tokens from your device immediately. Any data we already received from that service before you disconnected remains on your account until you delete it or close your account.</p>
+    <p>You can disconnect Garmin at any time in Profile, Connections, or by removing Hona in Garmin Connect. Either way Hona stops receiving new data from Garmin. Data already received stays in your account until you delete it or your account.</p>
 
     <h2>9. Your privacy rights</h2>
     <p>Depending on where you live, you may have rights to access, correct, delete, or export your personal data, to object to or restrict certain processing, and to withdraw consent. This includes rights under the EU/UK GDPR and the California Consumer Privacy Act (CCPA/CPRA). To exercise any of these rights, contact <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>. We will not discriminate against you for exercising them.</p>
+    <p><strong>How to use these rights in the app:</strong></p>
+    <ul>
+      <li><strong>See and correct your data:</strong> your profile, plan, runs, recovery and meals are in the app, and you can edit your profile and your own logs there.</li>
+      <li><strong>Export your data:</strong> Profile, Account and security, Export.</li>
+      <li><strong>Delete your account and data:</strong> Profile, Account and security, Delete account.</li>
+      <li><strong>Withdraw consent for a data source:</strong> disconnect it in Profile, Connections. For Apple Health, change Hona's access in the Health app or in iOS Settings, Privacy and Security, Health.</li>
+    </ul>
+    <p>You can also email <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>. We answer within 30 days. If you are in the EEA or the UK and are not satisfied with our answer, you can complain to your local data protection authority.</p>
     <p>If you are in the EEA or UK, our legal bases for processing are your <strong>consent</strong> (for health data and connected services), <strong>performance of a contract</strong> (to provide the Service), and our <strong>legitimate interests</strong> (to secure and improve the Service).</p>
 
     <h2>10. International data transfers</h2>
