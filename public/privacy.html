@@ -186,10 +186,26 @@
     </ul>
     <p>No method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
 
-    <h2>5. AI-assisted features</h2>
-    <p>Hona uses <strong>Anthropic’s Claude</strong> models to generate training insights and nutrition suggestions. When you use these features, a set of <strong>de-identified training and biometric numbers</strong> (for example your readiness score, heart-rate variability, resting heart rate, sleep hours, training load, and your race name and training phase) is sent to Anthropic to produce the insight.</p>
-    <p>Some of these values (for example, heart-rate variability, resting heart rate, sleep duration, and workout summaries) may originate from <strong>Apple HealthKit</strong>. When they do, they leave your device only in this de-identified, numeric form — Anthropic does not receive your name, email, account identifier, location, exact birthdate, or raw GPS, route, or sample-level HealthKit data.</p>
-    <p>Based on the current implementation, this data <strong>does not include</strong> your name, email address, location, exact birthdate, or raw GPS data.</p>
+    <h2>5. AI-assisted features (AI transparency statement)</h2>
+    <p>Some Hona features use artificial intelligence: building a training plan, the coach you can ask questions, and short daily notes about your training and recovery. These features use Claude models from Anthropic, PBC, through Anthropic's commercial API.</p>
+    <h3>Your consent</h3>
+    <p>Hona asks for your permission before any of your data is sent to these features. You can turn them off at any time in [Profile, AI features]. While they are off, none of your data is sent to Anthropic, and the rest of Hona keeps working.</p>
+    <h3>What is sent</h3>
+    <p>When you use an AI feature, Hona sends only what that feature needs to answer you:</p>
+    <ul>
+      <li>your message to the coach, and the earlier messages in that conversation;</li>
+      <li>your training plan, and a summary of your recent runs (date, distance, time, pace and heart rate), including runs from Garmin and your other connected sources;</li>
+      <li>your recent Recovery, sleep, heart rate variability and resting heart rate;</li>
+      <li>meals and fuel you have logged, and your daily nutrition targets;</li>
+      <li>your age, sex, height, weight and threshold pace.</li>
+    </ul>
+    <p>Hona does not send your name, email address, account ID, exact date of birth, location or GPS routes, or raw second-by-second sensor data.</p>
+    <h3>How Anthropic handles it</h3>
+    <p>Anthropic processes this data only to return a response to Hona, under its Commercial Terms and Data Processing Addendum, which do not allow Anthropic to train its models on it. Anthropic deletes it within 30 days. The one exception is content Anthropic's automated safety systems flag as breaking its Usage Policy, which it may keep for up to 2 years.</p>
+    <h3>No AI training on Garmin data</h3>
+    <p>Data from Garmin, and anything derived from it, is never used to train, evaluate or improve any AI model, whether Hona's, Anthropic's or anyone else's.</p>
+    <h3>AI answers can be wrong</h3>
+    <p>AI responses are suggestions about your training, not medical advice. Check with a doctor about pain, illness or injury.</p>
 
     <h2>6. How we share information</h2>
     <p>We share information only as described here:</p>
@@ -212,7 +228,7 @@
       <thead><tr><th>Who</th><th>What for</th><th>What they receive</th></tr></thead>
       <tbody>
         <tr><td>Google (Firebase, Cloud Firestore, Cloud Functions)</td><td>Hosting, database, sign-in and server processing</td><td>Your account and all data you sync to Hona</td></tr>
-        <tr><td>Anthropic</td><td>AI features (Section 5)</td><td>What Section 5 lists</td></tr>
+        <tr><td>Anthropic</td><td>AI features (Section 5), only with your consent</td><td>What Section 5 lists</td></tr>
         <tr><td>Garmin</td><td>Connected source, and receiving your planned runs</td><td>Your planned runs, when you send them</td></tr>
         <tr><td>Strava, Oura, Whoop, Wahoo</td><td>Connected sources you choose</td><td>Only the sign-in needed to read your data</td></tr>
         <tr><td>Apple (HealthKit)</td><td>Reading and writing Health data on your iPhone</td><td>Nothing from Hona; Health data is read on your iPhone</td></tr>
@@ -250,6 +266,7 @@
       <li><strong>Export your data:</strong> Profile, Account and security, Export.</li>
       <li><strong>Delete your account and data:</strong> Profile, Account and security, Delete account.</li>
       <li><strong>Withdraw consent for a data source:</strong> disconnect it in Profile, Connections. For Apple Health, change Hona's access in the Health app or in iOS Settings, Privacy and Security, Health.</li>
+      <li><strong>Withdraw consent for AI features:</strong> turn them off in [Profile, AI features].</li>
     </ul>
     <p>You can also email <a href="mailto:peter@pjxdesigns.com">peter@pjxdesigns.com</a>. We answer within 30 days. If you are in the EEA or the UK and are not satisfied with our answer, you can complain to your local data protection authority.</p>
     <p>If you are in the EEA or UK, our legal bases for processing are your <strong>consent</strong> (for health data and connected services), <strong>performance of a contract</strong> (to provide the Service), and our <strong>legitimate interests</strong> (to secure and improve the Service).</p>
