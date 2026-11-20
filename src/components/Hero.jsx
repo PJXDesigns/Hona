@@ -2,6 +2,19 @@ import { ArrowRight, Play } from 'lucide-react'
 
 const base = import.meta.env.BASE_URL
 
+// Browsers color-manage video slightly differently from the page, so the
+// baked-in paper background can show as a faint box. Fading the outer edges
+// hides it; the phone itself sits well inside the faded margin.
+const edgeFade =
+  'linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), ' +
+  'linear-gradient(to bottom, transparent, #000 3%, #000 97%, transparent)'
+const videoMask = {
+  WebkitMaskImage: edgeFade,
+  WebkitMaskComposite: 'source-in',
+  maskImage: edgeFade,
+  maskComposite: 'intersect'
+}
+
 // Narro-style hero: two-column editorial grid. Left, an eyebrow, a headline
 // that mixes sans, serif italic, and the single accent phrase, a short sub,
 // dual CTAs, and an honest proof line. Right, the phone video (portrait MP4
@@ -42,7 +55,8 @@ export default function Hero({ brand }) {
             </div>
           </div>
 
-          {/* Phone video column: portrait MP4 with paper-100 baked in. */}
+          {/* Phone video column: portrait MP4 with paper-100 baked in (Screeny,
+              iPhone 18 Pro, new Home UI; plays once and holds on the last frame). */}
           <div className="flex justify-center md:justify-end pointer-events-none">
             <video
               autoPlay
@@ -50,9 +64,10 @@ export default function Hero({ brand }) {
               playsInline
               preload="auto"
               aria-hidden="true"
+              style={videoMask}
               className="h-auto w-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[320px] max-h-[70vh]"
             >
-              <source src={`${base}hero.mp4`} type="video/mp4" />
+              <source src={`${base}hero-home.mp4`} type="video/mp4" />
             </video>
           </div>
 
