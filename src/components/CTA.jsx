@@ -35,7 +35,7 @@ export default function CTA({ brand }) {
       }
 
       // Formspree returns structured errors when it can.
-      let message = 'Something went wrong. Try again, or email peter@pjxdesigns.com.'
+      let message = 'Something went wrong. Try again, or email peter@hona.fitness.'
       try {
         const data = await res.json()
         if (Array.isArray(data?.errors) && data.errors.length) {
@@ -46,7 +46,7 @@ export default function CTA({ brand }) {
       setErrorMsg(message)
     } catch {
       setStatus('error')
-      setErrorMsg('Couldn’t reach the server. Check your connection and try again, or email peter@pjxdesigns.com.')
+      setErrorMsg('Couldn’t reach the server. Check your connection and try again, or email peter@hona.fitness.')
     }
   }
 
