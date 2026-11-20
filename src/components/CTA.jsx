@@ -84,9 +84,9 @@ export default function CTA({ brand }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === 'submitting'}
-                className="flex-1 h-11 bg-sunken border border-rule px-4 font-sans text-[15px] text-ink placeholder:text-ink-3 outline-none focus:border-ink transition-colors disabled:opacity-60"
+                className="w-full sm:flex-1 h-11 shrink-0 appearance-none rounded-none bg-sunken border border-rule px-4 font-sans text-[16px] text-ink placeholder:text-ink-3 outline-none focus:border-ink transition-colors disabled:opacity-60"
               />
-              <button type="submit" disabled={status === 'submitting'} className="btn whitespace-nowrap">
+              <button type="submit" disabled={status === 'submitting'} className="btn shrink-0 whitespace-nowrap">
                 {status === 'submitting' ? 'Sending' : 'Request invite'}
               </button>
             </form>
