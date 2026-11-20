@@ -1,9 +1,7 @@
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import HowItWorks from './components/HowItWorks.jsx'
-import Spotlight from './components/Spotlight.jsx'
+import Morning from './components/Morning.jsx'
 import InsideApp from './components/InsideApp.jsx'
-import ScreenshotGallery from './components/ScreenshotGallery.jsx'
 import Privacy from './components/Privacy.jsx'
 import CTA from './components/CTA.jsx'
 import Footer from './components/Footer.jsx'
@@ -28,10 +26,8 @@ export default function App() {
       <Nav brand={BRAND} />
       <main className="relative">
         <Hero brand={BRAND} />
-        <HowItWorks />
-        <Spotlight />
+        <Morning />
         <InsideApp />
-        <ScreenshotGallery />
         <Privacy />
         <CTA brand={BRAND} />
       </main>

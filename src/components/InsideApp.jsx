@@ -38,19 +38,27 @@ const tabs = [
 export default function InsideApp() {
   return (
     <section id="inside" className="band">
-      <div className="wrap">
-        <div className="label">Inside Hona</div>
-        <h2 className="mt-5 title-section">Six tabs, each with one job.</h2>
+      <div className="wrap grid lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-24">
+        <div>
+          <div className="label">Inside Hona</div>
+          <h2 className="mt-5 title-section">Six tabs, each with one job.</h2>
+          <p className="mt-6 body max-w-[26rem]">
+            Home, Train, Fuel, and Body sit in the tab bar. Coach is the star beside it, on every
+            screen. Profile is your avatar.
+          </p>
+        </div>
 
-        <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="border-t border-rule">
           {tabs.map((t) => (
-            <div key={t.name} className="pt-5 border-t border-rule">
-              <h3 className="title-block">{t.name}</h3>
-              <div className="mt-1.5 label">{t.tag}</div>
-              <p className="mt-4 body-sm">{t.body}</p>
+            <div key={t.name} className="grid sm:grid-cols-[160px_1fr] gap-x-8 gap-y-2 py-6 border-b border-rule">
+              <dt>
+                <div className="title-block">{t.name}</div>
+                <div className="mt-1.5 label">{t.tag}</div>
+              </dt>
+              <dd className="body-sm">{t.body}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   )

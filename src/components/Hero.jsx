@@ -23,7 +23,7 @@ export default function Hero({ brand }) {
 
           <div>
             <div className="label">Training intelligence for athletes</div>
-            <h1 className="mt-6 font-display font-semibold text-ink text-[40px] sm:text-[52px] lg:text-[60px] leading-[1.04] tracking-[-0.03em] max-w-[14ch]">
+            <h1 className="mt-6 font-display font-semibold text-ink text-[42px] sm:text-[56px] lg:text-[72px] leading-[1.02] tracking-[-0.035em] max-w-[13ch]">
               You train a lot. Hona hands back one clear day.
             </h1>
             <p className="mt-7 body max-w-[34rem]">
@@ -33,7 +33,7 @@ export default function Hero({ brand }) {
 
             <div className="mt-9 flex flex-wrap items-center gap-7">
               <a href={brand.betaSignupUrl} className="btn">Join the beta</a>
-              <a href="#loop" className="action">See how it works</a>
+              <a href="#morning" className="action">See a morning with Hona</a>
             </div>
 
             <div className="mt-10 pt-5 border-t border-rule flex flex-wrap items-baseline gap-x-4 gap-y-1">

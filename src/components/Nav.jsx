@@ -1,12 +1,10 @@
 // Top bar. The brand is the HONA wordmark (the design system has no drawn
 // mark). Solid paper with one hairline below: no blur, no transparency.
-// Section links in page order; NotThis and Privacy read in flow and don't
-// earn a slot.
+// Section links in page order.
 const links = [
-  { href: '#loop',    label: 'How it works' },
-  { href: '#core',    label: 'Recovery' },
+  { href: '#morning', label: 'A morning with Hona' },
   { href: '#inside',  label: 'Inside Hona' },
-  { href: '#screens', label: 'Screens' }
+  { href: '#privacy', label: 'Privacy' }
 ]
 
 export default function Nav({ brand }) {
