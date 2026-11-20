@@ -3,7 +3,6 @@
 // Section links in page order; NotThis and Privacy read in flow and don't
 // earn a slot.
 const links = [
-  { href: '#problem', label: 'The problem' },
   { href: '#loop',    label: 'How it works' },
   { href: '#core',    label: 'Recovery' },
   { href: '#inside',  label: 'Inside Hona' },

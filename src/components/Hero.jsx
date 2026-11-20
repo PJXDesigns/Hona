@@ -38,7 +38,7 @@ export default function Hero({ brand }) {
 
             <div className="mt-10 pt-5 border-t border-rule flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <span className="label text-sage">TestFlight</span>
-              <span className="body-sm">Now in private beta on iPhone. Free while it lasts.</span>
+              <span className="body-sm">Now in private beta on iPhone.</span>
             </div>
           </div>
 

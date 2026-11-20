@@ -1,6 +1,5 @@
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
-import Problem from './components/Problem.jsx'
 import HowItWorks from './components/HowItWorks.jsx'
 import Spotlight from './components/Spotlight.jsx'
 import InsideApp from './components/InsideApp.jsx'
@@ -29,7 +28,6 @@ export default function App() {
       <Nav brand={BRAND} />
       <main className="relative">
         <Hero brand={BRAND} />
-        <Problem />
         <HowItWorks />
         <Spotlight />
         <InsideApp />

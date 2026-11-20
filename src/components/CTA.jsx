@@ -57,7 +57,7 @@ export default function CTA({ brand }) {
           <div className="label">TestFlight beta</div>
           <h2 className="mt-5 title-section">Sharpen the athlete.</h2>
           <p className="mt-6 body max-w-[32rem]">
-            Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
+            Drop your email to get a TestFlight invite when the next build ships.
             Build notes only. No spam, no upsells.
           </p>
         </div>
