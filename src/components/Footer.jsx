@@ -4,7 +4,7 @@ const termsUrl         = `${base}terms.html`
 const privacyUrl       = `${base}privacy.html`
 const accessibilityUrl = `${base}accessibility.html`
 
-// Footer: the wordmark and pronunciation, contact and source, then legal.
+// Footer: the wordmark and pronunciation, contact, then legal.
 export default function Footer({ brand }) {
   return (
     <footer className="border-t border-rule">
@@ -18,7 +18,6 @@ export default function Footer({ brand }) {
           </div>
           <div className="flex items-center gap-7 font-sans text-[13px] text-ink-3">
             <a href={`mailto:${brand.contactEmail}`} className="hover:text-ink transition-colors">Contact</a>
-            <a href="https://github.com/PJXDesigns/Hona" className="hover:text-ink transition-colors">Source</a>
           </div>
         </div>
 
