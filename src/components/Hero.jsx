@@ -56,7 +56,8 @@ export default function Hero({ brand }) {
           </div>
 
           {/* Phone video column: portrait MP4 with paper-100 baked in (Screeny,
-              iPhone 18 Pro, new Home UI; plays once and holds on the last frame). */}
+              iPhone 18 Pro, a recording of the new Home with its opening heartbeat;
+              turns in from the left while zooming, plays once, holds on the last frame). */}
           <div className="flex justify-center md:justify-end pointer-events-none">
             <video
               autoPlay
