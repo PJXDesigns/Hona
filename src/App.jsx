@@ -5,7 +5,6 @@ import HowItWorks from './components/HowItWorks.jsx'
 import Spotlight from './components/Spotlight.jsx'
 import InsideApp from './components/InsideApp.jsx'
 import ScreenshotGallery from './components/ScreenshotGallery.jsx'
-import NotThis from './components/NotThis.jsx'
 import Privacy from './components/Privacy.jsx'
 import CTA from './components/CTA.jsx'
 import Footer from './components/Footer.jsx'
@@ -35,7 +34,6 @@ export default function App() {
         <Spotlight />
         <InsideApp />
         <ScreenshotGallery />
-        <NotThis />
         <Privacy />
         <CTA brand={BRAND} />
       </main>
