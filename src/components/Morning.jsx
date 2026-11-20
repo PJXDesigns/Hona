@@ -74,9 +74,9 @@ function Stats({ items }) {
       {items.map((s) => (
         <div key={s.name} className="pt-4 pr-4">
           <dt className="unit uppercase">{s.name}</dt>
-          <dd className="mt-2 font-display font-semibold text-ink text-[22px] leading-none tracking-[-0.4px]">
+          <dd className="mt-2 font-display font-semibold text-ink text-[22px] leading-none tracking-[-0.4px] whitespace-nowrap">
             {s.value}
-            {s.unit && <span className="ml-1 unit">{s.unit}</span>}
+            {s.unit && <span className="block mt-1.5 sm:inline sm:mt-0 sm:ml-1 unit">{s.unit}</span>}
           </dd>
         </div>
       ))}
@@ -184,8 +184,9 @@ export default function Morning() {
                   {s.stats && <Stats items={s.stats} />}
                   {s.recovery && <RecoveryRead />}
                   {/* Small screens: the step's own screen, inline, unless the
-                      step before already showed it. */}
-                  {(i === 0 || steps[i - 1].screen !== s.screen) && (
+                      screen just above already showed it (the hero video is
+                      Home, so the first step skips it too). */}
+                  {s.screen !== (i === 0 ? 'home' : steps[i - 1].screen) && (
                     <div className="mt-10 max-w-[240px] lg:hidden">
                       <Phone screen={s.screen} />
                     </div>
