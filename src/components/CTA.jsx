@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Mail, Check, ArrowRight, Loader2, AlertCircle } from 'lucide-react'
 
 // Formspree endpoint. Submissions are forwarded to peter@pjxdesigns.com.
 // To swap providers later, replace this URL.
@@ -52,33 +51,32 @@ export default function CTA({ brand }) {
   }
 
   return (
-    <section id="beta" className="relative py-28 md:py-32 text-center">
-      <div className="max-w-4xl mx-auto px-6 md:px-8">
-        <span className="eyebrow justify-center">Start now · TestFlight beta</span>
-        {/* The serif close: the one full-serif headline on the page. */}
-        <h2 className="mt-6 font-serif font-normal text-ink-900 tracking-verytight leading-[1.06] text-4xl sm:text-5xl md:text-6xl max-w-[16ch] mx-auto">
-          Train hard. Recover honestly. <span className="italic text-accent-500">Sharpen the athlete.</span>
-        </h2>
-        <p className="mt-7 text-lg text-ink-500 max-w-xl mx-auto leading-relaxed">
-          Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
-          Build notes only. No spam, no upsells.
-        </p>
+    <section id="beta" className="band">
+      <div className="wrap grid md:grid-cols-2 gap-12 md:gap-16 items-end">
+        <div>
+          <div className="label">TestFlight beta</div>
+          <h2 className="mt-5 title-section">Sharpen the athlete.</h2>
+          <p className="mt-6 body max-w-[32rem]">
+            Drop your email to get a TestFlight invite when the next build ships. Free while Hona is in beta.
+            Build notes only. No spam, no upsells.
+          </p>
+        </div>
 
-        {status !== 'success' ? (
-          <form onSubmit={onSubmit} className="mt-10 flex flex-col sm:flex-row gap-3 max-w-md mx-auto" noValidate>
-            {/* Honeypot: bots fill this, humans never see it. Formspree rejects submissions that include a value. */}
-            <input
-              type="text"
-              name="_gotcha"
-              tabIndex={-1}
-              autoComplete="off"
-              aria-hidden="true"
-              className="hidden"
-            />
-
-            <div className="flex-1 relative">
-              <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-300" />
+        <div>
+          {status !== 'success' ? (
+            <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3" noValidate>
+              {/* Honeypot: bots fill this, humans never see it. Formspree rejects submissions that include a value. */}
               <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+              <label htmlFor="beta-email" className="sr-only">Email</label>
+              <input
+                id="beta-email"
                 type="email"
                 name="email"
                 required
@@ -86,27 +84,22 @@ export default function CTA({ brand }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === 'submitting'}
-                className="w-full rounded-full bg-paper-50 border border-paper-400 px-11 py-3 text-sm text-ink-900 outline-none focus:border-accent-500 transition disabled:opacity-60"
+                className="flex-1 h-11 bg-sunken border border-rule px-4 font-sans text-[15px] text-ink placeholder:text-ink-3 outline-none focus:border-ink transition-colors disabled:opacity-60"
               />
-            </div>
-            <button type="submit" disabled={status === 'submitting'} className="btn-primary whitespace-nowrap disabled:opacity-70">
-              {status === 'submitting'
-                ? <><Loader2 size={16} className="animate-spin" /> Sending</>
-                : <>Request invite <ArrowRight size={16} /></>}
-            </button>
-          </form>
-        ) : (
-          <div className="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-accent-50 border border-accent-200 text-accent-700">
-            <Check size={18} /> You’re on the list. TestFlight invite incoming when the next build ships.
-          </div>
-        )}
+              <button type="submit" disabled={status === 'submitting'} className="btn whitespace-nowrap">
+                {status === 'submitting' ? 'Sending' : 'Request invite'}
+              </button>
+            </form>
+          ) : (
+            <p className="pt-4 border-t border-rule font-display font-semibold text-[19px] text-good">
+              You’re on the list. Your TestFlight invite comes with the next build.
+            </p>
+          )}
 
-        {status === 'error' && (
-          <div className="mt-4 inline-flex items-start gap-2 px-4 py-2 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm max-w-md mx-auto text-left">
-            <AlertCircle size={16} className="mt-0.5 shrink-0" />
-            <span>{errorMsg}</span>
-          </div>
-        )}
+          {status === 'error' && (
+            <p className="mt-4 body-sm text-alert">{errorMsg}</p>
+          )}
+        </div>
       </div>
     </section>
   )

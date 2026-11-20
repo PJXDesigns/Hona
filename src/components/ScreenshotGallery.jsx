@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 import DeviceFrame from './DeviceFrame.jsx'
 
 // Full-screen iOS captures. Two kinds of entry:
@@ -83,20 +82,14 @@ export default function ScreenshotGallery() {
   return (
     <section id="screens" className="band">
       <div className="wrap">
-        <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
-          <div className="max-w-2xl">
-            <span className="eyebrow">The screens</span>
-            <h2 className="lead mt-5">
-              Real screens, <span className="lead-em">real data.</span>
-            </h2>
-            <p className="mt-6 text-lg md:text-xl text-ink-500 leading-relaxed">
-              Straight from the current iOS build. More dropping in as the app comes together.
-            </p>
-          </div>
-          <div className="pill"><ImageIcon size={14} /> <span>{screens.length} so far</span></div>
-        </div>
+        <div className="label">Screens</div>
+        <h2 className="mt-5 title-section">Straight from the current build.</h2>
+        <p className="mt-6 body max-w-[36rem]">
+          Captured from the iOS app with a sample athlete&rsquo;s data. Train, Body, and Coach join
+          them as their redesigns land.
+        </p>
 
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
+        <div className="mt-14 grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-center">
           <div
             className="relative select-none touch-pan-y"
             onTouchStart={onTouchStart}
@@ -113,7 +106,7 @@ export default function ScreenshotGallery() {
                   src={s.src}
                   alt={s.alt}
                   draggable={false}
-                  className="block w-full h-auto pointer-events-none drop-shadow-[0_30px_40px_rgba(20,20,18,0.18)]"
+                  className="block w-full h-auto pointer-events-none"
                 />
               </div>
             ) : (
@@ -122,26 +115,27 @@ export default function ScreenshotGallery() {
           </div>
 
           <div>
-            <div className="text-accent-500 text-sm font-mono uppercase tracking-widest">
-              {String(i + 1).padStart(2, '0')} / {String(screens.length).padStart(2, '0')}
+            <div className="label">
+              {String(i + 1).padStart(2, '0')} of {String(screens.length).padStart(2, '0')}
             </div>
-            <h3 className="font-display font-bold text-3xl md:text-4xl mt-2 text-ink-900 tracking-tight">{s.label}</h3>
-            <p className="text-ink-500 text-lg mt-3 leading-relaxed">{s.caption}</p>
+            <h3 className="mt-4 font-display font-semibold text-ink text-[26px] md:text-[30px] leading-[1.15] tracking-[-0.02em]">{s.label}</h3>
+            <p className="mt-4 body max-w-[30rem]">{s.caption}</p>
 
-            <div className="mt-10 flex items-center gap-3">
-              <button onClick={prev} aria-label="Previous screen" className="btn-ghost px-3 py-2"><ChevronLeft size={18} /></button>
-              <button onClick={next} aria-label="Next screen"    className="btn-ghost px-3 py-2"><ChevronRight size={18} /></button>
-              <div className="ml-4 flex gap-2 flex-wrap">
-                {screens.map((sc, idx) => (
-                  <button
-                    key={sc.key}
-                    aria-label={`Go to screen ${idx + 1}`}
-                    onClick={() => setI(idx)}
-                    className={`h-1.5 rounded-full transition-all ${idx === i ? 'w-8 bg-accent-500' : 'w-3 bg-paper-400 hover:bg-ink-300'}`}
-                  />
-                ))}
-              </div>
-              <span className="ml-auto text-xs text-ink-300 lg:hidden">Swipe to navigate</span>
+            {/* Position: a rail with the current screen's segment in sage. */}
+            <div className="mt-10 flex gap-1.5" aria-hidden="true">
+              {screens.map((sc, idx) => (
+                <button
+                  key={sc.key}
+                  tabIndex={-1}
+                  onClick={() => setI(idx)}
+                  className={`h-[3px] flex-1 transition-colors ${idx === i ? 'bg-sage' : 'bg-track hover:bg-mark'}`}
+                />
+              ))}
+            </div>
+            <div className="mt-6 flex items-center gap-7">
+              <button onClick={prev} className="action">Previous</button>
+              <button onClick={next} className="action">Next</button>
+              <span className="ml-auto unit lg:hidden">Swipe to browse</span>
             </div>
           </div>
         </div>

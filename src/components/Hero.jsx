@@ -1,5 +1,3 @@
-import { ArrowRight, Play } from 'lucide-react'
-
 const base = import.meta.env.BASE_URL
 
 // Browsers color-manage video slightly differently from the page, so the
@@ -15,49 +13,39 @@ const videoMask = {
   maskComposite: 'intersect'
 }
 
-// Narro-style hero: two-column editorial grid. Left, an eyebrow, a headline
-// that mixes sans, serif italic, and the single accent phrase, a short sub,
-// dual CTAs, and an honest proof line. Right, the phone video (portrait MP4
-// with the paper background baked in).
+// Hero: label, a plain Nunito headline, one Literata sentence, one solid
+// control and one text action, then the beta line. Right: the phone video.
 export default function Hero({ brand }) {
   return (
-    <section id="hero" className="relative overflow-hidden py-16 md:py-24">
+    <section id="top" className="pt-16 pb-20 md:pt-24 md:pb-28">
       <div className="wrap">
-        <div className="grid md:grid-cols-[1.08fr_0.92fr] gap-12 md:gap-14 items-center">
+        <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
 
-          {/* Text column */}
-          <div className="relative z-10">
-            <span className="eyebrow">Training intelligence for athletes</span>
-            <h1 className="mt-6 font-serif font-semibold tracking-verytight text-ink-900 leading-[1.06] text-4xl sm:text-5xl lg:text-[62px]">
-              You <span className="italic font-medium">train</span> a lot.
-              <br />
-              Hona hands back
-              <br />
-              <span className="text-accent-500">one clear day.</span>
+          <div>
+            <div className="label">Training intelligence for athletes</div>
+            <h1 className="mt-6 font-display font-semibold text-ink text-[40px] sm:text-[52px] lg:text-[60px] leading-[1.04] tracking-[-0.03em] max-w-[14ch]">
+              You train a lot. Hona hands back one clear day.
             </h1>
-            <p className="mt-6 text-lg text-ink-500 leading-relaxed max-w-md">
+            <p className="mt-7 body max-w-[34rem]">
               Recovery, training load, fueling, and your coach&rsquo;s plan, read together every
-              morning. One score, one session, one clear day. Not another dashboard to babysit.
+              morning. You get one score, the session that fits it, and what to eat around it.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a href={brand.betaSignupUrl} className="btn-primary">
-                Join the beta <ArrowRight size={16} />
-              </a>
-              <a href="#loop" className="inline-flex items-center gap-2 text-sm font-semibold text-ink-700 hover:text-ink-900 transition-colors">
-                <Play size={14} /> Watch the loop <span aria-hidden="true">↓</span>
-              </a>
+            <div className="mt-9 flex flex-wrap items-center gap-7">
+              <a href={brand.betaSignupUrl} className="btn">Join the beta</a>
+              <a href="#loop" className="action">See how it works</a>
             </div>
 
-            <div className="mt-7 flex items-center gap-3 text-sm text-ink-400">
-              <span className="pill">TestFlight</span>
-              <span>Now in private beta on iPhone. Free while it lasts.</span>
+            <div className="mt-10 pt-5 border-t border-rule flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <span className="label text-sage">TestFlight</span>
+              <span className="body-sm">Now in private beta on iPhone. Free while it lasts.</span>
             </div>
           </div>
 
-          {/* Phone video column: portrait MP4 with paper-100 baked in (Screeny,
-              iPhone 18 Pro, a recording of the new Home with its opening heartbeat;
-              turns in from the left while zooming, plays once, holds on the last frame). */}
+          {/* Phone video: portrait MP4 with paper baked in (Screeny, iPhone 18
+              Pro, a recording of the new Home with its opening heartbeat;
+              turns in from the left while zooming, plays once, holds on the
+              last frame). */}
           <div className="flex justify-center md:justify-end pointer-events-none">
             <video
               autoPlay
@@ -66,7 +54,7 @@ export default function Hero({ brand }) {
               preload="auto"
               aria-hidden="true"
               style={videoMask}
-              className="h-auto w-auto max-w-[240px] sm:max-w-[280px] lg:max-w-[320px] max-h-[70vh]"
+              className="h-auto w-auto max-w-[260px] sm:max-w-[300px] lg:max-w-[340px] max-h-[72vh]"
             >
               <source src={`${base}hero-home.mp4`} type="video/mp4" />
             </video>

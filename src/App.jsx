@@ -21,9 +21,9 @@ export const BRAND = {
   appUrl: 'https://hona-31051.web.app'
 }
 
-// Page skeleton: editorial bands alternating paper / tinted surface, with one
-// dark spotlight in the middle for the core product moment, and a centered
-// serif close. Each band leads with the same unit: eyebrow, serif lead, body.
+// Page skeleton, on the Hona Design System [PROD]: flat paper, sections
+// separated by whitespace and one hairline, each led by a label and a plain
+// Nunito title.
 export default function App() {
   return (
     <div className="min-h-screen relative">
