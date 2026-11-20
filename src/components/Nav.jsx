@@ -23,17 +23,7 @@ export default function Nav({ brand }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-6 shrink-0">
-          <a
-            href={brand.appUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline font-sans text-[13px] text-ink-3 hover:text-ink whitespace-nowrap transition-colors"
-          >
-            Program Builder
-          </a>
-          <a href={brand.betaSignupUrl} className="btn h-9 px-4 text-[13px]">Join the beta</a>
-        </div>
+        <a href={brand.betaSignupUrl} className="btn h-9 px-4 text-[13px] shrink-0">Join the beta</a>
       </div>
     </header>
   )
