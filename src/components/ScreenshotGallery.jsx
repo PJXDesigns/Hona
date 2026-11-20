@@ -12,6 +12,8 @@ import DeviceFrame from './DeviceFrame.jsx'
 // screens still show the previous UI until Train, Body and Coach are redone.
 // Reorder by moving entries in this array; copy lives alongside each src.
 const base = import.meta.env.BASE_URL
+// Previous-UI screens (program, body, workout, season, coach) are hidden until
+// Train, Body and Coach are redone; their images stay in /public/mockups.
 const screens = [
   {
     key: 'home',
@@ -44,36 +46,6 @@ const screens = [
     alt: 'Hona Fuel, the During window’s log: three Maurten Gel 100s and one Gel 100 CAF 100, with carbs, sodium and caffeine for each.',
     label: 'What you actually took.',
     caption: 'Each gel with its carbs, sodium, and caffeine, plus the longest gap between them, so the next long run starts from what worked.'
-  },
-  {
-    key: 'program',
-    src: `${base}mockups/screen-1-program.jpg`,
-    label: 'Down to the week.',
-    caption: 'Phase, weekly load, and every session your coach planned, laid out block by block across the whole build.'
-  },
-  {
-    key: 'body',
-    src: `${base}mockups/screen-4-body.jpg`,
-    label: 'How you woke up.',
-    caption: 'Recovery, sleep, resting heart rate, and training load, pulled in from whichever wearable you already wear.'
-  },
-  {
-    key: 'workout',
-    src: `${base}mockups/screen-5-workout.jpg`,
-    label: 'Every session, in detail.',
-    caption: 'Coach notes, target zones, structure, and TSS, so you know exactly how the session should feel.'
-  },
-  {
-    key: 'season',
-    src: `${base}mockups/screen-6-season.jpg`,
-    label: 'The whole season at a glance.',
-    caption: 'Program progress, weeks to race, and training volume across every phase from base to taper.'
-  },
-  {
-    key: 'coach',
-    src: `${base}mockups/screen-7-ai-coach.jpg`,
-    label: 'A coach that reads your data.',
-    caption: 'Ask about training, fueling, or the week ahead, and get answers grounded in your real load and recovery.'
   }
 ]
 
