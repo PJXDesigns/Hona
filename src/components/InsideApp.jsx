@@ -1,13 +1,15 @@
-import { Home, Flame, Leaf, Activity } from 'lucide-react'
+import { Home, Flame, Leaf, Activity, Sparkles, UserRound } from 'lucide-react'
 
-// "Inside Hona" band: the app's four tabs, named exactly as they appear in
-// the tab bar so the site and the product describe themselves identically.
+// "Inside Hona" band: the app's six tabs, named exactly as they appear in the
+// app (Home, Train, Fuel and Body in the tab bar, Coach behind the star,
+// Profile behind the avatar) so the site and the product describe themselves
+// identically.
 const tabs = [
   {
     icon: Home,
     name: 'Home',
     tag: 'Where you are today',
-    body: 'Today’s sessions, meals, and readiness on one timeline, read top to bottom like a day.'
+    body: 'Your Recovery score from last night’s HRV, sleep, and resting heart rate, a note from the Coach, and the next session with what to eat for it.'
   },
   {
     icon: Flame,
@@ -19,13 +21,25 @@ const tabs = [
     icon: Leaf,
     name: 'Fuel',
     tag: 'What powers the work',
-    body: 'Energy balance, hydration, and per-session fueling, learned from your strongest days.'
+    body: 'Net carbs on a 24-hour dial, with Before, During, and After windows around every session and a fuel model that learns from your runs.'
   },
   {
     icon: Activity,
     name: 'Body',
     tag: 'How you’re recovering',
     body: 'Sleep, HRV, resting heart rate, and body metrics from the wearable you already own.'
+  },
+  {
+    icon: Sparkles,
+    name: 'Coach',
+    tag: 'Ask why',
+    body: 'Ask about training, fueling, or the week ahead, and get answers that read your real recovery, load, and plan.'
+  },
+  {
+    icon: UserRound,
+    name: 'Profile',
+    tag: 'Your setup',
+    body: 'Threshold pace and zones, connected sources, notifications, and appearance, all in one place.'
   }
 ]
 
@@ -35,10 +49,10 @@ export default function InsideApp() {
       <div className="wrap">
         <span className="eyebrow">Inside Hona</span>
         <h2 className="lead mt-5">
-          Four tabs. <span className="lead-em">Nothing</span> to learn.
+          Six tabs. <span className="lead-em">Nothing</span> to learn.
         </h2>
 
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-paper-300 border border-paper-300 rounded-2xl overflow-hidden">
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-paper-300 border border-paper-300 rounded-2xl overflow-hidden">
           {tabs.map((t) => (
             <div key={t.name} className="bg-paper-100 p-6 md:p-7">
               <t.icon size={18} className="text-accent-500" aria-hidden="true" />

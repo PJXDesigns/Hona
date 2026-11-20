@@ -15,7 +15,7 @@ export default function Spotlight() {
               Your morning numbers in. <span className="lead-em">One clear day</span> out.
             </h2>
             <p className="mt-6 text-lg text-ink-100/80 leading-relaxed max-w-xl">
-              Readiness, training load, fueling, and the plan, distilled into what to do today.
+              Recovery, training load, fueling, and the plan, distilled into what to do today.
               Ask the coach why, and it answers from your real numbers, not a script.
             </p>
             <p className="mt-6 text-sm text-ink-200/60 leading-relaxed max-w-xl">
@@ -25,7 +25,7 @@ export default function Spotlight() {
 
           <DeviceFrame
             src={`${base}mockups/screen-7-ai-coach.jpg`}
-            alt="Hona's AI coach analyzing the week: training load, readiness, and a session recommendation grounded in the athlete's data."
+            alt="Hona's AI coach analyzing the week: training load, recovery, and a session recommendation grounded in the athlete's data."
             imgKey="spotlight-coach"
           />
         </div>

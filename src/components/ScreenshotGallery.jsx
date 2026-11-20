@@ -2,30 +2,54 @@ import { useState, useRef } from 'react'
 import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react'
 import DeviceFrame from './DeviceFrame.jsx'
 
-// Full-screen iOS captures shown inside a coded device frame (see DeviceFrame
-// below). Source images live in /public/mockups/ as screen-N-*.jpg at native
-// iPhone resolution (1206x2622); the frame handles bezel, corners, and the
-// Dynamic Island, so the raw screenshots just need a clean status-bar area.
+// Full-screen iOS captures. Two kinds of entry:
+//   framed: true  The image already includes its device (Screeny renders in an
+//                 iPhone 18 Pro, silver, transparent background, WebP). Shown
+//                 as is.
+//   otherwise     A raw 1206x2622 capture shown inside the coded DeviceFrame.
+// The framed screens are from the current UI (Nov 2026), captured from the
+// simulator's fixture mode with sample data (athlete "Alex"). The coded-frame
+// screens still show the previous UI until Train, Body and Coach are redone.
 // Reorder by moving entries in this array; copy lives alongside each src.
 const base = import.meta.env.BASE_URL
 const screens = [
+  {
+    key: 'home',
+    framed: true,
+    src: `${base}mockups/home.webp`,
+    alt: 'Hona Home: Recovery 89, well recovered, with last night’s HRV, sleep and training load and a note from the Coach.',
+    label: 'One clear read, every morning.',
+    caption: 'Your Recovery score from last night’s HRV, sleep, and resting heart rate, set against your training load, with a short note from the Coach on what it means for today.'
+  },
+  {
+    key: 'fuel',
+    framed: true,
+    src: `${base}mockups/fuel.webp`,
+    alt: 'Hona Fuel: a 24-hour dial showing 210 of 576 g net carbs, with Before, During and After windows around a long run.',
+    label: 'The whole day on one dial.',
+    caption: 'Net carbs against the day’s target on a 24-hour dial, with Before, During, and After windows around every session.'
+  },
+  {
+    key: 'fuel-during',
+    framed: true,
+    src: `${base}mockups/fuel-during.webp`,
+    alt: 'Hona Fuel, the During window of a long run: four gels across 07:00 to 09:10, 100 of 98 g carbs at 46 g per hour.',
+    label: 'Inside the run.',
+    caption: 'Open a window and the dial opens with it: every gel on the clock, your carbs per hour, and how it compares to the guidance for a run that long.'
+  },
+  {
+    key: 'fuel-during-logged',
+    framed: true,
+    src: `${base}mockups/fuel-during-logged.webp`,
+    alt: 'Hona Fuel, the During window’s log: three Maurten Gel 100s and one Gel 100 CAF 100, with carbs, sodium and caffeine for each.',
+    label: 'What you actually took.',
+    caption: 'Each gel with its carbs, sodium, and caffeine, plus the longest gap between them, so the next long run starts from what worked.'
+  },
   {
     key: 'program',
     src: `${base}mockups/screen-1-program.jpg`,
     label: 'Down to the week.',
     caption: 'Phase, weekly load, and every session your coach planned, laid out block by block across the whole build.'
-  },
-  {
-    key: 'today',
-    src: `${base}mockups/screen-2-home.jpg`,
-    label: 'One calm view, every morning.',
-    caption: 'Today’s sessions, your fueling, and what your coach assigned, pulled together before you start the day.'
-  },
-  {
-    key: 'fuel',
-    src: `${base}mockups/screen-3-fuel.jpg`,
-    label: 'What fueled the work.',
-    caption: 'Energy balance, hydration, and per-session fueling, read against what you actually burned today.'
   },
   {
     key: 'body',
@@ -50,12 +74,6 @@ const screens = [
     src: `${base}mockups/screen-7-ai-coach.jpg`,
     label: 'A coach that reads your data.',
     caption: 'Ask about training, fueling, or the week ahead, and get answers grounded in your real load and recovery.'
-  },
-  {
-    key: 'fuel-model',
-    src: `${base}mockups/screen-8-fuel-model.jpg`,
-    label: 'Dialed in from your best days.',
-    caption: 'Hona learns the carb, fluid, and sodium rates that held your power through the final third of your hardest sessions.'
   }
 ]
 
@@ -116,7 +134,19 @@ export default function ScreenshotGallery() {
             role="region"
             aria-label="Screen carousel. Swipe left or right to navigate"
           >
-            <DeviceFrame src={s.src} alt={s.label} imgKey={s.key} />
+            {s.framed ? (
+              <div className="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                <img
+                  key={s.key}
+                  src={s.src}
+                  alt={s.alt}
+                  draggable={false}
+                  className="block w-full h-auto pointer-events-none drop-shadow-[0_30px_40px_rgba(20,20,18,0.18)]"
+                />
+              </div>
+            ) : (
+              <DeviceFrame src={s.src} alt={s.label} imgKey={s.key} />
+            )}
           </div>
 
           <div>

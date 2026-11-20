@@ -7,7 +7,7 @@ const steps = [
   },
   {
     title: 'Read',
-    body: 'One readiness score, set against the load your plan asks of you today.'
+    body: 'One Recovery score, set against the load your plan asks of you today.'
   },
   {
     title: 'Train',
@@ -15,7 +15,7 @@ const steps = [
   },
   {
     title: 'Fuel',
-    body: 'Energy, macro, and hydration targets that match the work you actually did, not a generic day.'
+    body: 'Net carbs, protein, and energy targets timed around each session, matched to the work you actually did, not a generic day.'
   },
   {
     title: 'Adjust',

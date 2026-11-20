@@ -23,7 +23,7 @@ export default function Hero({ brand }) {
               <span className="text-accent-500">one clear day.</span>
             </h1>
             <p className="mt-6 text-lg text-ink-500 leading-relaxed max-w-md">
-              Readiness, training load, fueling, and your coach&rsquo;s plan, read together every
+              Recovery, training load, fueling, and your coach&rsquo;s plan, read together every
               morning. One score, one session, one clear day. Not another dashboard to babysit.
             </p>
 
@@ -42,7 +42,7 @@ export default function Hero({ brand }) {
             </div>
           </div>
 
-          {/* Phone video column — portrait MP4 with paper-100 baked in. */}
+          {/* Phone video column: portrait MP4 with paper-100 baked in. */}
           <div className="flex justify-center md:justify-end pointer-events-none">
             <video
               autoPlay
